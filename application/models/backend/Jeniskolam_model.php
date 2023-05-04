@@ -1,10 +1,11 @@
 <?php
-class Jeniskolam_model extends CI_Model{
-/**
-* Description of Controller
-*
-* @author isnanw
-*/
+class Jeniskolam_model extends CI_Model
+{
+	/**
+	 * Description of Controller
+	 *
+	 * @author isnanw
+	 */
 
 	var $tablejeniskolam = 'tb_jeniskolam';
 	var $tablelog = 'tbl_log';
@@ -20,51 +21,43 @@ class Jeniskolam_model extends CI_Model{
 	private function _get_datatables_query()
 	{
 		//add custom filter here
-		if($this->input->post('namajeniskolam'))
-		{
+		if ($this->input->post('namajeniskolam')) {
 			$this->db->like('namajeniskolam', $this->input->post('namajeniskolam'));
 		}
 
 		$this->db->from($this->tablejeniskolam);
 		$i = 0;
-		foreach ($this->column_search_jeniskolam as $item)
-		{
-			if($_POST['search']['value'])
-			{
-				if($i===0)
-				{
+		foreach ($this->column_search_jeniskolam as $item) {
+			if ($_POST['search']['value']) {
+				if ($i === 0) {
 					$this->db->group_start();
 					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
+				} else {
 					$this->db->or_like($item, $_POST['search']['value']);
 				}
 
-				if(count($this->column_search_jeniskolam) - 1 == $i)
+				if (count($this->column_search_jeniskolam) - 1 == $i)
 					$this->db->group_end();
 			}
 			$column_search_stock[$i] = $item; // set column array variable to order processing
 			$i++;
 		}
 
-		if(isset($_POST['order'])) // here order processing
+		if (isset($_POST['order'])) // here order processing
 		{
 			$this->db->order_by($column_search_stock[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		}
-		else if(isset($this->order))
-		{
+		} else if (isset($this->order)) {
 			$order = $this->order;
 			$this->db->order_by(key($order), $order[key($order)]);
 		}
-
 	}
 
-	function get_datatables(){
+	function get_datatables()
+	{
 		$this->db->order_by('id_jeniskolam', 'ASC');
 		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
+		if ($_POST['length'] != -1)
+			$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -85,56 +78,56 @@ class Jeniskolam_model extends CI_Model{
 	public function get_by_id($id_jeniskolam)
 	{
 		$this->db->from($this->tablejeniskolam);
-		$this->db->where('id_jeniskolam',$id_jeniskolam);
+		$this->db->where('id_jeniskolam', $id_jeniskolam);
 		$query = $this->db->get();
 		return $query->row();
 	}
 
-	function insert_jeniskolam($data){
+	function insert_jeniskolam($data)
+	{
 		$insert = $this->db->insert($this->tablejeniskolam, $data);
-		if($insert){
+		if ($insert) {
 			return true;
 		}
 	}
 
-	function insert_log_jeniskolam($data2){
+	function insert_log_jeniskolam($data2)
+	{
 		$insert = $this->db->insert($this->tablelog, $data2);
-		if($insert){
+		if ($insert) {
 			return true;
 		}
 	}
 
 	public function update_entry($id, $data)
 	{
-			return $this->db->update('tb_jeniskolam', $data, array('id_jeniskolam' => $id));
+		return $this->db->update('tb_jeniskolam', $data, array('id_jeniskolam' => $id));
 	}
 
 	public function single_entry($id_jeniskolam)
-    {
-        $this->db->select('*');
-        $this->db->from('tb_jeniskolam');
-        $this->db->where('id_jeniskolam', $id_jeniskolam);
-        $query = $this->db->get();
-        if (count($query->result()) > 0) {
-            return $query->row();
-        }
-    }
-    public function update_lock($id_jeniskolam, $data)
-    {
-        return $this->db->update('tb_jeniskolam', $data, array('id_jeniskolam' => $id_jeniskolam));
-    }
-    function delete_entry($id_jeniskolam)
-    {
-        return $this->db->delete('tb_jeniskolam', array('id_jeniskolam' => $id_jeniskolam));
-    }
+	{
+		$this->db->select('*');
+		$this->db->from('tb_jeniskolam');
+		$this->db->where('id_jeniskolam', $id_jeniskolam);
+		$query = $this->db->get();
+		if (count($query->result()) > 0) {
+			return $query->row();
+		}
+	}
+	public function update_lock($id_jeniskolam, $data)
+	{
+		return $this->db->update('tb_jeniskolam', $data, array('id_jeniskolam' => $id_jeniskolam));
+	}
+	function delete_entry($id_jeniskolam)
+	{
+		return $this->db->delete('tb_jeniskolam', array('id_jeniskolam' => $id_jeniskolam));
+	}
 
-	function import($data){
+	function import($data)
+	{
 		$insert = $this->db->insert_batch('tb_jeniskolam', $data);
-		if($insert){
+		if ($insert) {
 			return true;
 		}
 	}
-
 }
-
-

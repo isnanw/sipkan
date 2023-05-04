@@ -1,6 +1,6 @@
 <!-- MODAL -->
 <!-- Add Records Modal -->
-<div class="modal fade text-left" id="modal_form_jeniskolam" tabindex="-1" jeniskolam="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+<div class="modal fade text-left" id="modal_form_jenisikan" tabindex="-1" jeniskolam="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" jeniskolam="document">
         <div class="modal-content">
             <div class="modal-header bg-success">
@@ -10,9 +10,9 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <div class="modal-body formjeniskolam">
+            <div class="modal-body formjenisikan">
                 <?php
-                $attributes = array('class' => 'form-horizontal', 'id' => 'formjeniskolam');
+                $attributes = array('class' => 'form-horizontal', 'id' => 'formjenisikan');
                 echo form_open($this->uri->uri_string(), $attributes);
                 ?>
                 <div class="form-body">
@@ -20,8 +20,8 @@
                         <input type="hidden" name="id" class="id" />
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label for="valid-state">Jenis Kolam</label>
-                                <input type="text" name="namajeniskolam" class="form-control namajeniskolam" id="namajeniskolam" placeholder="Nama jeniskolam">
+                                <label for="valid-state">Jenis Ikan</label>
+                                <input type="text" name="namajenisikan" class="form-control namajenisikan" id="namajenisikan" placeholder="Nama Jenis Ikan">
                                 <span class="help-block text-danger"></span>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                 <div class="show_record"></div>
                 <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                     <i class="bx bx-x d-sm-none"></i>Cancel</button>
-                <button type="submit" class="btn btn-success ml-1 btnSave" id="btnSave" onclick="addjeniskolam()">
+                <button type="submit" class="btn btn-success ml-1 btnSave" id="btnSave" onclick="addjenisikan()">
                     <i class="bx bx-check d-sm-none"></i>Save</button>
             </div>
         </div>
