@@ -1,47 +1,46 @@
-<div class="page-content">
-    <!------- breadcrumb --------->
-    <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
-    <!------- breadcrumb --------->
+<!------- breadcrumb --------->
+<?php $this->load->view("backend/_partials/breadcrumb.php") ?>
+<!------- breadcrumb --------->
 
-    <!-- Post Datatables -->
-    <section id="input-validation">
-        <div class="row">
-            <div class="col-12 col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                            <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_role()"><i class="bi bi-plus"></i></a>
-                        </div>
-                        <br/><br/>
-                        <div class="table-responsive">
-                            <table id="mytable" class="table table-bordered mb-0 text-sm">
-                                <thead>
-                                    <tr>
-                                        <th class="col-1">No</th>
-                                        <th class="col-9">Nama Role</th>
-                                        <th class="col-2">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+<!-- Post Datatables -->
+<section id="input-validation">
+    <div class="row">
+        <div class="col-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
+                        <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_role()"><i class="ti ti-square-plus"></i></a>
+                    </div>
+                    <br /><br />
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordered mb-0 text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="col-1">No</th>
+                                    <th class="col-9">Nama Role</th>
+                                    <th class="col-2">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Post Datatables END -->
+    </div>
+</section>
+<!-- Post Datatables END -->
 
-    <!------- FOOTER --------->
-        <?php $this->load->view("backend/_partials/footer.php") ?>
-    <!------- FOOTER --------->
+<!------- FOOTER --------->
+
+<!------- FOOTER --------->
 
 <!-- </div>
 </div> -->
 
 <!------- TOASTIFY JS --------->
-    <?php $this->load->view("backend/_partials/toastify.php") ?>
+<?php $this->load->view("backend/_partials/toastify.php") ?>
 
 <!------- TOASTIFY JS --------->
 
@@ -52,7 +51,7 @@
     var csfrData = {};
 
     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo
-    $this->security->get_csrf_hash(); ?>';
+                                                                            $this->security->get_csrf_hash(); ?>';
     $.ajaxSetup({
         data: csfrData
     });
@@ -66,29 +65,25 @@
             "order": [], //Initial no order.
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('backend/role/get_ajax_list')?>",
+                "url": "<?php echo site_url('backend/role/get_ajax_list') ?>",
                 "type": "POST",
-                "data": function (data) {
-                },
+                "data": function(data) {},
             },
 
             //Set column definition initialisation properties.
-            "columnDefs": [
-                {
-                    "targets": [ 0,1,2 ], //first column
-                    "orderable": false, //set not orderable
-                },
-            ],
+            "columnDefs": [{
+                "targets": [0, 1, 2], //first column
+                "orderable": false, //set not orderable
+            }, ],
         });
 
-        $("#namarole").change(function(){
+        $("#namarole").change(function() {
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
     });
 
-    function add_role()
-    {
+    function add_role() {
         save_method = 'add';
         $('#formrole')[0].reset();
         $('.form-group').removeClass('has-error');
@@ -98,8 +93,7 @@
         $('.modal-title').text('Tambah Role');
     }
 
-    function edit_role(id_role)
-    {
+    function edit_role(id_role) {
         save_method = 'update';
         $('#formrole')[0].reset();
         $('.form-group').removeClass('has-error');
@@ -108,73 +102,63 @@
         $('.modal-title').text('Edit Role');
 
         $.ajax({
-            url : "<?php echo site_url('backend/role/ajax_edit/')?>/" + id_role,
+            url: "<?php echo site_url('backend/role/ajax_edit/') ?>/" + id_role,
             type: "GET",
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data) {
                 $('[name="id"]').val(data.id_role);
                 $('[name="namarole"]').val(data.namarole);
 
                 $('#modal_form_role').modal('hide');
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
     }
 
-    function reload_table()
-    {
-        table.ajax.reload(null,false);
+    function reload_table() {
+        table.ajax.reload(null, false);
     }
 
-    function addrole()
-    {
+    function addrole() {
         $('#btnSave').text('saving...');
-        $('#btnSave').attr('disabled',true);
+        $('#btnSave').attr('disabled', true);
         var url;
 
-        if(save_method == 'add') {
-            url = "<?php echo site_url('backend/role/add')?>";
+        if (save_method == 'add') {
+            url = "<?php echo site_url('backend/role/add') ?>";
         } else {
-            url = "<?php echo site_url('backend/role/edit')?>";
+            url = "<?php echo site_url('backend/role/edit') ?>";
         }
 
 
         $.ajax({
-            url : url,
+            url: url,
             type: "POST",
             data: $('#formrole').serialize(),
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data) {
 
-                if(data.status)
-                {
+                if (data.status) {
                     toastify_success();
                     $('#modal_form_role').modal('hide');
                     reload_table();
-                }
-                else
-                {
-                    for (var i = 0; i < data.inputerror.length; i++)
-                    {
-                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error');
-                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]);
+                } else {
+                    for (var i = 0; i < data.inputerror.length; i++) {
+                        $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+                        $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
                     }
                 }
                 $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled',false);
+                $('#btnSave').attr('disabled', false);
 
 
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error adding / update data');
                 $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled',false);
+                $('#btnSave').attr('disabled', false);
 
             }
         });
@@ -199,7 +183,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url : "<?php echo site_url('backend/role/deleterole')?>",
+                    url: "<?php echo site_url('backend/role/deleterole') ?>",
                     data: {
                         idkon: idkon,
                     },
@@ -220,44 +204,45 @@
         });
     });
 
-        $(document).on("click", "#lock", function(e) {
-            e.preventDefault();
+    $(document).on("click", "#lock", function(e) {
+        e.preventDefault();
 
-            var id_role = $(this).attr("value");
+        var id_role = $(this).attr("value");
 
-            Swal.fire({
-                title: "Aktif/ Nonaktif Konsumen ini ?",
-                text: "Konsumen yang di Nonaktifkan menandakan sudah tidak melakukan Transaksi selama 1 bulan!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ya, Proses!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "post",
-                        url : "<?php echo site_url('backend/konsumen/lock')?>",
-                        data: {
-                            id_role: id_role,
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.res == "success") {
-                                Swal.fire(
-                                    "Success!",
-                                    "Proses berhasil dilakukan.",
-                                    "success"
-                                );
+        Swal.fire({
+            title: "Aktif/ Nonaktif Konsumen ini ?",
+            text: "Konsumen yang di Nonaktifkan menandakan sudah tidak melakukan Transaksi selama 1 bulan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Proses!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo site_url('backend/konsumen/lock') ?>",
+                    data: {
+                        id_role: id_role,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.res == "success") {
+                            Swal.fire(
+                                "Success!",
+                                "Proses berhasil dilakukan.",
+                                "success"
+                            );
 
-                                reload_table();
-                            }
-                        },
-                    });
-                }
-            });
+                            reload_table();
+                        }
+                    },
+                });
+            }
         });
+    });
 </script>
 
 </body>
+
 </html>
