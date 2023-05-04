@@ -1,5 +1,5 @@
 <?php
-class Jenisikan_model extends CI_Model
+class Jenisbudidaya_model extends CI_Model
 {
     /**
      * Description of Controller
@@ -7,10 +7,10 @@ class Jenisikan_model extends CI_Model
      * @author BayuKun28
      */
 
-    var $tablejenisikan = 'tb_jenisikan';
+    var $tablejenisbudidaya = 'tb_jenisbudidaya';
     var $tablelog = 'tbl_log';
-    var $column_search_jenisikan = array('namajenisikan');
-    var $order = array('id_jenisikan' => 'ASC'); // default order
+    var $column_search_jenisbudidaya = array('namajenisbudidaya');
+    var $order = array('id_jenisbudidaya' => 'ASC'); // default order
 
     public function __construct()
     {
@@ -21,13 +21,13 @@ class Jenisikan_model extends CI_Model
     private function _get_datatables_query()
     {
         //add custom filter here
-        if ($this->input->post('namajenisikan')) {
-            $this->db->like('namajenisikan', $this->input->post('namajenisikan'));
+        if ($this->input->post('namajenisbudidaya')) {
+            $this->db->like('namajenisbudidaya', $this->input->post('namajenisbudidaya'));
         }
 
-        $this->db->from($this->tablejenisikan);
+        $this->db->from($this->tablejenisbudidaya);
         $i = 0;
-        foreach ($this->column_search_jenisikan as $item) {
+        foreach ($this->column_search_jenisbudidaya as $item) {
             if ($_POST['search']['value']) {
                 if ($i === 0) {
                     $this->db->group_start();
@@ -36,7 +36,7 @@ class Jenisikan_model extends CI_Model
                     $this->db->or_like($item, $_POST['search']['value']);
                 }
 
-                if (count($this->column_search_jenisikan) - 1 == $i)
+                if (count($this->column_search_jenisbudidaya) - 1 == $i)
                     $this->db->group_end();
             }
             $column_search_stock[$i] = $item; // set column array variable to order processing
@@ -54,7 +54,7 @@ class Jenisikan_model extends CI_Model
 
     function get_datatables()
     {
-        $this->db->order_by('id_jenisikan', 'ASC');
+        $this->db->order_by('id_jenisbudidaya', 'ASC');
         $this->_get_datatables_query();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
@@ -71,27 +71,27 @@ class Jenisikan_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->from($this->tablejenisikan);
+        $this->db->from($this->tablejenisbudidaya);
         return $this->db->count_all_results();
     }
 
-    public function get_by_id($id_jenisikan)
+    public function get_by_id($id_jenisbudidaya)
     {
-        $this->db->from($this->tablejenisikan);
-        $this->db->where('id_jenisikan', $id_jenisikan);
+        $this->db->from($this->tablejenisbudidaya);
+        $this->db->where('id_jenisbudidaya', $id_jenisbudidaya);
         $query = $this->db->get();
         return $query->row();
     }
 
-    function insert_jenisikan($data)
+    function insert_jenisbudidaya($data)
     {
-        $insert = $this->db->insert($this->tablejenisikan, $data);
+        $insert = $this->db->insert($this->tablejenisbudidaya, $data);
         if ($insert) {
             return true;
         }
     }
 
-    function insert_log_jenisikan($data2)
+    function insert_log_jenisbudidaya($data2)
     {
         $insert = $this->db->insert($this->tablelog, $data2);
         if ($insert) {
@@ -101,31 +101,31 @@ class Jenisikan_model extends CI_Model
 
     public function update_entry($id, $data)
     {
-        return $this->db->update('tb_jenisikan', $data, array('id_jenisikan' => $id));
+        return $this->db->update('tb_jenisbudidaya', $data, array('id_jenisbudidaya' => $id));
     }
 
-    public function single_entry($id_jenisikan)
+    public function single_entry($id_jenisbudidaya)
     {
         $this->db->select('*');
-        $this->db->from('tb_jenisikan');
-        $this->db->where('id_jenisikan', $id_jenisikan);
+        $this->db->from('tb_jenisbudidaya');
+        $this->db->where('id_jenisbudidaya', $id_jenisbudidaya);
         $query = $this->db->get();
         if (count($query->result()) > 0) {
             return $query->row();
         }
     }
-    public function update_lock($id_jenisikan, $data)
+    public function update_lock($id_jenisbudidaya, $data)
     {
-        return $this->db->update('tb_jenisikan', $data, array('id_jenisikan' => $id_jenisikan));
+        return $this->db->update('tb_jenisbudidaya', $data, array('id_jenisbudidaya' => $id_jenisbudidaya));
     }
-    function delete_entry($id_jenisikan)
+    function delete_entry($id_jenisbudidaya)
     {
-        return $this->db->delete('tb_jenisikan', array('id_jenisikan' => $id_jenisikan));
+        return $this->db->delete('tb_jenisbudidaya', array('id_jenisbudidaya' => $id_jenisbudidaya));
     }
 
     function import($data)
     {
-        $insert = $this->db->insert_batch('tb_jenisikan', $data);
+        $insert = $this->db->insert_batch('tb_jenisbudidaya', $data);
         if ($insert) {
             return true;
         }
