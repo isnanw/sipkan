@@ -4,7 +4,7 @@ class Jeniskolam extends CI_Controller
 	/**
 	 * Description of Controller
 	 *
-	 * @author isnanw
+	 * @author BayuKun28
 	 */
 	function __construct()
 	{
