@@ -57,7 +57,7 @@ class Users_model extends CI_Model{
 		$email_super = 'isnanwahyudi4@gmail.com';
 		$dev = 'IsW';
 		$this->db->join( 'tb_role', 'tbl_user.user_level = tb_role.id_role' , 'left' );
-		$this->db->join( 'tb_atasan', 'tbl_user.user_atasan = tb_atasan.id_atasan' , 'left' );
+		// $this->db->join( 'tb_atasan', 'tbl_user.user_atasan = tb_atasan.id_atasan' , 'left' );
 		$this->db->where_not_in ( 'user_email', $email_super);
 		$this->db->where_not_in ( 'user_name', $dev);
 		$this->db->order_by('user_id', 'desc');

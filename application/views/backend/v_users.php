@@ -1,7 +1,4 @@
-<div class="page-content">
-    <!------- breadcrumb --------->
-        <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
-    <!------- breadcrumb --------->
+<?php $this->load->view("backend/_partials/breadcrumb.php") ?>
 
     <!-- Post Datatables -->
     <section id="input-validation">
@@ -13,7 +10,7 @@
 
 
                 <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_person()"><i class="bi bi-plus"></i></a>
+                <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_person()"><i class="ti ti-plus"></i></a>
 
                 </div>
                 <br/><br/>
@@ -45,9 +42,7 @@
 </div>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-<!------- FOOTER --------->
-    <?php $this->load->view("backend/_partials/footer.php") ?>
-<!------- FOOTER --------->
+
 </div>
 </div>
 

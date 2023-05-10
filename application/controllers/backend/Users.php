@@ -27,7 +27,7 @@ class Users extends CI_Controller{
 		$data['title'] 	= 'Users Karyawan';
 		$data['jsonfilepstudi'] = json_decode($getfilepstudi);
 		$data['level'] 	= $this->users_model->get_all_role();
-		$data['atasan'] 	= $this->users_model->get_all_atasan();
+		// $data['atasan'] 	= $this->users_model->get_all_atasan();
 
 		$this->load->view('backend/menu',$data);
 		$this->load->view('backend/modal/user_modal');
@@ -65,7 +65,7 @@ class Users extends CI_Controller{
 			$row[] = "<div class='avatar avatar-lg me-3'><img alt='Image' src='../assets/images/profilusers/$d->user_photo' width=50></div>";
 			$row[] = $d->user_email;
 			$row[] = $d->user_name;
-			$row[] = $d->namarole. '<br><span class="badge bg-light-info">'.$d->namaatasan.'</span>';
+			$row[] = $d->namarole. ' ';
 
 			$row[] = '<div class="alert alert-light-'.$actclass.' color-'.$actclass.'"><i class="bi bi-'.$icon.'-circle"></i> '.$actket.'</div>';
 
@@ -108,7 +108,7 @@ class Users extends CI_Controller{
 						'user_email' => $this->input->post('email'),
 						'user_password' => MD5($this->input->post('password')),
 						'user_level' => $this->input->post('level'),
-						'user_atasan' => $this->input->post('atasan'),
+						// 'user_atasan' => $this->input->post('atasan'),
 						'user_status' => '1',
 						'user_photo' => $bg_filefotoprofil,
 					);
@@ -141,7 +141,7 @@ class Users extends CI_Controller{
 					'user_email' => $this->input->post('email'),
 					'user_password' => MD5($this->input->post('password')),
 					'user_level' => $this->input->post('level'),
-					'user_atasan' => $this->input->post('atasan'),
+					// 'user_atasan' => $this->input->post('atasan'),
 					'user_status' => '1',
 					'user_photo' => 'user_blank.webp',
 				);
@@ -215,7 +215,7 @@ class Users extends CI_Controller{
 							$ajax_data['user_name'] = $this->input->post('nama');
 							$ajax_data['user_email'] = $this->input->post('email');
 							$ajax_data['user_level'] = $this->input->post('level');
-							$ajax_data['user_atasan'] = $this->input->post('atasan');
+							// $ajax_data['user_atasan'] = $this->input->post('atasan');
 							if ($this->users_model->update_entry($userid, $ajax_data)) {
 								echo json_encode(array("status" => TRUE));
 							} else {

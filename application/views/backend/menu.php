@@ -143,6 +143,32 @@
                 <span class="d-flex">
                   <i class="ti ti-stack-pop"></i>
                 </span>
+                <span class="hide-menu">Data Dasar</span>
+              </a>
+              <ul aria-expanded="false" class="collapse first-level">
+                <li class="sidebar-item">
+                  <a href="<?= site_url('backend/pembenihan'); ?>" class="sidebar-link">
+                    <div class="round-16 d-flex align-items-center justify-content-center">
+                      <i class="ti ti-circle"></i>
+                    </div>
+                    <span class="hide-menu">Produksi Pembenihan Ikan</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a href="<?= site_url('backend/pembesaran'); ?>" class="sidebar-link">
+                    <div class="round-16 d-flex align-items-center justify-content-center">
+                      <i class="ti ti-circle"></i>
+                    </div>
+                    <span class="hide-menu">Data Pembesaran Budidaya</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                <span class="d-flex">
+                  <i class="ti ti-stack-pop"></i>
+                </span>
                 <span class="hide-menu">Produksi Budidaya Ikan</span>
               </a>
               <ul aria-expanded="false" class="collapse first-level">
