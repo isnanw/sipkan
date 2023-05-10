@@ -122,11 +122,11 @@
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a href="<?= site_url('backend/jeniskomuditas'); ?>" class="sidebar-link">
+                  <a href="<?= site_url('backend/jeniskomoditas'); ?>" class="sidebar-link">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
-                    <span class="hide-menu">Jenis Komuditas</span>
+                    <span class="hide-menu">Jenis Komoditas</span>
                   </a>
                 </li>
               </ul>
