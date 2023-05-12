@@ -19,79 +19,9 @@
   <script src="<?= base_url('assets/keren/'); ?>dist/js/datatable/datatable-basic.init.js"></script>
   <script src="<?= base_url('assets/keren/'); ?>dist/libs/jquery-steps/build/jquery.steps.min.js"></script>
   <script src="<?= base_url('assets/keren/'); ?>dist/libs/jquery-validation/dist/jquery.validate.min.js"></script>
-  <script src="<?= base_url('assets/keren/'); ?>dist/js/forms/form-wizard.js"></script>
+  <!-- <script src="<?= base_url('assets/keren/'); ?>dist/js/forms/form-wizard.js"></script> -->
 
   <script language="JavaScript" type="application/javascript" src="<?php echo base_url() . 'assets/extensions/toastify-js/src/toastify.js' ?>"></script>
   <script language="JavaScript" type="application/javascript" src="<?php echo base_url() . 'assets/js/pages/toastifycrud.js' ?>"></script>
   <script language="JavaScript" type="application/javascript" src="<?php echo base_url() . 'assets/extensions/sweetalert2/sweetalert2.min.js' ?>"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("#kab").select2({
-        ajax: {
-          url: '<?= base_url() ?>boking/getdataprov',
-          type: "post",
-          dataType: 'json',
-          delay: 200,
-          data: function(params) {
-            return {
-              searchTerm: params.term
-            };
-          },
-          processResults: function(response) {
-            return {
-              results: response
-            };
-          },
-          cache: true
-        }
-      });
-    });
-    $("#kab").change(function() {
-      var kodelokasi = $("#kab").val();
-      $("#distrik").select2({
-        ajax: {
-          url: '<?= base_url() ?>boking/getdatakab/' + kodelokasi,
-          type: "post",
-          dataType: 'json',
-          delay: 200,
-          data: function(params) {
-            return {
-              searchTerm: params.term
-            };
-          },
-          processResults: function(response) {
-            return {
-              results: response
-            };
-          },
-          cache: true
-        }
-      });
-    });
-    $("#distrik").change(function() {
-      var kodelokasi = $("#distrik").val();
-      $("#kampung").select2({
-        ajax: {
-          url: '<?= base_url() ?>boking/getdatakec/' + kodelokasi,
-          type: "post",
-          dataType: 'json',
-          delay: 200,
-          data: function(params) {
-            return {
-              searchTerm: params.term
-            };
-          },
-          processResults: function(response) {
-            return {
-              results: response
-            };
-          },
-          cache: true
-        }
-      });
-    });
-  </script>
-  </body>
-
-  </html>
+  <script src="<?= base_url('assets/'); ?>select2/js/select2.full.min.js"></script>

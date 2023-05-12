@@ -115,7 +115,7 @@ $(".tab-wizard").steps({
   transitionEffect: "fade",
   titleTemplate: '<span class="step">#index#</span> #title#',
   labels: {
-    finish: "Submit",
+    finish: "ssss",
   },
   onFinished: function (event, currentIndex) {
     swal(
@@ -133,7 +133,7 @@ $(".validation-wizard").steps({
   transitionEffect: "fade",
   titleTemplate: '<span class="step">#index#</span> #title#',
   labels: {
-    finish: "Submit",
+    finish: "Subt",
   },
   onStepChanging: function (event, currentIndex, newIndex) {
     return (

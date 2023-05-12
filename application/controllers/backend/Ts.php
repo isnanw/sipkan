@@ -16,6 +16,8 @@ class Ts extends CI_Controller
             redirect($url);
         };
         $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
+        $this->load->model('backend/Lokasi_model', 'lokasi_model');
+        $this->load->model('backend/Ts_model', 'ts_model');
         $this->load->model('Site_model', 'site_model');
         $this->load->helper('text');
         $this->load->helper('url');
@@ -33,7 +35,6 @@ class Ts extends CI_Controller
 
         $this->load->view('backend/menu', $data);
         // $this->load->view('backend/modal/jenisikan_modal');
-        $this->load->view('backend/_partials/templatejs');
         $this->load->view('backend/v_ts', $data);
     }
 
@@ -53,25 +54,27 @@ class Ts extends CI_Controller
 
     public function get_ajax_list()
     {
-        $list = $this->jenisikan_model->get_datatables();
+        $list = $this->ts_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $d) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $d->namajenisikan;
+            $row[] = $d->lokasi;
+            $row[] = $d->kampung;
+            $row[] = $d->ketua;
+            $row[] = $d->jml_anggota;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_jenisikan(' . "'" . $d->id_jenisikan . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
-      <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletejenisikan" value="' . $d->id_jenisikan . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
-
+      <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_ts(' . "'" . $d->id . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->jenisikan_model->count_all(),
-            "recordsFiltered" => $this->jenisikan_model->count_filtered(),
+            "recordsTotal" => $this->ts_model->count_all(),
+            "recordsFiltered" => $this->ts_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -87,21 +90,43 @@ class Ts extends CI_Controller
 
     function add()
     {
-        $this->_validate();
+        // $this->_validate();
 
         $users = $this->session->userdata('id');
         $nama_users = $this->session->userdata('name');
 
         $data = array(
-            'namajenisikan' => $this->input->post('namajenisikan')
+            'lokasi' => $this->input->post('kab'),
+            'kampung' => $this->input->post('kampung'),
+            'ketua' => $this->input->post('ketua'),
+            'jml_anggota' => $this->input->post('jml_anggota'),
+            'jml_tambak' => $this->input->post('jml_tambak'),
+            'uk_tambak' => $this->input->post('uk_tambak'),
+            'potensi' => $this->input->post('potensi'),
+            'existing' => $this->input->post('existing'),
+            'jenis_komoditas' => $this->input->post('komoditas'),
+            'jml_ekor' => $this->input->post('jml_ekor')
         );
-        $insert = $this->jenisikan_model->insert_jenisikan($data);
-
-        if ($insert) {
+        $id_ts = $this->ts_model->tambah_ts($data);
+        $data1 = array(
+            'id_ts' => $id_ts,
+            'jan' => $this->input->post('jan'),
+            'feb' => $this->input->post('feb'),
+            'mar' => $this->input->post('mar'),
+            'apr' => $this->input->post('apr'),
+            'mei' => $this->input->post('mei'),
+            'jun' => $this->input->post('jun'),
+            'jul' => $this->input->post('jul'),
+            'agu' => $this->input->post('agu'),
+            'sep' => $this->input->post('sep'),
+            'okt' => $this->input->post('okt'),
+            'nov' => $this->input->post('nov'),
+            'des' => $this->input->post('des')
+        );
+        $prosesdetail = $this->ts_model->tambah_detail_ts($data1);
+        if ($id_ts) {
             // INSERT LOG
-
-            $j = $this->input->post('namajenisikan');
-            $b = '<b>' . $nama_users . '</b> Melakukan Tambah jenisikan <b>' . $j . '</b>';
+            $b = '<b>' . $nama_users . '</b> Melakukan Tambah Tambak Sederhana';
             $data2 = array(
                 'ket' => $b,
             );
@@ -111,6 +136,7 @@ class Ts extends CI_Controller
         } else {
             echo json_encode(array("status" => FALSE));
         }
+        redirect('Backend/Ts');
     }
 
     function edit()

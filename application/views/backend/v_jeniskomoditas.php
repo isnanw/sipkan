@@ -35,10 +35,8 @@
 </div> -->
 
 <!------- TOASTIFY JS --------->
-<?php $this->load->view("backend/_partials/toastify.php") ?>
-
-<!------- TOASTIFY JS --------->
-
+<?php $this->load->view("backend/_partials/toastify") ?>
+<?php $this->load->view("backend/_partials/templatejs") ?>
 
 <script type="application/javascript">
     var save_method;

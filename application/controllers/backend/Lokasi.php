@@ -29,7 +29,7 @@ class Lokasi extends CI_Controller
 
     $this->load->view('backend/menu', $data);
     $this->load->view('backend/modal/lokasi_modal');
-    $this->load->view('backend/_partials/templatejs');
+    // $this->load->view('backend/_partials/templatejs');
     $this->load->view('backend/v_lokasi', $data);
   }
 
@@ -57,5 +57,24 @@ class Lokasi extends CI_Controller
     //output to json format
 
     echo json_encode($output);
+  }
+  public function getdatakab()
+  {
+    $searchTerm = $this->input->post('searchTerm');
+    $response   = $this->lokasi_model->getkab($searchTerm);
+    echo json_encode($response);
+  }
+
+  public function getdatadistrik($kodelokasi)
+  {
+    $searchTerm = $this->input->post('searchTerm');
+    $response   = $this->lokasi_model->getdistrik($kodelokasi, $searchTerm);
+    echo json_encode($response);
+  }
+  public function getdatakampung($kodelokasi)
+  {
+    $searchTerm = $this->input->post('searchTerm');
+    $response   = $this->lokasi_model->getkampung($kodelokasi, $searchTerm);
+    echo json_encode($response);
   }
 }

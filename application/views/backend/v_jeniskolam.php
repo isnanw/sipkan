@@ -1,44 +1,42 @@
 <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
-    <!-- Post Datatables -->
+<!-- Post Datatables -->
 
-    <section id="input-validation">
-        <div class="row">
-            <div class="col-12 col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                            <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_jeniskolam()"><i class="ti ti-square-plus"></i></a>
-                        </div>
-                        <br/><br/>
-                        <div class="table-responsive">
-                            <table id="mytable" class="table table-bordered mb-0 text-sm">
-                                <thead>
-                                    <tr>
-                                        <th class="col-1">No</th>
-                                        <th class="col-9">Nama Jenis Kolam</th>
-                                        <th class="col-2">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+<section id="input-validation">
+    <div class="row">
+        <div class="col-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
+                        <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_jeniskolam()"><i class="ti ti-square-plus"></i></a>
+                    </div>
+                    <br /><br />
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordered mb-0 text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="col-1">No</th>
+                                    <th class="col-9">Nama Jenis Kolam</th>
+                                    <th class="col-2">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Post Datatables END -->
+    </div>
+</section>
+<!-- Post Datatables END -->
 
 
 <!-- </div>
 </div> -->
 
 <!------- TOASTIFY JS --------->
-    <?php $this->load->view("backend/_partials/toastify.php") ?>
-
-<!------- TOASTIFY JS --------->
-
+<?php $this->load->view("backend/_partials/toastify") ?>
+<?php $this->load->view("backend/_partials/templatejs") ?>
 
 <script type="application/javascript">
     var save_method;
@@ -46,7 +44,7 @@
     var csfrData = {};
 
     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo
-    $this->security->get_csrf_hash(); ?>';
+                                                                            $this->security->get_csrf_hash(); ?>';
     $.ajaxSetup({
         data: csfrData
     });
@@ -60,29 +58,25 @@
             "order": [], //Initial no order.
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('backend/jeniskolam/get_ajax_list')?>",
+                "url": "<?php echo site_url('backend/jeniskolam/get_ajax_list') ?>",
                 "type": "POST",
-                "data": function (data) {
-                },
+                "data": function(data) {},
             },
 
             //Set column definition initialisation properties.
-            "columnDefs": [
-                {
-                    "targets": [ 0,1,2 ], //first column
-                    "orderable": false, //set not orderable
-                },
-            ],
+            "columnDefs": [{
+                "targets": [0, 1, 2], //first column
+                "orderable": false, //set not orderable
+            }, ],
         });
 
-        $("#namajeniskolam").change(function(){
+        $("#namajeniskolam").change(function() {
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
     });
 
-    function add_jeniskolam()
-    {
+    function add_jeniskolam() {
         save_method = 'add';
         $('#formjeniskolam')[0].reset();
         $('.form-group').removeClass('has-error');
@@ -92,8 +86,7 @@
         $('.modal-title').text('Tambah jeniskolam');
     }
 
-    function edit_jeniskolam(id_jeniskolam)
-    {
+    function edit_jeniskolam(id_jeniskolam) {
         save_method = 'update';
         $('#formjeniskolam')[0].reset();
         $('.form-group').removeClass('has-error');
@@ -102,73 +95,63 @@
         $('.modal-title').text('Edit jeniskolam');
 
         $.ajax({
-            url : "<?php echo site_url('backend/jeniskolam/ajax_edit/')?>/" + id_jeniskolam,
+            url: "<?php echo site_url('backend/jeniskolam/ajax_edit/') ?>/" + id_jeniskolam,
             type: "GET",
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data) {
                 $('[name="id"]').val(data.id_jeniskolam);
                 $('[name="namajeniskolam"]').val(data.namajeniskolam);
 
                 $('#modal_form_jeniskolam').modal('hide');
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
     }
 
-    function reload_table()
-    {
-        table.ajax.reload(null,false);
+    function reload_table() {
+        table.ajax.reload(null, false);
     }
 
-    function addjeniskolam()
-    {
+    function addjeniskolam() {
         $('#btnSave').text('saving...');
-        $('#btnSave').attr('disabled',true);
+        $('#btnSave').attr('disabled', true);
         var url;
 
-        if(save_method == 'add') {
-            url = "<?php echo site_url('backend/jeniskolam/add')?>";
+        if (save_method == 'add') {
+            url = "<?php echo site_url('backend/jeniskolam/add') ?>";
         } else {
-            url = "<?php echo site_url('backend/jeniskolam/edit')?>";
+            url = "<?php echo site_url('backend/jeniskolam/edit') ?>";
         }
 
 
         $.ajax({
-            url : url,
+            url: url,
             type: "POST",
             data: $('#formjeniskolam').serialize(),
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data) {
 
-                if(data.status)
-                {
+                if (data.status) {
                     toastify_success();
                     $('#modal_form_jeniskolam').modal('hide');
                     reload_table();
-                }
-                else
-                {
-                    for (var i = 0; i < data.inputerror.length; i++)
-                    {
-                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error');
-                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]);
+                } else {
+                    for (var i = 0; i < data.inputerror.length; i++) {
+                        $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+                        $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
                     }
                 }
                 $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled',false);
+                $('#btnSave').attr('disabled', false);
 
 
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error adding / update data');
                 $('#btnSave').text('Save');
-                $('#btnSave').attr('disabled',false);
+                $('#btnSave').attr('disabled', false);
 
             }
         });
@@ -193,7 +176,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url : "<?php echo site_url('backend/jeniskolam/deletejeniskolam')?>",
+                    url: "<?php echo site_url('backend/jeniskolam/deletejeniskolam') ?>",
                     data: {
                         idkon: idkon,
                     },
@@ -214,44 +197,45 @@
         });
     });
 
-        $(document).on("click", "#lock", function(e) {
-            e.preventDefault();
+    $(document).on("click", "#lock", function(e) {
+        e.preventDefault();
 
-            var id_jeniskolam = $(this).attr("value");
+        var id_jeniskolam = $(this).attr("value");
 
-            Swal.fire({
-                title: "Aktif/ Nonaktif Konsumen ini ?",
-                text: "Konsumen yang di Nonaktifkan menandakan sudah tidak melakukan Transaksi selama 1 bulan!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ya, Proses!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "post",
-                        url : "<?php echo site_url('backend/konsumen/lock')?>",
-                        data: {
-                            id_jeniskolam: id_jeniskolam,
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.res == "success") {
-                                Swal.fire(
-                                    "Success!",
-                                    "Proses berhasil dilakukan.",
-                                    "success"
-                                );
+        Swal.fire({
+            title: "Aktif/ Nonaktif Konsumen ini ?",
+            text: "Konsumen yang di Nonaktifkan menandakan sudah tidak melakukan Transaksi selama 1 bulan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Proses!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo site_url('backend/konsumen/lock') ?>",
+                    data: {
+                        id_jeniskolam: id_jeniskolam,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.res == "success") {
+                            Swal.fire(
+                                "Success!",
+                                "Proses berhasil dilakukan.",
+                                "success"
+                            );
 
-                                reload_table();
-                            }
-                        },
-                    });
-                }
-            });
+                            reload_table();
+                        }
+                    },
+                });
+            }
         });
+    });
 </script>
 
 </body>
+
 </html>

@@ -33,7 +33,7 @@ class Jeniskomoditas extends CI_Controller
 
         $this->load->view('backend/menu', $data);
         $this->load->view('backend/modal/jeniskomoditas_modal');
-        $this->load->view('backend/_partials/templatejs');
+        // $this->load->view('backend/_partials/templatejs');
         $this->load->view('backend/v_jeniskomoditas', $data);
     }
 
@@ -207,5 +207,11 @@ class Jeniskomoditas extends CI_Controller
             echo json_encode($data);
             exit();
         }
+    }
+    public function getdatakomoditas()
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->jeniskomoditas_model->getkomoditas($searchTerm);
+        echo json_encode($response);
     }
 }

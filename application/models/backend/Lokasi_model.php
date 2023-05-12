@@ -130,4 +130,40 @@ class Lokasi_model extends CI_Model
             return true;
         }
     }
+
+    function getkab($searchTerm = "")
+    {
+        $query = "SELECT * FROM lokasi WHERE LENGTH(kodelokasi) <= 5  AND lokasi like '%$searchTerm%' ORDER BY kodelokasi ASC";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['kodelokasi'], "text" => $prov['lokasi']);
+        }
+        return $data;
+    }
+
+    function getdistrik($kodelokasi, $searchTerm = "")
+    {
+        $query = "SELECT kodelokasi ,lokasi FROM lokasi WHERE LENGTH(kodelokasi) = 8 AND LEFT(kodelokasi,5) = '$kodelokasi' AND lokasi like '%$searchTerm%'  ORDER BY kodelokasi ASC";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['kodelokasi'], "text" => $prov['lokasi']);
+        }
+        return $data;
+    }
+
+    function getkampung($kodelokasi, $searchTerm = "")
+    {
+        $query = "SELECT kodelokasi,lokasi FROM lokasi WHERE LENGTH(kodelokasi) > 8 AND LEFT(kodelokasi,8) = '$kodelokasi' AND lokasi like '%$searchTerm%' ORDER BY kodelokasi ASC";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['kodelokasi'], "text" => $prov['lokasi']);
+        }
+        return $data;
+    }
 }

@@ -17,7 +17,8 @@
   <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/keren/'); ?>dist/images/logos/icon.png" />
   <!-- Owl Carousel  -->
   <link rel="stylesheet" href="<?= base_url('assets/keren/'); ?>dist/libs/owl.carousel/dist/assets/owl.carousel.min.css">
-
+  <link rel="stylesheet" href="<?php echo base_url('assets/'); ?>select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/'); ?>select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Core Css -->
   <link id="themeColors" rel="stylesheet" href="<?= base_url('assets/keren/'); ?>dist/css/style.min.css" />
 

@@ -130,4 +130,15 @@ class Jeniskomoditas_model extends CI_Model
             return true;
         }
     }
+    function getkomoditas($searchTerm = "")
+    {
+        $query = "SELECT * FROM tb_jeniskomoditas WHERE namajeniskomoditas like '%$searchTerm%' ORDER BY id_jeniskomoditas ASC ";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['id_jeniskomoditas'], "text" => $prov['namajeniskomoditas']);
+        }
+        return $data;
+    }
 }

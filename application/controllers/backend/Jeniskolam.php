@@ -33,7 +33,7 @@ class Jeniskolam extends CI_Controller
 
 		$this->load->view('backend/menu', $data);
 		$this->load->view('backend/modal/jeniskolam_modal');
-		$this->load->view('backend/_partials/templatejs');
+		// $this->load->view('backend/_partials/templatejs');
 		$this->load->view('backend/v_jeniskolam', $data);
 	}
 
