@@ -1,5 +1,5 @@
 <?php
-class Jenisbudidaya extends CI_Controller
+class Ts extends CI_Controller
 {
     /**
      * Description of Controller
@@ -15,7 +15,7 @@ class Jenisbudidaya extends CI_Controller
             $url = base_url('login_user');
             redirect($url);
         };
-        $this->load->model('backend/Jenisbudidaya_model', 'jenisbudidaya_model');
+        $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
         $this->load->model('Site_model', 'site_model');
         $this->load->helper('text');
         $this->load->helper('url');
@@ -28,36 +28,50 @@ class Jenisbudidaya extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
-        $data['title'] = 'Data Jenis Budidaya';
-        $data['title0'] = 'Master';
+        $data['title'] = 'Data Tambak Sederhana';
+        $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);
-        $this->load->view('backend/modal/jenisbudidaya_modal');
+        // $this->load->view('backend/modal/jenisikan_modal');
         $this->load->view('backend/_partials/templatejs');
-        $this->load->view('backend/v_jenisbudidaya', $data);
+        $this->load->view('backend/v_ts', $data);
+    }
+
+    public function v_input()
+    {
+        $site = $this->site_model->get_site_data()->row_array();
+        $data['site_title'] = $site['site_title'];
+        $data['site_favicon'] = $site['site_favicon'];
+        $data['images'] = $site['images'];
+        $data['title'] = 'Input Tambak Sederhana';
+        $data['title0'] = 'Produksi Budidaya Ikan';
+
+        $this->load->view('backend/menu', $data);
+        // $this->load->view('backend/modal/jenisikan_modal');
+        $this->load->view('backend/v_tsinput', $data);
     }
 
     public function get_ajax_list()
     {
-        $list = $this->jenisbudidaya_model->get_datatables();
+        $list = $this->jenisikan_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $d) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $d->namajenisbudidaya;
+            $row[] = $d->namajenisikan;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_jenisbudidaya(' . "'" . $d->id_jenisbudidaya . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
-      <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletejenisbudidaya" value="' . $d->id_jenisbudidaya . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
+      <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_jenisikan(' . "'" . $d->id_jenisikan . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletejenisikan" value="' . $d->id_jenisikan . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
 
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->jenisbudidaya_model->count_all(),
-            "recordsFiltered" => $this->jenisbudidaya_model->count_filtered(),
+            "recordsTotal" => $this->jenisikan_model->count_all(),
+            "recordsFiltered" => $this->jenisikan_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -65,9 +79,9 @@ class Jenisbudidaya extends CI_Controller
         echo json_encode($output);
     }
 
-    public function ajax_edit($id_jenisbudidaya)
+    public function ajax_edit($id_jenisikan)
     {
-        $data = $this->jenisbudidaya_model->get_by_id($id_jenisbudidaya);
+        $data = $this->jenisikan_model->get_by_id($id_jenisikan);
         echo json_encode($data);
     }
 
@@ -79,19 +93,19 @@ class Jenisbudidaya extends CI_Controller
         $nama_users = $this->session->userdata('name');
 
         $data = array(
-            'namajenisbudidaya' => $this->input->post('namajenisbudidaya')
+            'namajenisikan' => $this->input->post('namajenisikan')
         );
-        $insert = $this->jenisbudidaya_model->insert_jenisbudidaya($data);
+        $insert = $this->jenisikan_model->insert_jenisikan($data);
 
         if ($insert) {
             // INSERT LOG
 
-            $j = $this->input->post('namajenisbudidaya');
-            $b = '<b>' . $nama_users . '</b> Melakukan Tambah jenisbudidaya <b>' . $j . '</b>';
+            $j = $this->input->post('namajenisikan');
+            $b = '<b>' . $nama_users . '</b> Melakukan Tambah jenisikan <b>' . $j . '</b>';
             $data2 = array(
                 'ket' => $b,
             );
-            $this->jenisbudidaya_model->insert_log_jenisbudidaya($data2);
+            $this->jenisikan_model->insert_log_jenisikan($data2);
             // INSERT LOG
             echo json_encode(array("status" => TRUE));
         } else {
@@ -106,19 +120,19 @@ class Jenisbudidaya extends CI_Controller
 
 
         $users = $this->session->userdata('id');
-        $ajax_data['namajenisbudidaya'] = $this->input->post('namajenisbudidaya');
+        $ajax_data['namajenisikan'] = $this->input->post('namajenisikan');
 
 
-        if ($this->jenisbudidaya_model->update_entry($id, $ajax_data)) {
+        if ($this->jenisikan_model->update_entry($id, $ajax_data)) {
             // INSERT LOG
             $nama_users = $this->session->userdata('name');
 
-            $j = $this->input->post('namajenisbudidaya');
-            $b = '<b>' . $nama_users . '</b> Melakukan Edit jenisbudidaya <b>' . $j . '</b>';
+            $j = $this->input->post('namajenisikan');
+            $b = '<b>' . $nama_users . '</b> Melakukan Edit jenisikan <b>' . $j . '</b>';
             $data2 = array(
                 'ket' => $b,
             );
-            $this->jenisbudidaya_model->insert_log_jenisbudidaya($data2);
+            $this->jenisikan_model->insert_log_jenisikan($data2);
             // INSERT LOG
             echo json_encode(array("status" => TRUE));
         } else {
@@ -126,12 +140,12 @@ class Jenisbudidaya extends CI_Controller
         }
     }
 
-    public function deletejenisbudidaya()
+    public function deletejenisikan()
     {
         if ($this->input->is_ajax_request()) {
 
-            $id_jenisbudidaya = $this->input->post('idkon');
-            if ($this->jenisbudidaya_model->delete_entry($id_jenisbudidaya)) {
+            $id_jenisikan = $this->input->post('idkon');
+            if ($this->jenisikan_model->delete_entry($id_jenisikan)) {
 
                 $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
             } else {
@@ -150,23 +164,23 @@ class Jenisbudidaya extends CI_Controller
         $data['error_string'] = array();
         $data['inputerror'] = array();
         $data['status'] = TRUE;
-        $nama = $this->input->post('namajenisbudidaya');
+        $nama = $this->input->post('namajenisikan');
 
-        if ($this->input->post('namajenisbudidaya') == '') {
-            $data['inputerror'][] = 'namajenisbudidaya';
-            $data['error_string'][] = 'Form jenisbudidaya harus berisi';
+        if ($this->input->post('namajenisikan') == '') {
+            $data['inputerror'][] = 'namajenisikan';
+            $data['error_string'][] = 'Form jenisikan harus berisi';
             $data['status'] = FALSE;
         }
 
         $namalength = strlen($nama);
         if ($namalength < 3) {
-            $data['inputerror'][] = 'namajenisbudidaya';
-            $data['error_string'][] = 'Nama jenisbudidaya Miminal 3 Karakter';
+            $data['inputerror'][] = 'namajenisikan';
+            $data['error_string'][] = 'Nama jenisikan Miminal 3 Karakter';
             $data['status'] = FALSE;
         }
         if ($namalength > 25) {
-            $data['inputerror'][] = 'namajenisbudidaya';
-            $data['error_string'][] = 'Nama jenisbudidaya Maksimal 25 Karakter';
+            $data['inputerror'][] = 'namajenisikan';
+            $data['error_string'][] = 'Nama jenisikan Maksimal 25 Karakter';
             $data['status'] = FALSE;
         }
 
@@ -183,22 +197,22 @@ class Jenisbudidaya extends CI_Controller
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        $nama = $this->input->post('namajenisbudidaya');
+        $nama = $this->input->post('namajenisikan');
 
-        if ($this->input->post('namajenisbudidaya') == '') {
-            $data['inputerror'][] = 'namajenisbudidaya';
-            $data['error_string'][] = 'Form Nama jenisbudidaya harus berisi';
+        if ($this->input->post('namajenisikan') == '') {
+            $data['inputerror'][] = 'namajenisikan';
+            $data['error_string'][] = 'Form Nama jenisikan harus berisi';
             $data['status'] = FALSE;
         }
 
         $namalength = strlen($nama);
         if ($namalength < 3) {
-            $data['inputerror'][] = 'namajenisbudidaya';
+            $data['inputerror'][] = 'namajenisikan';
             $data['error_string'][] = 'Nama Miminal 3 Karakter';
             $data['status'] = FALSE;
         }
         if ($namalength > 25) {
-            $data['inputerror'][] = 'namajenisbudidaya';
+            $data['inputerror'][] = 'namajenisikan';
             $data['error_string'][] = 'Nama Maksimal 25 Karakter';
             $data['status'] = FALSE;
         }

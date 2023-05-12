@@ -29,6 +29,7 @@ class Jeniskolam extends CI_Controller
 		$data['site_favicon'] = $site['site_favicon'];
 		$data['images'] = $site['images'];
 		$data['title'] = 'Data Jenis Kolam';
+		$data['title0'] = 'Master';
 
 		$this->load->view('backend/menu', $data);
 		$this->load->view('backend/modal/jeniskolam_modal');
