@@ -78,8 +78,15 @@ class Ts_model extends CI_Model
 
     public function get_by_id($id)
     {
-        $this->db->from($this->tablets);
-        $this->db->where('id', $id);
+        $query = "(SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak,ts.potensi,ts.existing,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_ekor,l3.kodelokasi as kodedistrik,l3.lokasi as distrik
+                    FROM tb_ts ts
+                    LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
+                    LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
+                    LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas 
+                    LEFT JOIN lokasi l3 on l3.kodelokasi = LEFT(l2.kodelokasi,8)
+                ) kk";
+        $this->db->from($query);
+        $this->db->where('kk.id', $id);
         $query = $this->db->get();
         return $query->row();
     }
@@ -101,9 +108,14 @@ class Ts_model extends CI_Model
         }
     }
 
-    public function update_entry($id, $data)
+    public function update_ts($id, $data)
     {
         return $this->db->update('tb_ts', $data, array('id' => $id));
+    }
+
+    public function update_detail_ts($id, $data2)
+    {
+        return $this->db->update('tb_tspp', $data2, array('id_ts' => $id));
     }
 
     public function single_entry($id)
@@ -120,10 +132,16 @@ class Ts_model extends CI_Model
     {
         return $this->db->update('tb_ts', $data, array('id' => $id));
     }
-    function delete_entry($id)
+    function delete_ts($id)
     {
         return $this->db->delete('tb_ts', array('id' => $id));
     }
+
+    function delete_tspp($id)
+    {
+        return $this->db->delete('tb_tspp', array('id_ts' => $id));
+    }
+
 
     function import($data)
     {
@@ -131,5 +149,19 @@ class Ts_model extends CI_Model
         if ($insert) {
             return true;
         }
+    }
+    public function edit($id)
+    {
+        $query = "SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak,ts.potensi,ts.existing,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_ekor,l3.kodelokasi as kodedistrik,l3.lokasi as distrik,
+                    ts2.jan,ts2.feb,ts2.mar,ts2.apr,ts2.mei,ts2.jun,ts2.jul,ts2.agu,ts2.sep,ts2.okt,ts2.nov,ts2.des
+                                        FROM tb_ts ts
+                                        LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
+                                        LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
+                                        LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas 
+                                        LEFT JOIN lokasi l3 on l3.kodelokasi = LEFT(l2.kodelokasi,8)
+                                        LEFT JOIN tb_tspp ts2 ON ts2.id_ts = ts.id
+                    WHERE ts.id = $id";
+        return $this->db->query($query)->row_array();
+        echo json_encode($query);
     }
 }

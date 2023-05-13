@@ -25,3 +25,46 @@
   <script language="JavaScript" type="application/javascript" src="<?php echo base_url() . 'assets/js/pages/toastifycrud.js' ?>"></script>
   <script language="JavaScript" type="application/javascript" src="<?php echo base_url() . 'assets/extensions/sweetalert2/sweetalert2.min.js' ?>"></script>
   <script src="<?= base_url('assets/'); ?>select2/js/select2.full.min.js"></script>
+
+  <?php
+  if (!empty($this->session->flashdata('message'))) {
+    $pesan = $this->session->flashdata('message');
+    if ($pesan == "success") {
+      $script = "
+                    <script>
+                            Swal.fire({
+                              icon: 'success',
+                              title: 'Data',
+                              text: 'Data Berhasil Ditambah'
+                            }) 
+                    </script>
+                ";
+    } elseif ($pesan == "successedit") {
+      $script =
+        "
+                    <script>
+                          Swal.fire({
+                            icon: 'success',
+                            title: 'Data',
+                            text: 'Data Berhasil Di Edit'
+                          }) 
+                    </script>
+        ";
+    } else {
+      $script =
+        "
+                    <script>
+                                Swal.fire({
+                                  icon: 'error',
+                                  title: 'Data',
+                                  text: 'Gagal'
+                                }) 
+
+                    </script>
+                    ";
+    }
+  } else {
+    $script = "";
+  }
+  echo $script;
+  ?>

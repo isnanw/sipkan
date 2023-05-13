@@ -48,8 +48,25 @@ class Ts extends CI_Controller
         $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);
-        // $this->load->view('backend/modal/jenisikan_modal');
         $this->load->view('backend/v_tsinput', $data);
+    }
+    public function v_edit()
+    {
+        $data['id_ts'] = $this->uri->segment(4);
+        $site = $this->site_model->get_site_data()->row_array();
+        $data['site_title'] = $site['site_title'];
+        $data['site_favicon'] = $site['site_favicon'];
+        $data['images'] = $site['images'];
+        $data['title'] = 'Edit Tambak Sederhana';
+        $data['title0'] = 'Produksi Budidaya Ikan';
+
+        $this->load->view('backend/menu', $data);
+        $this->load->view('backend/v_tsedit', $data);
+    }
+    public function ajax_edit($id_ts)
+    {
+        $data = $this->ts_model->edit($id_ts);
+        echo json_encode($data);
     }
 
     public function get_ajax_list()
@@ -66,7 +83,7 @@ class Ts extends CI_Controller
             $row[] = $d->ketua;
             $row[] = $d->jml_anggota;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_ts(' . "'" . $d->id . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('Backend/Ts/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
             $data[] = $row;
         }
@@ -80,12 +97,6 @@ class Ts extends CI_Controller
         //output to json format
 
         echo json_encode($output);
-    }
-
-    public function ajax_edit($id_jenisikan)
-    {
-        $data = $this->jenisikan_model->get_by_id($id_jenisikan);
-        echo json_encode($data);
     }
 
     function add()
@@ -133,46 +144,67 @@ class Ts extends CI_Controller
             $this->jenisikan_model->insert_log_jenisikan($data2);
             // INSERT LOG
             echo json_encode(array("status" => TRUE));
+            $this->session->set_flashdata('message', 'success');
         } else {
             echo json_encode(array("status" => FALSE));
+            $this->session->set_flashdata('message', 'error');
         }
+
         redirect('Backend/Ts');
     }
 
     function edit()
     {
-        $id = $this->input->post('id', TRUE);
-        $this->_validate_edit();
-
-
+        $id = $this->input->post('id_ts', TRUE);
         $users = $this->session->userdata('id');
-        $ajax_data['namajenisikan'] = $this->input->post('namajenisikan');
+        $nama_users = $this->session->userdata('name');
 
-
-        if ($this->jenisikan_model->update_entry($id, $ajax_data)) {
-            // INSERT LOG
-            $nama_users = $this->session->userdata('name');
-
-            $j = $this->input->post('namajenisikan');
-            $b = '<b>' . $nama_users . '</b> Melakukan Edit jenisikan <b>' . $j . '</b>';
-            $data2 = array(
-                'ket' => $b,
-            );
-            $this->jenisikan_model->insert_log_jenisikan($data2);
-            // INSERT LOG
-            echo json_encode(array("status" => TRUE));
-        } else {
-            echo json_encode(array("status" => FALSE));
-        }
+        $data = array(
+            'lokasi' => $this->input->post('kab'),
+            'kampung' => $this->input->post('kampung'),
+            'ketua' => $this->input->post('ketua'),
+            'jml_anggota' => $this->input->post('jml_anggota'),
+            'jml_tambak' => $this->input->post('jml_tambak'),
+            'uk_tambak' => $this->input->post('uk_tambak'),
+            'potensi' => $this->input->post('potensi'),
+            'existing' => $this->input->post('existing'),
+            'jenis_komoditas' => $this->input->post('komoditas'),
+            'jml_ekor' => $this->input->post('jml_ekor')
+        );
+        $id_ts = $this->ts_model->update_ts($id, $data);
+        $data1 = array(
+            'jan' => $this->input->post('jan'),
+            'feb' => $this->input->post('feb'),
+            'mar' => $this->input->post('mar'),
+            'apr' => $this->input->post('apr'),
+            'mei' => $this->input->post('mei'),
+            'jun' => $this->input->post('jun'),
+            'jul' => $this->input->post('jul'),
+            'agu' => $this->input->post('agu'),
+            'sep' => $this->input->post('sep'),
+            'okt' => $this->input->post('okt'),
+            'nov' => $this->input->post('nov'),
+            'des' => $this->input->post('des')
+        );
+        $prosesdetail = $this->ts_model->update_detail_ts($id, $data1);
+        // INSERT LOG
+        $b = '<b>' . $nama_users . '</b> Melakukan Update Tambak Sederhana';
+        $data2 = array(
+            'ket' => $b,
+        );
+        $this->jenisikan_model->insert_log_jenisikan($data2);
+        // INSERT LOG
+        echo json_encode(array("status" => TRUE));
+        $this->session->set_flashdata('message', 'successedit');
+        redirect('Backend/Ts');
     }
 
-    public function deletejenisikan()
+    public function deletets()
     {
         if ($this->input->is_ajax_request()) {
 
-            $id_jenisikan = $this->input->post('idkon');
-            if ($this->jenisikan_model->delete_entry($id_jenisikan)) {
-
+            $iddelete = $this->input->post('id_ts');
+            if ($this->ts_model->delete_ts($iddelete) && $this->ts_model->delete_tspp($iddelete)) {
                 $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
             } else {
                 $data = array('res' => "error", 'message' => "Proses gagal dilakukan");

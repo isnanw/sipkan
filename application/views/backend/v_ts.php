@@ -103,6 +103,47 @@
             ],
         });
     });
+
+    function reload_table() {
+        table.ajax.reload(null, false);
+    }
+    $(document).on("click", "#deletets", function(e) {
+        e.preventDefault();
+
+        var id_ts = $(this).attr("value");
+
+        Swal.fire({
+            title: "Apakah kamu yakin ingin menghapus Data ini?",
+            text: "Data ini akan di hapus secara Permanen!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Hapus!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo site_url('backend/ts/deletets') ?>",
+                    data: {
+                        id_ts: id_ts,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.res == "success") {
+                            Swal.fire(
+                                "Deleted!",
+                                "Data berhasil dihapus.",
+                                "success"
+                            );
+
+                            reload_table();
+                        }
+                    },
+                });
+            }
+        });
+    });
 </script>
 
 </body>
