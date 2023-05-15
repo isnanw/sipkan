@@ -237,4 +237,10 @@ class Jeniskolam extends CI_Controller
 			exit();
 		}
 	}
+	public function getdatakolam()
+	{
+		$searchTerm = $this->input->post('searchTerm');
+		$response   = $this->jeniskolam_model->getkolam($searchTerm);
+		echo json_encode($response);
+	}
 }

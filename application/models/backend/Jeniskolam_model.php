@@ -130,4 +130,16 @@ class Jeniskolam_model extends CI_Model
 			return true;
 		}
 	}
+
+	function getkolam($searchTerm = "")
+	{
+		$query = "SELECT * FROM tb_jeniskolam WHERE namajeniskolam like '%$searchTerm%' ORDER BY id_jeniskolam ASC ";
+		$dataprov = $this->db->query($query)->result_array();
+
+		$data = array();
+		foreach ($dataprov as $prov) {
+			$data[] = array("id" => $prov['id_jeniskolam'], "text" => $prov['namajeniskolam']);
+		}
+		return $data;
+	}
 }
