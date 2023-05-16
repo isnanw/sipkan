@@ -1,5 +1,5 @@
 <?php
-class Ts extends CI_Controller
+class Kjtt extends CI_Controller
 {
     /**
      * Description of Controller
@@ -17,7 +17,7 @@ class Ts extends CI_Controller
         };
         $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
         $this->load->model('backend/Lokasi_model', 'lokasi_model');
-        $this->load->model('backend/Ts_model', 'ts_model');
+        $this->load->model('backend/Kjtt_model', 'kjtt_model');
         $this->load->model('Site_model', 'site_model');
         $this->load->helper('text');
         $this->load->helper('url');
@@ -30,12 +30,12 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
-        $data['title'] = 'Data Tambak Sederhana';
+        $data['title'] = 'Data Produksi Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);
         // $this->load->view('backend/modal/jenisikan_modal');
-        $this->load->view('backend/v_ts', $data);
+        $this->load->view('backend/v_kjtt', $data);
     }
 
     public function v_input()
@@ -44,34 +44,34 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
-        $data['title'] = 'Input Tambak Sederhana';
+        $data['title'] = 'Input Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);
-        $this->load->view('backend/v_tsinput', $data);
+        $this->load->view('backend/v_kjttinput', $data);
     }
     public function v_edit()
     {
-        $data['id_ts'] = $this->uri->segment(4);
+        $data['idedit'] = $this->uri->segment(4);
         $site = $this->site_model->get_site_data()->row_array();
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
-        $data['title'] = 'Edit Tambak Sederhana';
+        $data['title'] = 'Edit Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);
-        $this->load->view('backend/v_tsedit', $data);
+        $this->load->view('backend/v_kjttedit', $data);
     }
-    public function ajax_edit($id_ts)
+    public function ajax_edit($idedit)
     {
-        $data = $this->ts_model->edit($id_ts);
+        $data = $this->kjtt_model->edit($idedit);
         echo json_encode($data);
     }
 
     public function get_ajax_list()
     {
-        $list = $this->ts_model->get_datatables();
+        $list = $this->kjtt_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $d) {
@@ -83,15 +83,15 @@ class Ts extends CI_Controller
             $row[] = $d->ketua;
             $row[] = $d->jml_anggota;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('Backend/Ts/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/Kjtt/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->ts_model->count_all(),
-            "recordsFiltered" => $this->ts_model->count_filtered(),
+            "recordsTotal" => $this->kjtt_model->count_all(),
+            "recordsFiltered" => $this->kjtt_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -111,16 +111,16 @@ class Ts extends CI_Controller
             'kampung' => $this->input->post('kampung'),
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
-            'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
+            'jml_unit' => $this->input->post('jml_unit'),
+            'jml_petak' => $this->input->post('jml_petak'),
             'potensi' => $this->input->post('potensi'),
             'existing' => $this->input->post('existing'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
-        $id_ts = $this->ts_model->tambah_ts($data);
+        $idedit = $this->kjtt_model->tambah($data);
         $data1 = array(
-            'id_ts' => $id_ts,
+            'id_kjtt' => $idedit,
             'jan' => $this->input->post('jan'),
             'feb' => $this->input->post('feb'),
             'mar' => $this->input->post('mar'),
@@ -134,10 +134,10 @@ class Ts extends CI_Controller
             'nov' => $this->input->post('nov'),
             'des' => $this->input->post('des')
         );
-        $prosesdetail = $this->ts_model->tambah_detail_ts($data1);
-        if ($id_ts) {
+        $prosesdetail = $this->kjtt_model->tambah_detail($data1);
+        if ($idedit) {
             // INSERT LOG
-            $b = '<b>' . $nama_users . '</b> Melakukan Tambah Tambak Sederhana';
+            $b = '<b>' . $nama_users . '</b> Melakukan Tambah KJT T';
             $data2 = array(
                 'ket' => $b,
             );
@@ -150,12 +150,12 @@ class Ts extends CI_Controller
             $this->session->set_flashdata('message', 'error');
         }
 
-        redirect('Backend/Ts');
+        redirect('backend/Kjtt');
     }
 
     function edit()
     {
-        $id = $this->input->post('id_ts', TRUE);
+        $id = $this->input->post('idedit', TRUE);
         $users = $this->session->userdata('id');
         $nama_users = $this->session->userdata('name');
 
@@ -164,14 +164,14 @@ class Ts extends CI_Controller
             'kampung' => $this->input->post('kampung'),
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
-            'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
+            'jml_unit' => $this->input->post('jml_unit'),
+            'jml_petak' => $this->input->post('jml_petak'),
             'potensi' => $this->input->post('potensi'),
             'existing' => $this->input->post('existing'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
-        $id_ts = $this->ts_model->update_ts($id, $data);
+        $idedit = $this->kjtt_model->update($id, $data);
         $data1 = array(
             'jan' => $this->input->post('jan'),
             'feb' => $this->input->post('feb'),
@@ -186,9 +186,9 @@ class Ts extends CI_Controller
             'nov' => $this->input->post('nov'),
             'des' => $this->input->post('des')
         );
-        $prosesdetail = $this->ts_model->update_detail_ts($id, $data1);
+        $prosesdetail = $this->kjtt_model->update_detail($id, $data1);
         // INSERT LOG
-        $b = '<b>' . $nama_users . '</b> Melakukan Update Tambak Sederhana';
+        $b = '<b>' . $nama_users . '</b> Melakukan Update KJT T';
         $data2 = array(
             'ket' => $b,
         );
@@ -196,15 +196,15 @@ class Ts extends CI_Controller
         // INSERT LOG
         echo json_encode(array("status" => TRUE));
         $this->session->set_flashdata('message', 'successedit');
-        redirect('Backend/Ts');
+        redirect('backend/Kjtt');
     }
 
     public function deletets()
     {
         if ($this->input->is_ajax_request()) {
 
-            $iddelete = $this->input->post('id_ts');
-            if ($this->ts_model->delete_ts($iddelete) && $this->ts_model->delete_tspp($iddelete)) {
+            $iddelete = $this->input->post('id');
+            if ($this->kjtt_model->delete($iddelete) && $this->kjtt_model->delete_detail($iddelete)) {
                 $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
             } else {
                 $data = array('res' => "error", 'message' => "Proses gagal dilakukan");

@@ -12,7 +12,7 @@ class Kat extends CI_Controller
         //ini_set('memory_limit', "256M");
         error_reporting(0);
         if ($this->session->userdata('logged') != TRUE) {
-            $url = base_url('login_user');
+            $url = base_url('login');
             redirect($url);
         };
         $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
