@@ -76,9 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+<<<<<<< HEAD
 	'username' => 'unikjmco_sipkan',
 	'password' => 'Keeromkab@321',
 	'database' => 'unikjmco_sipkan',
+=======
+	'username' => 'root',
+	'password' => '',
+	'database' => 'sipkan',
+>>>>>>> 36c3ea828b9809c447f98e6fdc3f207beadfb2c8
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

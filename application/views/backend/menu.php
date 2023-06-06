@@ -139,7 +139,7 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Data</span>
             </li>
-            <!-- <li class="sidebar-item">
+            <li class="sidebar-item">
               <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                 <span class="d-flex">
                   <i class="ti ti-stack-pop"></i>
@@ -164,7 +164,7 @@
                   </a>
                 </li>
               </ul>
-            </li> -->
+            </li>
             <li class="sidebar-item">
               <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                 <span class="d-flex">

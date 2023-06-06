@@ -214,4 +214,10 @@ class Jeniskomoditas extends CI_Controller
         $response   = $this->jeniskomoditas_model->getkomoditas($searchTerm);
         echo json_encode($response);
     }
+    public function getdataperiode()
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->jeniskomoditas_model->getperiode($searchTerm);
+        echo json_encode($response);
+    }
 }

@@ -208,4 +208,12 @@ class Jenisbudidaya extends CI_Controller
             exit();
         }
     }
+
+
+    public function getdatabudidaya()
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->jenisbudidaya_model->getbudidaya($searchTerm);
+        echo json_encode($response);
+    }
 }

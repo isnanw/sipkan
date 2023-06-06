@@ -141,4 +141,16 @@ class Jeniskomoditas_model extends CI_Model
         }
         return $data;
     }
+
+    function getperiode($searchTerm = "")
+    {
+        $query = "SELECT * FROM tb_periode WHERE periode like '%$searchTerm%' ORDER BY id ASC ";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['id'], "text" => $prov['periode']);
+        }
+        return $data;
+    }
 }

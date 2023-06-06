@@ -100,7 +100,7 @@
                                         <div class="col-12">
                                             <div class="d-md-flex align-items-center mt-3">
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <a href="<?= base_url('Backend/Ts') ?>" class="btn btn-danger font-medium rounded-pill px-4">
+                                                    <a href="<?= base_url('backend/Ts') ?>" class="btn btn-danger font-medium rounded-pill px-4">
                                                         <div class="d-flex align-items-center">
                                                             Cancel
                                                         </div>
@@ -192,7 +192,7 @@
                                         <div class="col-12">
                                             <div class="d-md-flex align-items-center mt-3">
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <a href="<?= base_url('Backend/Ts') ?>" class="btn btn-danger font-medium rounded-pill px-4">
+                                                    <a href="<?= base_url('backend/Ts') ?>" class="btn btn-danger font-medium rounded-pill px-4">
                                                         <div class="d-flex align-items-center">
                                                             Cancel
                                                         </div>

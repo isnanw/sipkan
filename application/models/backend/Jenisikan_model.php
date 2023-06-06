@@ -130,4 +130,16 @@ class Jenisikan_model extends CI_Model
             return true;
         }
     }
+
+    function getikan($searchTerm = "")
+    {
+        $query = "SELECT * FROM tb_jenisikan WHERE namajenisikan like '%$searchTerm%' ORDER BY id_jenisikan ASC ";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['id_jenisikan'], "text" => $prov['namajenisikan']);
+        }
+        return $data;
+    }
 }
