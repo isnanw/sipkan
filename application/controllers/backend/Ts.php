@@ -150,7 +150,7 @@ class Ts extends CI_Controller
             $this->session->set_flashdata('message', 'error');
         }
 
-        redirect('Backend/Ts');
+        redirect('backend/Ts');
     }
 
     function edit()
@@ -196,7 +196,7 @@ class Ts extends CI_Controller
         // INSERT LOG
         echo json_encode(array("status" => TRUE));
         $this->session->set_flashdata('message', 'successedit');
-        redirect('Backend/Ts');
+        redirect('backend/Ts');
     }
 
     public function deletets()
