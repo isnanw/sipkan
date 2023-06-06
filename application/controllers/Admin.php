@@ -35,7 +35,7 @@ class Admin extends CI_Controller{
 
 
         if ($this->form_validation->run() == FALSE){
-            $url=base_url('admin');
+            $url=base_url('login');
             echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-dismissible show fade">Email atau Password Salah.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
             redirect($url);
         }else{
@@ -94,7 +94,7 @@ class Admin extends CI_Controller{
 
     function logout(){
         $this->session->sess_destroy();
-        $url=base_url('admin');
+        $url=base_url('login');
         redirect($url);
     }
 
