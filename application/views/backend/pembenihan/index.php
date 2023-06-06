@@ -66,7 +66,7 @@
             "order": [], //Initial no order.
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('backend/Rl/get_ajax_list') ?>",
+                "url": "<?php echo site_url('backend/pembenihan/get_ajax_list') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
@@ -124,7 +124,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url: "<?php echo site_url('backend/Rl/deletets') ?>",
+                    url: "<?php echo site_url('backend/pembenihan/deletets') ?>",
                     data: {
                         id: id,
                     },

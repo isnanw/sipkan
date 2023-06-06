@@ -10,7 +10,7 @@ class Pembenihan_model extends CI_Model
     var $tablets = 'tb_rl';
     var $tablelog = 'tbl_log';
     var $column_search_ts = array('lokasi', 'kampung', 'ketua');
-    var $order = array('id' => 'ASC'); // default order
+    var $order = array('kk.id' => 'ASC'); // default order
 
     public function __construct()
     {
@@ -20,13 +20,22 @@ class Pembenihan_model extends CI_Model
 
     private function _get_datatables_query()
     {
-        $query = "(SELECT ts.id,l.lokasi,l2.lokasi as kampung,ts.ketua,
-                            ts.jml_anggota,ts.jml_unit,ts.jml_longline,
-                            ts.potensi,ts.existing,j.namajeniskomoditas,ts.jml_bibit
-                    FROM tb_rl ts
-                    LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
-                    LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
-                    LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas
+        $query = "(SELECT
+                        l.lokasi as kab,
+                        p.periode as periode,
+                        tj.namajenisbudidaya as budidaya,
+                        tji.namajenisikan as ikan,
+                        tp.*
+                    FROM
+                            tb_pembenihan tp
+                    LEFT JOIN lokasi l on
+                            l.kodelokasi = tp.lokasi
+                    LEFT JOIN tb_periode p on
+                            p.id = tp.bulan
+                    LEFT JOIN tb_jenisbudidaya tj on
+                            tj.id_jenisbudidaya = tp.id_budidaya
+                    LEFT JOIN tb_jenisikan tji on
+                            tji.id_jenisikan = tp.id_jenisikan
                 ) kk";
         $this->db->from($query);
         $i = 0;
@@ -97,13 +106,13 @@ class Pembenihan_model extends CI_Model
 
     public function update($id, $data)
     {
-        return $this->db->update('tb_rl', $data, array('id' => $id));
+        return $this->db->update('tb_pembenihan', $data, array('id' => $id));
     }
 
-    public function update_detail($id, $data2)
-    {
-        return $this->db->update('tb_rlpp', $data2, array('id_rl' => $id));
-    }
+    // public function update_detail($id, $data2)
+    // {
+    //     return $this->db->update('tb_rlpp', $data2, array('id_rl' => $id));
+    // }
 
     public function single_entry($id)
     {
@@ -121,7 +130,7 @@ class Pembenihan_model extends CI_Model
     }
     function delete($id)
     {
-        return $this->db->delete('tb_rl', array('id' => $id));
+        return $this->db->delete('tb_pembenihan', array('id' => $id));
     }
 
     function delete_detail($id)
@@ -139,18 +148,23 @@ class Pembenihan_model extends CI_Model
     }
     public function edit($id)
     {
-        $query = "SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,
-                            l2.lokasi as kampung,ts.ketua,ts.jml_unit,ts.jml_longline,ts.jml_anggota,
-                            ts.potensi,ts.existing,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_bibit,
-                            l3.kodelokasi as kodedistrik,l3.lokasi as distrik,
-                            ts2.jan,ts2.feb,ts2.mar,ts2.apr,ts2.mei,ts2.jun,ts2.jul,ts2.agu,ts2.sep,ts2.okt,ts2.nov,ts2.des
-                    FROM tb_rl ts
-                    LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
-                    LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
-                    LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas
-                    LEFT JOIN lokasi l3 on l3.kodelokasi = LEFT(l2.kodelokasi,8)
-                    LEFT JOIN tb_rlpp ts2 ON ts2.id_rl = ts.id
-                    WHERE ts.id = $id";
+        $query = "SELECT l.kodelokasi,
+                        l.lokasi as kab,
+                        p.periode as periode,
+                        tj.namajenisbudidaya as budidaya,
+                        tji.namajenisikan as ikan,
+                        tp.*
+                    FROM
+                            tb_pembenihan tp
+                    LEFT JOIN lokasi l on
+                            l.kodelokasi = tp.lokasi
+                    LEFT JOIN tb_periode p on
+                            p.id = tp.bulan
+                    LEFT JOIN tb_jenisbudidaya tj on
+                            tj.id_jenisbudidaya = tp.id_budidaya
+                    LEFT JOIN tb_jenisikan tji on
+                            tji.id_jenisikan = tp.id_jenisikan
+                    WHERE tp.id = $id";
         return $this->db->query($query)->row_array();
         echo json_encode($query);
     }

@@ -61,41 +61,42 @@ class Pembenihan extends CI_Controller
     $data['site_title'] = $site['site_title'];
     $data['site_favicon'] = $site['site_favicon'];
     $data['images'] = $site['images'];
-    $data['title'] = 'Edit Budidaya Rumput Laut ( Longline RL )';
+    $data['title1']       = 'Edit Data';
+    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
     $data['title0'] = 'Produksi Budidaya Ikan';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/v_rledit', $data);
+    $this->load->view('backend/pembenihan/edit', $data);
   }
   public function ajax_edit($idedit)
   {
-    $data = $this->rl_model->edit($idedit);
+    $data = $this->pembenihan_model->edit($idedit);
     echo json_encode($data);
   }
 
   public function get_ajax_list()
   {
-    $list = $this->rl_model->get_datatables();
+    $list = $this->pembenihan_model->get_datatables();
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $d) {
       $no++;
       $row = array();
       $row[] = $no;
-      $row[] = $d->lokasi;
-      $row[] = $d->kampung;
-      $row[] = $d->ketua;
-      $row[] = $d->jml_anggota;
+      $row[] = $d->kab;
+      $row[] = $d->periode;
+      $row[] = $d->budidaya;
+      $row[] = $d->ikan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('backend/RL/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/pembenihan/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
       $data[] = $row;
     }
 
     $output = array(
       "draw" => $_POST['draw'],
-      "recordsTotal" => $this->rl_model->count_all(),
-      "recordsFiltered" => $this->rl_model->count_filtered(),
+      "recordsTotal" => $this->pembenihan_model->count_all(),
+      "recordsFiltered" => $this->pembenihan_model->count_filtered(),
       "data" => $data,
     );
     //output to json format
@@ -150,34 +151,21 @@ class Pembenihan extends CI_Controller
 
     $data = array(
       'lokasi' => $this->input->post('kab'),
-      'kampung' => $this->input->post('kampung'),
-      'ketua' => $this->input->post('ketua'),
-      'jml_anggota' => $this->input->post('jml_anggota'),
-      'jml_unit' => $this->input->post('jml_unit'),
-      'jml_longline' => $this->input->post('jml_longline'),
-      'potensi' => $this->input->post('potensi'),
-      'existing' => $this->input->post('existing'),
-      'jenis_komoditas' => $this->input->post('komoditas'),
-      'jml_bibit' => $this->input->post('jml_bibit')
+      'bulan' => $this->input->post('periode'),
+      'id_budidaya' => $this->input->post('budidaya'),
+      'id_jenisikan' => $this->input->post('ikan'),
+      'produksi' => $this->input->post('produksi'),
+      'harga' => $this->input->post('harga'),
+      'nilai_produksi' => $this->input->post('nilaiproduksi'),
+      'luas_lahan' => $this->input->post('luaslahan'),
+      'luas_wadah' => $this->input->post('luaswadah'),
+      'jumlah_upr_pembudidayaan' => $this->input->post('upr')
     );
-    $idedit = $this->rl_model->update($id, $data);
-    $data1 = array(
-      'jan' => $this->input->post('jan'),
-      'feb' => $this->input->post('feb'),
-      'mar' => $this->input->post('mar'),
-      'apr' => $this->input->post('apr'),
-      'mei' => $this->input->post('mei'),
-      'jun' => $this->input->post('jun'),
-      'jul' => $this->input->post('jul'),
-      'agu' => $this->input->post('agu'),
-      'sep' => $this->input->post('sep'),
-      'okt' => $this->input->post('okt'),
-      'nov' => $this->input->post('nov'),
-      'des' => $this->input->post('des')
-    );
-    $prosesdetail = $this->rl_model->update_detail($id, $data1);
+    $idedit = $this->pembenihan_model->update($id, $data);
+
+    // $prosesdetail = $this->pembenihan_model->update_detail($id, $data1);
     // INSERT LOG
-    $b = '<b>' . $nama_users . '</b> Melakukan Update RL';
+    $b = '<b>' . $nama_users . '</b> Melakukan Update Pembenihan';
     $data2 = array(
       'ket' => $b,
     );
@@ -185,7 +173,7 @@ class Pembenihan extends CI_Controller
     // INSERT LOG
     echo json_encode(array("status" => TRUE));
     $this->session->set_flashdata('message', 'successedit');
-    redirect('backend/Rl');
+    redirect('backend/pembenihan');
   }
 
   public function deletets()
@@ -193,7 +181,7 @@ class Pembenihan extends CI_Controller
     if ($this->input->is_ajax_request()) {
 
       $iddelete = $this->input->post('id');
-      if ($this->rl_model->delete($iddelete) && $this->rl_model->delete_detail($iddelete)) {
+      if ($this->pembenihan_model->delete($iddelete) && $this->pembenihan_model->delete_detail($iddelete)) {
         $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
       } else {
         $data = array('res' => "error", 'message' => "Proses gagal dilakukan");
