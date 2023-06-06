@@ -208,4 +208,11 @@ class Jenisikan extends CI_Controller
             exit();
         }
     }
+
+    public function getdataikan()
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->jenisikan_model->getikan($searchTerm);
+        echo json_encode($response);
+    }
 }

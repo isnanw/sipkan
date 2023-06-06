@@ -130,4 +130,16 @@ class Jenisbudidaya_model extends CI_Model
             return true;
         }
     }
+
+    function getbudidaya($searchTerm = "")
+    {
+        $query = "SELECT * FROM tb_jenisbudidaya WHERE namajenisbudidaya like '%$searchTerm%' ORDER BY id_jenisbudidaya ASC ";
+        $dataprov = $this->db->query($query)->result_array();
+
+        $data = array();
+        foreach ($dataprov as $prov) {
+            $data[] = array("id" => $prov['id_jenisbudidaya'], "text" => $prov['namajenisbudidaya']);
+        }
+        return $data;
+    }
 }
