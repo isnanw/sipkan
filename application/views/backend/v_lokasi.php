@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                        <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_lokasi()"><i class="ti ti-square-plus"></i></a>
+                        <!-- <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_lokasi()"><i class="ti ti-square-plus"></i></a> -->
                     </div>
                     <br /><br />
                     <div class="table-responsive">

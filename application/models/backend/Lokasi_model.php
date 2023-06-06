@@ -9,7 +9,7 @@ class Lokasi_model extends CI_Model
 
     var $tablelokasi = 'lokasi';
     var $tablelog = 'tbl_log';
-    var $column_search_lokasi = array('kodelokasi,lokasi');
+    var $column_search_lokasi = array('kodelokasi','lokasi');
     var $order = array('kodelokasi' => 'ASC'); // default order
 
     public function __construct()
