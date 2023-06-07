@@ -48,6 +48,7 @@ class Jenisikan extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $d->namajenisikan;
+            $row[] = "Rp ".number_format($d->harga, 2, ',', '.');
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
       <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_jenisikan(' . "'" . $d->id_jenisikan . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletejenisikan" value="' . $d->id_jenisikan . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
@@ -80,7 +81,8 @@ class Jenisikan extends CI_Controller
         $nama_users = $this->session->userdata('name');
 
         $data = array(
-            'namajenisikan' => $this->input->post('namajenisikan')
+            'namajenisikan' => $this->input->post('namajenisikan'),
+            'harga' => $this->input->post('harga')
         );
         $insert = $this->jenisikan_model->insert_jenisikan($data);
 
@@ -88,7 +90,7 @@ class Jenisikan extends CI_Controller
             // INSERT LOG
 
             $j = $this->input->post('namajenisikan');
-            $b = '<b>' . $nama_users . '</b> Melakukan Tambah jenisikan <b>' . $j . '</b>';
+            $b = '<b>' . $nama_users . '</b> Melakukan Tambah Jenis Ikan <b>' . $j . '</b>';
             $data2 = array(
                 'ket' => $b,
             );
@@ -108,6 +110,7 @@ class Jenisikan extends CI_Controller
 
         $users = $this->session->userdata('id');
         $ajax_data['namajenisikan'] = $this->input->post('namajenisikan');
+        $ajax_data['harga'] = $this->input->post('harga');
 
 
         if ($this->jenisikan_model->update_entry($id, $ajax_data)) {
@@ -115,7 +118,8 @@ class Jenisikan extends CI_Controller
             $nama_users = $this->session->userdata('name');
 
             $j = $this->input->post('namajenisikan');
-            $b = '<b>' . $nama_users . '</b> Melakukan Edit jenisikan <b>' . $j . '</b>';
+            $k = $this->input->post('harga');
+            $b = '<b>' . $nama_users . '</b> Melakukan Edit jenisikan <b>' . $j . '</b> dengan harga <b>' .$k. '</b>';
             $data2 = array(
                 'ket' => $b,
             );
@@ -152,10 +156,17 @@ class Jenisikan extends CI_Controller
         $data['inputerror'] = array();
         $data['status'] = TRUE;
         $nama = $this->input->post('namajenisikan');
+        $harga = $this->input->post('harga');
 
         if ($this->input->post('namajenisikan') == '') {
             $data['inputerror'][] = 'namajenisikan';
-            $data['error_string'][] = 'Form jenisikan harus berisi';
+            $data['error_string'][] = 'Form jenis ikan harus berisi';
+            $data['status'] = FALSE;
+        }
+
+        if ($this->input->post('harga') == '') {
+            $data['inputerror'][] = 'harga';
+            $data['error_string'][] = 'Form harga ikan harus berisi';
             $data['status'] = FALSE;
         }
 

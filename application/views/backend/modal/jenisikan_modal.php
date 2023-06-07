@@ -4,9 +4,8 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" jeniskolam="document">
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h5 class="modal-title white" id="myModalLabel120">
-                </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title white" id="myModalLabel120"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
@@ -22,6 +21,14 @@
                             <div class="form-group">
                                 <label for="valid-state">Jenis Ikan</label>
                                 <input type="text" name="namajenisikan" class="form-control namajenisikan" id="namajenisikan" placeholder="Nama Jenis Ikan">
+                                <span class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3"></div>
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label for="valid-state">Harga (Rp)</label>
+                                <input type="number" name="harga" class="form-control harga" id="harga" placeholder="Harga Ikan/Ekor">
                                 <span class="help-block text-danger"></span>
                             </div>
                         </div>

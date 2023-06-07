@@ -15,7 +15,8 @@
                             <thead>
                                 <tr>
                                     <th class="col-1">No</th>
-                                    <th class="col-9">Nama Jenis Ikan</th>
+                                    <th class="col-5">Nama Jenis Ikan</th>
+                                    <th class="col-4">Harga</th>
                                     <th class="col-2">Aksi</th>
                                 </tr>
                             </thead>
@@ -74,6 +75,10 @@
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
+        $("#harga").change(function() {
+            $(this).parent().parent().removeClass('help-block text-danger');
+            $(this).next().empty();
+        });
     });
 
     function add_jenisikan() {
@@ -101,6 +106,7 @@
             success: function(data) {
                 $('[name="id"]').val(data.id_jenisikan);
                 $('[name="namajenisikan"]').val(data.namajenisikan);
+                $('[name="harga"]').val(data.harga);
 
                 $('#modal_form_jenisikan').modal('hide');
             },
