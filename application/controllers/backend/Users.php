@@ -9,7 +9,7 @@ class Users extends CI_Controller{
             redirect($url);
 		};
 		$this->load->model('backend/Users_model','users_model');
-		$this->load->model('backend/Pengeluaran_model','pengeluaran_model');
+		// $this->load->model('backend/Pengeluaran_model','pengeluaran_model');
 		$this->load->model('Site_model','site_model');
 		$this->load->library('upload');
 		$this->load->helper('text');
