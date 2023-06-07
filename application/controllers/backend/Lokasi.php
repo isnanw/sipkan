@@ -37,12 +37,13 @@ class Lokasi extends CI_Controller
   public function get_ajax_list()
   {
     $list = $this->lokasi_model->get_datatables();
+    // die($list);
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $d) {
       $no++;
       $row = array();
-      $row[] = $no;
+      // $row[] = $no;
       $row[] = $d->kodelokasi;
       $row[] = $d->lokasi;
 

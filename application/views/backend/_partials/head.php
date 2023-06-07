@@ -32,10 +32,6 @@
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <img src="<?= base_url('assets/keren/'); ?>dist/images/logos/icon.png" alt="loader" class="lds-ripple img-fluid" />
-    </div>
-    <!-- Preloader -->
-    <div class="preloader">
-        <img src="<?= base_url('assets/keren/'); ?>dist/images/logos/icon.png" alt="loader" class="lds-ripple img-fluid" />
-    </div>
+    </div> -->

@@ -1,34 +1,36 @@
 <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
 <!-- Post Datatables -->
 
-<section id="input-validation">
-    <div class="row">
-        <div class="col-12 col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                        <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_jenisikan()"><i class="ti ti-square-plus"></i></a>
-                    </div>
-                    <br /><br />
-                    <div class="table-responsive">
-                        <table id="mytable" class="table table-bordered mb-0 text-sm">
-                            <thead>
-                                <tr>
-                                    <th class="col-1">No</th>
-                                    <th class="col-5">Nama Jenis Ikan</th>
-                                    <th class="col-4">Harga</th>
-                                    <th class="col-2">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+<div class="card">
+    <div class="card-body">
+        <div class="mb-2">
+            <h5 class="mb-0">Table
+                <?= $title; ?>
+            </h5>
+        </div>
+        <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
+            <a class="btn icon btn btn-success" id="btn-validate-import" onclick="add_jenisikan()"><i
+                    class="ti ti-square-plus"></i> Tambah Data</a>
+        </div>
+        <p class="card-subtitle mb-3">=============</p>
+
+        <div class="table-responsive m-t-40">
+            <table id="mytable" class="table border display table-bordered table-striped no-wrap">
+                <thead>
+                    <!-- start row -->
+                    <tr>
+                        <th class="col-1">No</th>
+                        <th class="col-5">Nama Jenis Ikan</th>
+                        <th class="col-4">Harga</th>
+                        <th class="col-2">Aksi</th>
+                    </tr>
+                    <!-- end row -->
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
-</section>
+</div>
 <!-- Post Datatables END -->
 
 
@@ -45,14 +47,16 @@
     var csfrData = {};
 
     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo
-                                                                            $this->security->get_csrf_hash(); ?>';
+           $this->security->get_csrf_hash(); ?>';
     $.ajaxSetup({
         data: csfrData
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         //datatables
         table = $('#mytable').DataTable({
+            "responsive": true,
+            // "scrollX": true,
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             //"searching": false,
@@ -61,21 +65,21 @@
             "ajax": {
                 "url": "<?php echo site_url('backend/jenisikan/get_ajax_list') ?>",
                 "type": "POST",
-                "data": function(data) {},
+                "data": function (data) { },
             },
 
             //Set column definition initialisation properties.
             "columnDefs": [{
                 "targets": [0, 1, 2], //first column
                 "orderable": false, //set not orderable
-            }, ],
+            },],
         });
 
-        $("#namajenisikan").change(function() {
+        $("#namajenisikan").change(function () {
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
-        $("#harga").change(function() {
+        $("#harga").change(function () {
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
@@ -103,14 +107,14 @@
             url: "<?php echo site_url('backend/jenisikan/ajax_edit/') ?>/" + id_jenisikan,
             type: "GET",
             dataType: "JSON",
-            success: function(data) {
+            success: function (data) {
                 $('[name="id"]').val(data.id_jenisikan);
                 $('[name="namajenisikan"]').val(data.namajenisikan);
                 $('[name="harga"]').val(data.harga);
 
                 $('#modal_form_jenisikan').modal('hide');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
@@ -137,7 +141,7 @@
             type: "POST",
             data: $('#formjenisikan').serialize(),
             dataType: "JSON",
-            success: function(data) {
+            success: function (data) {
 
                 if (data.status) {
                     toastify_success();
@@ -154,7 +158,7 @@
 
 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error adding / update data');
                 $('#btnSave').text('Save');
                 $('#btnSave').attr('disabled', false);
@@ -165,7 +169,7 @@
     }
 
 
-    $(document).on("click", "#deletejenisikan", function(e) {
+    $(document).on("click", "#deletejenisikan", function (e) {
         e.preventDefault();
 
         var idkon = $(this).attr("value");
@@ -187,7 +191,7 @@
                         idkon: idkon,
                     },
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         if (response.res == "success") {
                             Swal.fire(
                                 "Deleted!",
@@ -203,7 +207,7 @@
         });
     });
 
-    $(document).on("click", "#lock", function(e) {
+    $(document).on("click", "#lock", function (e) {
         e.preventDefault();
 
         var id_jenisikan = $(this).attr("value");
@@ -225,7 +229,7 @@
                         id_jenisikan: id_jenisikan,
                     },
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         if (response.res == "success") {
                             Swal.fire(
                                 "Success!",

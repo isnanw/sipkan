@@ -1,6 +1,7 @@
 <!-- MODAL -->
 <!-- Add Records Modal -->
-<div class="modal fade text-left" id="modal_form_jenisikan" tabindex="-1" jeniskolam="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+<div class="modal fade text-left" id="modal_form_jenisikan" tabindex="-1" jeniskolam="dialog"
+    aria-labelledby="myModalLabel120" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" jeniskolam="document">
         <div class="modal-content">
             <div class="modal-header bg-success">
@@ -20,7 +21,8 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="valid-state">Jenis Ikan</label>
-                                <input type="text" name="namajenisikan" class="form-control namajenisikan" id="namajenisikan" placeholder="Nama Jenis Ikan">
+                                <input type="text" name="namajenisikan" class="form-control namajenisikan"
+                                    id="namajenisikan" placeholder="Nama Jenis Ikan">
                                 <span class="help-block text-danger"></span>
                             </div>
                         </div>
@@ -28,7 +30,8 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="valid-state">Harga (Rp)</label>
-                                <input type="number" name="harga" class="form-control harga" id="harga" placeholder="Harga Ikan/Ekor">
+                                <input type="number" name="harga" class="form-control harga" id="harga"
+                                    placeholder="Harga Ikan/Ekor">
                                 <span class="help-block text-danger"></span>
                             </div>
                         </div>
@@ -51,8 +54,10 @@
 <!-- Add Records Modal -->
 
 <!-- Import Modal -->
-<form id="add-row-form" action="<?php echo site_url('backend/konsumen/import'); ?>" method="post" enctype="multipart/form-data">
-    <div class="modal fade text-left" id="import" tabindex="-1" jeniskolam="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
+<form id="add-row-form" action="<?php echo site_url('backend/konsumen/import'); ?>" method="post"
+    enctype="multipart/form-data">
+    <div class="modal fade text-left" id="import" tabindex="-1" jeniskolam="dialog" aria-labelledby="myModalLabel120"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" jeniskolam="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -65,9 +70,12 @@
                 <div class="modal-body">
                     <h5> Format Import
 
-                        <a href="javascript:void(0);" class="btn icon btn-sm btn-primary download-excel"><i class="bi bi-download"></i></a>
+                        <a href="javascript:void(0);" class="btn icon btn-sm btn-primary download-excel"><i
+                                class="bi bi-download"></i></a>
                     </h5>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aturan</button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" aria-expanded="false"
+                        aria-controls="collapseExample">Aturan</button>
                     <div class="collapse" id="collapseExample">
                         1. Format dalam bentuk (xls,xlsx).<br />
                         2. Nama, Alamat, No HP Wajib Isi.<br />
@@ -79,7 +87,8 @@
                     <div class="col-12">
                         <fieldset>
                             <div class="input-group">
-                                <input type="file" name="fileExcel" class="form-control fileExcel" accept=".xls,.xlsx" required>
+                                <input type="file" name="fileExcel" class="form-control fileExcel" accept=".xls,.xlsx"
+                                    required>
 
                             </div>
                         </fieldset>
@@ -87,7 +96,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                        value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                         <i class="bx bx-x d-sm-none"></i>Cancel</button>
                     <button type="submit" class="btn btn-success ml-1 btn-import" id="btn-import">

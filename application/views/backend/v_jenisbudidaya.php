@@ -1,33 +1,35 @@
 <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
 <!-- Post Datatables -->
 
-<section id="input-validation">
-    <div class="row">
-        <div class="col-12 col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
-                        <a class="btn icon btn-sm btn-success" id="btn-validate-import" onclick="add_jenisbudidaya()"><i class="ti ti-square-plus"></i></a>
-                    </div>
-                    <br /><br />
-                    <div class="table-responsive">
-                        <table id="mytable" class="table table-bordered mb-0 text-sm">
-                            <thead>
-                                <tr>
-                                    <th class="col-1">No</th>
-                                    <th class="col-9">Nama Jenis Budidaya</th>
-                                    <th class="col-2">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+<div class="card">
+    <div class="card-body">
+        <div class="mb-2">
+            <h5 class="mb-0">Table
+                <?= $title; ?>
+            </h5>
+        </div>
+        <div class="btn-group mb-3  float-end" role="group" aria-label="Basic example">
+            <a class="btn icon btn btn-success" id="btn-validate-import" onclick="add_jenisbudidaya()"><i
+                    class="ti ti-square-plus"></i> Tambah Data</a>
+        </div>
+        <p class="card-subtitle mb-3">=============</p>
+
+        <div class="table-responsive m-t-40">
+            <table id="mytable" class="table border display table-bordered table-striped no-wrap">
+                <thead>
+                    <!-- start row -->
+                    <tr>
+                        <th class="col-1">No</th>
+                        <th class="col-9">Nama Jenis Budidaya</th>
+                        <th class="col-2">Aksi</th>
+                    </tr>
+                    <!-- end row -->
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
-</section>
+</div>
 <!-- Post Datatables END -->
 
 
@@ -44,12 +46,12 @@
     var csfrData = {};
 
     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo
-                                                                            $this->security->get_csrf_hash(); ?>';
+           $this->security->get_csrf_hash(); ?>';
     $.ajaxSetup({
         data: csfrData
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         //datatables
         table = $('#mytable').DataTable({
             "processing": true, //Feature control the processing indicator.
@@ -60,17 +62,17 @@
             "ajax": {
                 "url": "<?php echo site_url('backend/jenisbudidaya/get_ajax_list') ?>",
                 "type": "POST",
-                "data": function(data) {},
+                "data": function (data) { },
             },
 
             //Set column definition initialisation properties.
             "columnDefs": [{
                 "targets": [0, 1, 2], //first column
                 "orderable": false, //set not orderable
-            }, ],
+            },],
         });
 
-        $("#namajenisbudidaya").change(function() {
+        $("#namajenisbudidaya").change(function () {
             $(this).parent().parent().removeClass('help-block text-danger');
             $(this).next().empty();
         });
@@ -98,13 +100,13 @@
             url: "<?php echo site_url('backend/jenisbudidaya/ajax_edit/') ?>/" + id_jenisbudidaya,
             type: "GET",
             dataType: "JSON",
-            success: function(data) {
+            success: function (data) {
                 $('[name="id"]').val(data.id_jenisbudidaya);
                 $('[name="namajenisbudidaya"]').val(data.namajenisbudidaya);
 
                 $('#modal_form_jenisbudidaya').modal('hide');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
@@ -131,7 +133,7 @@
             type: "POST",
             data: $('#formjenisbudidaya').serialize(),
             dataType: "JSON",
-            success: function(data) {
+            success: function (data) {
 
                 if (data.status) {
                     toastify_success();
@@ -148,7 +150,7 @@
 
 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error adding / update data');
                 $('#btnSave').text('Save');
                 $('#btnSave').attr('disabled', false);
@@ -159,7 +161,7 @@
     }
 
 
-    $(document).on("click", "#deletejenisbudidaya", function(e) {
+    $(document).on("click", "#deletejenisbudidaya", function (e) {
         e.preventDefault();
 
         var idkon = $(this).attr("value");
@@ -181,7 +183,7 @@
                         idkon: idkon,
                     },
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         if (response.res == "success") {
                             Swal.fire(
                                 "Deleted!",
@@ -197,7 +199,7 @@
         });
     });
 
-    $(document).on("click", "#lock", function(e) {
+    $(document).on("click", "#lock", function (e) {
         e.preventDefault();
 
         var id_jenisbudidaya = $(this).attr("value");
@@ -219,7 +221,7 @@
                         id_jenisbudidaya: id_jenisbudidaya,
                     },
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         if (response.res == "success") {
                             Swal.fire(
                                 "Success!",
