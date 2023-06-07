@@ -101,7 +101,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="valid-state">Tipe Akun</label>
-                                <select class="form-select level" name="level" id="level" onchange="setAtasan(this.value)" style="width:100%" required>
+                                <select class="form-select level" name="level" id="level"  style="width:100%" required>
                                     <option value="">[Pilih Level User]</option>
                                     <?php foreach ($level->result() as $row) : ?>
                                         <option value="<?php echo $row->id_role; ?>"><?php echo $row->namarole; ?></option>

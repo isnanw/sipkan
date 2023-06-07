@@ -1,4 +1,62 @@
+        <style>
+          .welcome-bg-img {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+          }
+        </style>
         <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 d-flex align-items-stretch">
+              <div class="card w-100 bg-light-info overflow-hidden shadow-none">
+                <div class="card-body position-relative">
+                  <div class="row">
+                    <div class="col-sm-7">
+                      <div class="d-flex align-items-center mb-7">
+                        <div class="rounded-circle overflow-hidden me-6">
+                          <img src="<?= base_url() . 'assets/images/profilusers/' . $this->session->userdata('user_photo'); ?>" alt="" width="40" height="40">
+                        </div>
+                        <h5 class="fw-semibold mb-0 fs-5">Welcome <?= $this->session->userdata('name'); ?></h5>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="border-end pe-4 border-muted border-opacity-10">
+                          <h3 class="mb-1 fw-semibold fs-8 d-flex align-content-center"><?= $tahun; ?><i class="ti ti-arrow-up-right fs-5 lh-base text-success"></i></h3>
+                          <p class="mb-0 text-dark">Tahun Input</p>
+                        </div>
+                        <div class="ps-4">
+                          <!-- <h3 class="mb-1 fw-semibold fs-8 d-flex align-content-center">35%<i class="ti ti-arrow-up-right fs-5 lh-base text-success"></i></h3>
+                          <p class="mb-0 text-dark">Overall Performance</p> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="welcome-bg-img mb-n7 text-end">
+                        <img src="<?= base_url('assets/keren/'); ?>dist/images/backgrounds/welcome-bg.svg" alt="" class="img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-2 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div class="card-body p-4">
+                  <h4 class="fw-semibold">$10,230</h4>
+                  <p class="mb-2 fs-3">Expense</p>
+                  <div id="expense"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-2 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div class="card-body p-4">
+                  <h4 class="fw-semibold">$65,432</h4>
+                  <p class="mb-1 fs-3">Sales</p>
+                  <div id="sales" class="sales-chart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!--  Owl carousel -->
           <div class="owl-carousel counter-carousel owl-theme">
             <div class="item">
@@ -6,8 +64,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-user-male.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-primary mb-1"> Employees </p>
-                    <h5 class="fw-semibold text-primary mb-0">96</h5>
+                    <p class="fw-semibold fs-3 text-primary mb-1"> Users </p>
+                    <h5 class="fw-semibold text-primary mb-0"><?= $jmlh_user; ?></h5>
                   </div>
                 </div>
               </div>
@@ -17,8 +75,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-briefcase.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-warning mb-1">Clients</p>
-                    <h5 class="fw-semibold text-warning mb-0">3,685</h5>
+                    <p class="fw-semibold fs-3 text-warning mb-1">Jenis Kolam</p>
+                    <h5 class="fw-semibold text-warning mb-0"><?= $jmlh_kolam; ?></h5>
                   </div>
                 </div>
               </div>
@@ -28,8 +86,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-mailbox.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-info mb-1">Projects</p>
-                    <h5 class="fw-semibold text-info mb-0">256</h5>
+                    <p class="fw-semibold fs-3 text-info mb-1">Jenis Ikan</p>
+                    <h5 class="fw-semibold text-info mb-0"><?= $jmlh_ikan; ?></h5>
                   </div>
                 </div>
               </div>
@@ -39,8 +97,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-favorites.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-danger mb-1">Events</p>
-                    <h5 class="fw-semibold text-danger mb-0">932</h5>
+                    <p class="fw-semibold fs-3 text-danger mb-1">Jenis Budidaya</p>
+                    <h5 class="fw-semibold text-danger mb-0"><?= $jmlh_budidaya; ?></h5>
                   </div>
                 </div>
               </div>
@@ -50,8 +108,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-speech-bubble.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-success mb-1">Payroll</p>
-                    <h5 class="fw-semibold text-success mb-0">$348K</h5>
+                    <p class="fw-semibold fs-3 text-success mb-1">Pembesaran</p>
+                    <h5 class="fw-semibold text-success mb-0"><?= $jmlh_pembesaran; ?></h5>
                   </div>
                 </div>
               </div>
@@ -61,8 +119,8 @@
                 <div class="card-body">
                   <div class="text-center">
                     <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-connect.svg" width="50" height="50" class="mb-3" alt="" />
-                    <p class="fw-semibold fs-3 text-info mb-1">Reports</p>
-                    <h5 class="fw-semibold text-info mb-0">48</h5>
+                    <p class="fw-semibold fs-3 text-info mb-1">Pembenihan</p>
+                    <h5 class="fw-semibold text-info mb-0"><?= $jmlh_pembenihan; ?></h5>
                   </div>
                 </div>
               </div>
@@ -70,6 +128,7 @@
           </div>
           <!--  Row 1 -->
           <div class="row">
+
             <div class="col-lg-8 d-flex align-items-strech">
               <div class="card w-100">
                 <div class="card-body">
@@ -553,336 +612,14 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <!--  Shopping Cart -->
-    <div class="offcanvas offcanvas-end shopping-cart" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header py-4">
-        <h5 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Shopping Cart</h5>
-        <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
-      </div>
-      <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
-        <ul class="mb-0">
-          <li class="pb-7">
-            <div class="d-flex align-items-center">
-              <img src="<?= base_url('assets/keren/'); ?>dist/images/products/product-1.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="" />
-              <div>
-                <h6 class="mb-1">Supreme toys cooker</h6>
-                <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                <div class="d-flex align-items-center justify-content-between mt-2">
-                  <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                  <div class="input-group input-group-sm w-50">
-                    <button class="btn border-0 round-20 minus p-0 bg-light-success text-success " type="button" id="add1"> - </button>
-                    <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add1" value="1" />
-                    <button class="btn text-success bg-light-success  p-0 round-20 border-0 add" type="button" id="addo2"> + </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="pb-7">
-            <div class="d-flex align-items-center">
-              <img src="<?= base_url('assets/keren/'); ?>dist/images/products/product-2.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="" />
-              <div>
-                <h6 class="mb-1">Supreme toys cooker</h6>
-                <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                <div class="d-flex align-items-center justify-content-between mt-2">
-                  <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                  <div class="input-group input-group-sm w-50">
-                    <button class="btn border-0 round-20 minus p-0 bg-light-success text-success " type="button" id="add2"> - </button>
-                    <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add2" value="1" />
-                    <button class="btn text-success bg-light-success  p-0 round-20 border-0 add" type="button" id="addon34"> + </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="pb-7">
-            <div class="d-flex align-items-center">
-              <img src="<?= base_url('assets/keren/'); ?>dist/images/products/product-3.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="" />
-              <div>
-                <h6 class="mb-1">Supreme toys cooker</h6>
-                <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                <div class="d-flex align-items-center justify-content-between mt-2">
-                  <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                  <div class="input-group input-group-sm w-50">
-                    <button class="btn border-0 round-20 minus p-0 bg-light-success text-success " type="button" id="add3"> - </button>
-                    <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add3" value="1" />
-                    <button class="btn text-success bg-light-success  p-0 round-20 border-0 add" type="button" id="addon3"> + </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <div class="align-bottom">
-          <div class="d-flex align-items-center pb-7">
-            <span class="text-dark fs-3">Sub Total</span>
-            <div class="ms-auto">
-              <span class="text-dark fw-semibold fs-3">$2530</span>
-            </div>
-          </div>
-          <div class="d-flex align-items-center pb-7">
-            <span class="text-dark fs-3">Total</span>
-            <div class="ms-auto">
-              <span class="text-dark fw-semibold fs-3">$6830</span>
-            </div>
-          </div>
-          <a href="eco-checkout.html" class="btn btn-outline-primary w-100">Go to shopping cart</a>
-        </div>
-      </div>
-    </div>
 
     <!--  Mobilenavbar -->
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mobilenavbar" aria-labelledby="offcanvasWithBothOptionsLabel">
-      <nav class="sidebar-nav scroll-sidebar">
-        <div class="offcanvas-header justify-content-between">
-          <img src="<?= base_url('assets/keren/'); ?>dist/images/logos/favicon.png" alt="" class="img-fluid">
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body profile-dropdown mobile-navbar" data-simplebar=""  data-simplebar>
-          <ul id="sidebarnav">
-            <li class="sidebar-item">
-              <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                <span>
-                  <i class="ti ti-apps"></i>
-                </span>
-                <span class="hide-menu">Apps</span>
-              </a>
-              <ul aria-expanded="false" class="collapse first-level my-3">
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-chat.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Chat Application</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">New messages arrived</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-invoice.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Invoice App</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">Get latest invoice</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-mobile.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Contact Application</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">2 Unsaved Contacts</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-message-box.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Email App</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">Get new emails</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-cart.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">User Profile</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">learn more information</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-date.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Calendar App</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">Get dates</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-lifebuoy.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Contact List Table</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">Add new contact</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="sidebar-item py-2">
-                  <a href="#" class="d-flex align-items-center">
-                    <div class="bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                      <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-dd-application.svg" alt="" class="img-fluid" width="24" height="24">
-                    </div>
-                    <div class="d-inline-block">
-                      <h6 class="mb-1 bg-hover-primary">Notes Application</h6>
-                      <span class="fs-2 d-block fw-normal text-muted">To-do and Daily tasks</span>
-                    </div>
-                  </a>
-                </li>
-                <ul class="px-8 mt-7 mb-4">
-                  <li class="sidebar-item mb-3">
-                    <h5 class="fs-5 fw-semibold">Quick Links</h5>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">Pricing Page</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">Authentication Design</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">Register Now</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">404 Error Page</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">Notes App</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">User Application</a>
-                  </li>
-                  <li class="sidebar-item py-2">
-                    <a class="fw-semibold text-dark" href="#">Account Settings</a>
-                  </li>
-                </ul>
-              </ul>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="app-chat.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-message-dots"></i>
-                </span>
-                <span class="hide-menu">Chat</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="app-calendar.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-calendar"></i>
-                </span>
-                <span class="hide-menu">Calendar</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="app-email.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mail"></i>
-                </span>
-                <span class="hide-menu">Email</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+
 
     <!--  Search Bar -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content rounded-1">
-          <div class="modal-header border-bottom">
-            <input type="search" class="form-control fs-3" placeholder="Search here" id="search" />
-            <span data-bs-dismiss="modal" class="lh-1 cursor-pointer">
-              <i class="ti ti-x fs-5 ms-3"></i>
-            </span>
-          </div>
-          <div class="modal-body message-body" data-simplebar="">
-            <h5 class="mb-0 fs-5 p-1">Quick Page Links</h5>
-            <ul class="list mb-0 py-2">
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Modern</span>
-                  <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Dashboard</span>
-                  <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Contacts</span>
-                  <span class="fs-3 text-muted d-block">/apps/contacts</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Posts</span>
-                  <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Detail</span>
-                  <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Shop</span>
-                  <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Modern</span>
-                  <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Dashboard</span>
-                  <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Contacts</span>
-                  <span class="fs-3 text-muted d-block">/apps/contacts</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Posts</span>
-                  <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Detail</span>
-                  <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
-                </a>
-              </li>
-              <li class="p-1 mb-1 bg-hover-light-black">
-                <a href="#">
-                  <span class="fs-3 text-black fw-normal d-block">Shop</span>
-                  <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+
 

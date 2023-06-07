@@ -24,10 +24,19 @@ class Dashboard extends CI_Controller{
 	function index(){
 
 		$site = $this->site_model->get_site_data()->row_array();
-		$data['site_title'] = $site['site_title'];
-		$data['site_favicon'] = $site['site_favicon'];
-		$data['images'] = $site['images'];
-		$data['tahun'] = $site['tahun'];
+		$data['site_title']      = $site['site_title'];
+		$data['site_favicon']    = $site['site_favicon'];
+		$data['images']          = $site['images'];
+		$data['tahun']           = $site['tahun'];
+
+		$data['jmlh_user']       = $this->dashboard_model->countUsers();
+		$data['jmlh_kolam']      = $this->dashboard_model->countKolam();
+		$data['jmlh_ikan']       = $this->dashboard_model->countIkan();
+		$data['jmlh_budidaya']   = $this->dashboard_model->countBudidaya();
+		$data['jmlh_komoditas']  = $this->dashboard_model->countKomoditas();
+		$data['jmlh_pembesaran'] = $this->dashboard_model->countPembesaran();
+		$data['jmlh_pembenihan'] = $this->dashboard_model->countPembenihan();
+
 		$data['title'] = 'Dashboard';
 
 		if($this->session->userdata('access')=='1') {

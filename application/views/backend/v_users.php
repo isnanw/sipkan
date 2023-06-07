@@ -141,11 +141,11 @@ function add_person()
         cache: false,
         theme: "bootstrap-5",
     });
-    $("#atasan").select2({
-        dropdownParent: $("#modal_form"),
-        cache: false,
-        theme: "bootstrap-5",
-    });
+    // $("#atasan").select2({
+    //     dropdownParent: $("#modal_form"),
+    //     cache: false,
+    //     theme: "bootstrap-5",
+    // });
 }
 
 function edit_person(user_id)
@@ -178,11 +178,11 @@ function edit_person(user_id)
                     cache: false,
                     theme: "bootstrap-5",
                 }).val(data.user_level).trigger("change");
-                $("#atasan").select2({
-                    dropdownParent: $("#modal_form"),
-                    cache: false,
-                    theme: "bootstrap-5",
-                }).val(data.user_atasan).trigger("change");
+                // $("#atasan").select2({
+                //     dropdownParent: $("#modal_form"),
+                //     cache: false,
+                //     theme: "bootstrap-5",
+                // }).val(data.user_atasan).trigger("change");
 
                 $('#modal_form').modal('hide'); // show bootstrap modal
         },
@@ -207,7 +207,7 @@ function proc()
     var password = $(".password").val();
     var conf_pass = $(".conf_pass").val();
     var level = $(".level").val();
-    var atasan = $(".atasan").val();
+    // var atasan = $(".atasan").val();
     var user_photo = $("#user_photo")[0].files[0];
 
     var fd = new FormData();
@@ -217,7 +217,7 @@ function proc()
     fd.append("password", password);
     fd.append("conf_pass", conf_pass);
     fd.append("level", level);
-    fd.append("atasan", atasan);
+    // fd.append("atasan", atasan);
     fd.append("user_photo", user_photo);
     fd.append("<?php echo $this->security->get_csrf_token_name(); ?>", '<?php echo
 $this->security->get_csrf_hash(); ?>');

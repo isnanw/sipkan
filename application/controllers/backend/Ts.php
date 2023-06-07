@@ -30,7 +30,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
-        $data['title'] = 'Data Tambak Sederhana';
+        $data['title'] = 'Perairan Umum Darat (PUD)';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
         $this->load->view('backend/menu', $data);

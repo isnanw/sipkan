@@ -1,8 +1,6 @@
 <?php
 class Dashboard_model extends CI_Model{
 
-
-
     function laporan_statistics(){
         date_default_timezone_set('Asia/Jayapura');
         $bulan =date('m');
@@ -22,35 +20,34 @@ class Dashboard_model extends CI_Model{
     }
 
 
-    function count_all_visitors(){
-        $query = $this->db->count_all('tbl_visitors');
-        return $query;
-    }
-    function count_galon() {
-            $query = $this->db->query("SELECT SUM(stock) AS galon FROM tbl_stock_produksi WHERE id_stock='2'");
-            return $query;
-    }
-    function count_botol1500() {
-            $query = $this->db->query("SELECT SUM(stock) AS botol1500 FROM tbl_stock_produksi WHERE id_stock='5'");
-            return $query;
-    }
-    function count_botol600() {
-            $query = $this->db->query("SELECT SUM(stock) AS botol600 FROM tbl_stock_produksi WHERE id_stock='4'");
-            return $query;
-    }
-    function count_botol330() {
-            $query = $this->db->query("SELECT SUM(stock) AS botol330 FROM tbl_stock_produksi WHERE id_stock='3'");
-            return $query;
-    }
-    function count_cup() {
-            $query = $this->db->query("SELECT SUM(stock) AS cup FROM tbl_stock_produksi WHERE id_stock='1'");
-            return $query;
+    public function countUsers() {
+        return $this->db->count_all('tbl_user'); // Menghitung jumlah baris di tabel "user"
     }
 
-    function count_mozilla_visitors(){
-        $query = $this->db->query("SELECT COUNT(*) mozilla_visitor FROM tbl_visitors WHERE visit_platform='Firefox'");
-        return $query;
+    public function countKolam() {
+        return $this->db->count_all('tb_jeniskolam'); // Menghitung jumlah baris di tabel "jeniskolam"
     }
+
+    public function countBudidaya() {
+        return $this->db->count_all('tb_jenisbudidaya'); // Menghitung jumlah baris di tabel "jenisbudidaya"
+    }
+
+    public function countIkan() {
+        return $this->db->count_all('tb_jenisikan'); // Menghitung jumlah baris di tabel "jenisikan"
+    }
+
+    public function countKomoditas() {
+        return $this->db->count_all('tb_jeniskomoditas'); // Menghitung jumlah baris di tabel "jeniskomunditas"
+    }
+
+    public function countPembenihan() {
+        return $this->db->count_all('tb_pembenihan'); // Menghitung jumlah baris di tabel "pembenihan"
+    }
+
+    public function countPembesaran() {
+        return $this->db->count_all('tb_pembesaran'); // Menghitung jumlah baris di tabel "pembesaran"
+    }
+
     function count_safari_visitors(){
         $query = $this->db->query("SELECT COUNT(*) safari_visitor FROM tbl_visitors WHERE visit_platform='Safari'");
         return $query;

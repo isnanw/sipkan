@@ -178,7 +178,7 @@
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
-                    <span class="hide-menu">TS</span>
+                    <span class="hide-menu">PUD</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
@@ -213,14 +213,14 @@
                     <span class="hide-menu">MNP</span>
                   </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                   <a href="<?= site_url('backend/rl'); ?>" class="sidebar-link">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
                     <span class="hide-menu">RL</span>
                   </a>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                   <a href="<?= site_url('backend/kjal'); ?>" class="sidebar-link">
                     <div class="round-16 d-flex align-items-center justify-content-center">
@@ -324,11 +324,18 @@
             </li>
           </ul>
 
+          <button class="navbar-toggler p-0 border-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="p-2">
+              <i class="ti ti-dots fs-7"></i>
+            </span>
+          </button>
+
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
-              <a href="javascript:void(0)" class="nav-link d-flex d-lg-none align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar" aria-controls="offcanvasWithBothOptions">
+              <!-- <a href="javascript:void(0)" class="nav-link d-flex d-lg-none align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar" aria-controls="offcanvasWithBothOptions">
                 <i class="ti ti-align-justified fs-7"></i>
-              </a>
+              </a> -->
+
               <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
 
                 <li class="nav-item dropdown">
@@ -375,6 +382,7 @@
               </ul>
             </div>
           </div>
+
         </nav>
       </header>
       <!--  Header End -->
