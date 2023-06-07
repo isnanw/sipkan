@@ -319,6 +319,9 @@
                 <i class="ti ti-menu-2"></i>
               </a>
             </li>
+            <li class="nav-item dropdown-hover d-none d-lg-block">
+              <strong class="nav-link"><?= $tahun; ?></strong>
+            </li>
           </ul>
 
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">

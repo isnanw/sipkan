@@ -1,5 +1,5 @@
 <?php
-class Pembenihan extends CI_Controller
+class Pembesaran extends CI_Controller
 {
   /**
    * Description of Controller
@@ -19,8 +19,7 @@ class Pembenihan extends CI_Controller
     $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
     $this->load->model('backend/Jenisbudidaya_model', 'jenisbudidaya_model');
     $this->load->model('backend/Lokasi_model', 'lokasi_model');
-    $this->load->model('backend/Rl_model', 'rl_model');
-    $this->load->model('backend/Pembenihan_model', 'pembenihan_model');
+    $this->load->model('backend/Pembesaran_model', 'pembesaran_model');
     $this->load->model('Site_model', 'site_model');
     $this->load->helper('text');
     $this->load->helper('url');
@@ -34,12 +33,12 @@ class Pembenihan extends CI_Controller
     $data['site_favicon'] = $site['site_favicon'];
     $data['images'] = $site['images'];
     $data['tahun'] = $site['tahun'];
-    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
+    $data['title'] = 'DATA PEMBESARAN BUDIDAYA';
     $data['title0'] = 'Data Dasar';
 
     $this->load->view('backend/menu', $data);
     // $this->load->view('backend/modal/jenisikan_modal');
-    $this->load->view('backend/pembenihan/index', $data);
+    $this->load->view('backend/pembesaran/index', $data);
   }
 
   public function v_input()
@@ -50,36 +49,36 @@ class Pembenihan extends CI_Controller
     $data['images']       = $site['images'];
     $data['tahun'] = $site['tahun'];
     $data['title1']       = 'Tambah Data';
-    $data['title']        = 'PRODUKSI PEMBENIHAN IKAN';
+    $data['title']        = 'DATA PEMBESARAN BUDIDAYA';
     $data['title0']       = 'Data Dasar';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/pembenihan/tambah', $data);
+    $this->load->view('backend/pembesaran/tambah', $data);
   }
   public function v_edit()
   {
     $data['idedit'] = $this->uri->segment(4);
     $site = $this->site_model->get_site_data()->row_array();
-    $data['site_title'] = $site['site_title'];
+    $data['site_title']   = $site['site_title'];
     $data['site_favicon'] = $site['site_favicon'];
-    $data['images'] = $site['images'];
-    $data['tahun'] = $site['tahun'];
+    $data['images']       = $site['images'];
+    $data['tahun']        = $site['tahun'];
     $data['title1']       = 'Edit Data';
-    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
-    $data['title0'] = 'Produksi Budidaya Ikan';
+    $data['title']        = 'DATA PEMBESARAN BUDIDAYA';
+    $data['title0']       = 'Produksi Budidaya Ikan';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/pembenihan/edit', $data);
+    $this->load->view('backend/pembesaran/edit', $data);
   }
   public function ajax_edit($idedit)
   {
-    $data = $this->pembenihan_model->edit($idedit);
+    $data = $this->pembesaran_model->edit($idedit);
     echo json_encode($data);
   }
 
   public function get_ajax_list()
   {
-    $list = $this->pembenihan_model->get_datatables();
+    $list = $this->pembesaran_model->get_datatables();
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $d) {
@@ -91,15 +90,15 @@ class Pembenihan extends CI_Controller
       $row[] = $d->budidaya;
       $row[] = $d->ikan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('backend/pembenihan/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/pembesaran/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
       $data[] = $row;
     }
 
     $output = array(
       "draw" => $_POST['draw'],
-      "recordsTotal" => $this->pembenihan_model->count_all(),
-      "recordsFiltered" => $this->pembenihan_model->count_filtered(),
+      "recordsTotal" => $this->pembesaran_model->count_all(),
+      "recordsFiltered" => $this->pembesaran_model->count_filtered(),
       "data" => $data,
     );
     //output to json format
@@ -115,7 +114,6 @@ class Pembenihan extends CI_Controller
     $nama_users = $this->session->userdata('name');
 
     $data = array(
-      'tahun' => $this->input->post('tahun'),
       'lokasi' => $this->input->post('kab'),
       'bulan' => $this->input->post('periode'),
       'id_budidaya' => $this->input->post('budidaya'),
@@ -125,13 +123,13 @@ class Pembenihan extends CI_Controller
       'nilai_produksi' => $this->input->post('nilaiproduksi'),
       'luas_lahan' => $this->input->post('luaslahan'),
       'luas_wadah' => $this->input->post('luaswadah'),
-      'jumlah_upr_pembudidayaan' => $this->input->post('upr')
+      'jumlah_rtp_pembesaran' => $this->input->post('rtp')
     );
-    $insert = $this->pembenihan_model->tambah($data);
+    $insert = $this->pembesaran_model->tambah($data);
 
     if ($insert) {
       // INSERT LOG
-      $b = '<b>' . $nama_users . '</b> Melakukan Tambah Pembenihan';
+      $b = '<b>' . $nama_users . '</b> Melakukan Tambah pembesaran';
       $data2 = array(
         'ket' => $b,
       );
@@ -144,7 +142,7 @@ class Pembenihan extends CI_Controller
       $this->session->set_flashdata('message', 'error');
     }
 
-    redirect('backend/pembenihan');
+    redirect('backend/pembesaran');
   }
 
   function edit()
@@ -163,13 +161,13 @@ class Pembenihan extends CI_Controller
       'nilai_produksi' => $this->input->post('nilaiproduksi'),
       'luas_lahan' => $this->input->post('luaslahan'),
       'luas_wadah' => $this->input->post('luaswadah'),
-      'jumlah_upr_pembudidayaan' => $this->input->post('upr')
+      'jumlah_rtp_pembesaran' => $this->input->post('rtp')
     );
-    $idedit = $this->pembenihan_model->update($id, $data);
+    $idedit = $this->pembesaran_model->update($id, $data);
 
-    // $prosesdetail = $this->pembenihan_model->update_detail($id, $data1);
+    // $prosesdetail = $this->pembesaran_model->update_detail($id, $data1);
     // INSERT LOG
-    $b = '<b>' . $nama_users . '</b> Melakukan Update Pembenihan';
+    $b = '<b>' . $nama_users . '</b> Melakukan Update pembesaran';
     $data2 = array(
       'ket' => $b,
     );
@@ -177,7 +175,7 @@ class Pembenihan extends CI_Controller
     // INSERT LOG
     echo json_encode(array("status" => TRUE));
     $this->session->set_flashdata('message', 'successedit');
-    redirect('backend/pembenihan');
+    redirect('backend/pembesaran');
   }
 
   public function deletets()
@@ -185,7 +183,7 @@ class Pembenihan extends CI_Controller
     if ($this->input->is_ajax_request()) {
 
       $iddelete = $this->input->post('id');
-      if ($this->pembenihan_model->delete($iddelete)) {
+      if ($this->pembesaran_model->delete($iddelete)) {
         $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
       } else {
         $data = array('res' => "error", 'message' => "Proses gagal dilakukan");

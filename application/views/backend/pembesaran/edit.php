@@ -6,11 +6,10 @@
         <div class="form-with-tabs">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h4 class="mb-0 text-white">Form Input</h4>
+                    <h4 class="mb-0 text-white">Form Edit</h4>
                 </div>
-
                 <div class="card-body p-4">
-                    <?php echo form_open('backend/pembenihan/add'); ?>
+                    <?php echo form_open('backend/pembesaran/edit'); ?>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-data" role="tabpanel" aria-labelledby="pills-data" tabindex="0">
                             <div class="row">
@@ -21,13 +20,13 @@
                                             <label class="control-label">Kab/Kota</label>
                                             <select class="form-control" id="kab" name="kab" required>
                                             </select>
+                                            <input type="hidden" id="idedit" name="idedit" class="form-control" value="<?= $idedit; ?>" required />
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
                                             <label class="control-label">Periode (Bulan)</label>
                                             <select class="form-control" id="periode" name="periode" required>
                                             </select>
-                                            <input type="number" id="tahun" name="tahun" class="form-control" hidden required value="<?= $tahun; ?>"/>
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -48,12 +47,12 @@
                                     </div>
                                     <div class="row pt-3 mb-3">
                                         <!-- <h5 class="mb-2">Data</h5> -->
-                                       <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="control-label">Produksi (Ekor)</label>
                                             <input type="number" id="produksi" name="produksi" class="form-control" required />
                                         </div>
                                         <!--/span-->
-                                       <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="control-label">Harga/Ekor</label>
                                             <input type="number" id="harga" name="harga" class="form-control" required />
                                         </div>
@@ -61,12 +60,12 @@
                                     </div>
                                     <div class="row pt-3 mb-3">
                                         <!-- <h5 class="mb-2">Data</h5> -->
-                                       <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="control-label">Nilai Produksi (Pro*Hrg)</label>
                                             <input type="number" id="nilaiproduksi" name="nilaiproduksi" class="form-control" required />
                                         </div>
                                         <!--/span-->
-                                       <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="control-label">Luas Lahan (Ha) Produksi</label>
                                             <input type="number" id="luaslahan" name="luaslahan" class="form-control" required />
                                         </div>
@@ -80,8 +79,8 @@
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
-                                            <label class="control-label">Jumlah (UPR) Pembudidaya</label>
-                                            <input type="number" id="upr" name="upr" class="form-control" required />
+                                            <label class="control-label">Jumlah (RTP) Pembudidaya</label>
+                                            <input type="number" id="rtp" name="rtp" class="form-control" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -96,7 +95,7 @@
                                                 </div>
                                             </button>
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <a href="<?= base_url('backend/pembenihan') ?>" class="btn btn-danger font-medium rounded-pill px-4">
+                                                    <a href="<?= base_url('backend/pembesaran') ?>" class="btn btn-danger font-medium rounded-pill px-4">
                                                         <div class="d-flex align-items-center">
                                                             Cancel
                                                         </div>
@@ -130,6 +129,7 @@
 <!------- TOASTIFY JS --------->
 <?php $this->load->view("backend/_partials/toastify") ?>
 <?php $this->load->view("backend/_partials/templatejs") ?>
+
 <script type="text/javascript">
     var save_method;
     var table;
@@ -141,47 +141,48 @@
         data: csfrData
     });
     $(document).ready(function() {
-        $("#kab").select2({
-            ajax: {
-                url: '<?= site_url() ?>backend/Lokasi/getdatakab',
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
+        var idedit = $('#idedit').val();
+        $('#kab').select2();
+        $('#periode').select2();
+        $('#budidaya').select2();
+        $('#ikan').select2();
+        $.ajax({
+            url: '<?= site_url() ?>backend/pembesaran/ajax_edit/' + idedit,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                var $hasilkab = $("<option selected='selected'></option>").val(data.kodelokasi).text(data.kab)
+                $("#kab").append($hasilkab).trigger('change');
+
+                var $hasilperiode = $("<option selected='selected'></option>").val(data.id).text(data.periode)
+                $("#periode").append($hasilperiode).trigger('change');
+
+                var $hasilbudidaya = $("<option selected='selected'></option>").val(data.id_budidaya).text(data.budidaya)
+                $("#budidaya").append($hasilbudidaya).trigger('change');
+
+                var $hasilikan = $("<option selected='selected'></option>").val(data.id_jenisikan).text(data.ikan)
+                $("#ikan").append($hasilikan).trigger('change');
+
+                $('#produksi').val(data.produksi);
+                $('#harga').val(data.harga);
+                $('#nilaiproduksi').val(data.nilai_produksi);
+                $('#luaslahan').val(data.luas_lahan);
+                $('#luaswadah').val(data.luas_wadah);
+                $('#rtp').val(data.jumlah_rtp_pembesaran);
+
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
             }
         });
-        $("#komoditas").select2({
+    });
+    $("#kab").change(function() {
+        $('#distrik').val('');
+        var kodelokasi = $("#kab").val();
+        $("#distrik").select2({
             ajax: {
-                url: '<?= site_url() ?>backend/Jeniskomoditas/getdatakomoditas',
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
-        $("#periode").select2({
-            ajax: {
-                url: '<?= site_url() ?>backend/Jeniskomoditas/getdataperiode',
+                url: '<?= site_url() ?>backend/Lokasi/getdatadistrik/' + kodelokasi,
                 type: "post",
                 dataType: 'json',
                 delay: 200,
@@ -201,6 +202,25 @@
         $("#budidaya").select2({
             ajax: {
                 url: '<?= site_url() ?>backend/Jenisbudidaya/getdatabudidaya',
+                type: "post",
+                dataType: 'json',
+                delay: 200,
+                data: function(params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+        $("#periode").select2({
+            ajax: {
+                url: '<?= site_url() ?>backend/Jeniskomoditas/getdataperiode',
                 type: "post",
                 dataType: 'json',
                 delay: 200,
@@ -237,52 +257,7 @@
             }
         });
     });
-    $("#kab").change(function() {
-        $('#distrik').val('');
-        var kodelokasi = $("#kab").val();
-        $("#distrik").select2({
-            ajax: {
-                url: '<?= site_url() ?>backend/Lokasi/getdatadistrik/' + kodelokasi,
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
-    });
-    $("#distrik").change(function() {
-        $('#kampung').val('');
-        var kodelokasi = $("#distrik").val();
-        $("#kampung").select2({
-            ajax: {
-                url: '<?= site_url() ?>backend/Lokasi/getdatakampung/' + kodelokasi,
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
-    });
+
 </script>
 </body>
 

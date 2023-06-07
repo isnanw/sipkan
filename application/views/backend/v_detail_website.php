@@ -5,12 +5,10 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-
-
                 <div class="card-body">
                     <div class="row" id="basic-form">
                         <div class="divider">
-                            <div class="divider-text"><?php echo $title; ?></div>
+                            <div class="divider-text"><b><?php echo $title; ?></b></div>
                         </div>
                         <div class="col-12 text-center">
                             <div class="show_img"></div>
@@ -64,9 +62,10 @@
                                 <input type="file" class="form-control form-control-sm" id="img_favicon" name="img_favicon" accept=".jpg,.jpeg,.png,.webp" />
                             </div>
                         </div>
+                        <div></div>
                         <!------------------------------------------------------------------------------------------------>
-                        <div class="divider">
-                            <div class="divider-text">Link Social Media</div>
+                        <!-- <div class="divider">
+                            <div class="divider-text"><b>Link Social Media</b></div>
                         </div>
                         <div class="col-sm-6">
                             <label for="valid-state">Facebook</label>
@@ -89,10 +88,17 @@
                             <label for="valid-state">Telegram</label>
                             <input type="text" class="form-control detail_telegram" name="telegram" placeholder="Link Telegram">
 
+                        </div> -->
+                        <br>
+                        <hr>
+                        <div class="divider">
+                            <div class="divider-text"><b>Tahun Input</b></div>
                         </div>
+                        <div class="col-sm-6">
+                            <!-- <label for="valid-state">Tahun</label> -->
+                            <input type="number" class="form-control detail_tahun" name="tahun" placeholder="Tahun Input">
 
-
-
+                        </div>
 
                         <div class="col-md-12 col-12 mt-4">
                             <input type="hidden" name="id" class="id">
@@ -158,6 +164,7 @@
                         instagram = data[i].instagram;
                         youtube = data[i].youtube;
                         telegram = data[i].telegram;
+                        tahun = data[i].tahun;
                         alamat_universitas = data[i].alamat_universitas;
                         images = data[i].images;
                         site_favicon = data[i].site_favicon;
@@ -174,6 +181,7 @@
                     $('.detail_instagram').val(instagram);
                     $('.detail_youtube').val(youtube);
                     $('.detail_telegram').val(telegram);
+                    $('.detail_tahun').val(tahun);
                     $('.detail_alamat_universitas').val(alamat_universitas);
                     $(".show_img").html('<img src="' + base_url + 'assets/images/logo/' + images + '" width="150" height="150" class="rounded img-thumbnail">');
                     $(".show_img_favicon").html('<img src="' + base_url + 'assets/images/logo/' + site_favicon + '" width="50" height="50">');
@@ -200,6 +208,7 @@
             var instagram = $('.detail_instagram').val();
             var youtube = $('.detail_youtube').val();
             var telegram = $('.detail_telegram').val();
+            var tahun = $('.detail_tahun').val();
             var alamat_universitas = $('.detail_alamat_universitas').val();
             var user_photo = $("#user_photo")[0].files[0];
             var img_favicon = $("#img_favicon")[0].files[0];
@@ -217,13 +226,14 @@
             fd.append("instagram", instagram);
             fd.append("youtube", youtube);
             fd.append("telegram", telegram);
+            fd.append("tahun", tahun);
             fd.append("alamat_universitas", alamat_universitas);
             fd.append("user_photo", user_photo);
             fd.append("img_favicon", img_favicon);
             fd.append("<?php echo $this->security->get_csrf_token_name(); ?>", '<?php echo
                                                                                 $this->security->get_csrf_hash(); ?>');
 
-            if (id == "" || site_title == "" || email == "" || site_deskripsi == "" || notelp == "" || nama_kontak == "" || facebook == "" || instagram == "" || youtube == "" || telegram == "" || alamat_universitas == "") {
+            if (id == "" || site_title == "" || email == "" || site_deskripsi == "" || notelp == "" || nama_kontak == "" || facebook == "" || instagram == "" || youtube == "" || telegram == "" || tahun == "" || alamat_universitas == "") {
                 Swal.fire({
                     icon: "warning",
                     title: "Alert",
@@ -241,30 +251,30 @@
                     title: "Alert",
                     text: 'Email harus format : abc@gmail.com'
                 })
-            } else if (!facebook.match(validLinkRegex)) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Alert",
-                    text: 'Link Facebook Tidak Valid'
-                })
-            } else if (!instagram.match(validLinkRegex)) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Alert",
-                    text: 'Link Instagram Tidak Valid'
-                })
-            } else if (!youtube.match(validLinkRegex)) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Alert",
-                    text: 'Link Youtube Tidak Valid'
-                })
-            } else if (!telegram.match(validLinkRegex)) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Alert",
-                    text: 'Link Telegram Tidak Valid'
-                })
+            // } else if (!facebook.match(validLinkRegex)) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: "Alert",
+            //         text: 'Link Facebook Tidak Valid'
+            //     })
+            // } else if (!instagram.match(validLinkRegex)) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: "Alert",
+            //         text: 'Link Instagram Tidak Valid'
+            //     })
+            // } else if (!youtube.match(validLinkRegex)) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: "Alert",
+            //         text: 'Link Youtube Tidak Valid'
+            //     })
+            // } else if (!telegram.match(validLinkRegex)) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: "Alert",
+            //         text: 'Link Telegram Tidak Valid'
+            //     })
             } else {
 
                 $.ajax({
@@ -290,6 +300,7 @@
                             instagram = data[i].instagram;
                             youtube = data[i].youtube;
                             telegram = data[i].telegram;
+                            tahun = data[i].tahun;
                             alamat_universitas = data[i].alamat_universitas;
                             images = data[i].images;
                             site_favicon = data[i].site_favicon;
@@ -305,14 +316,11 @@
                         $('.detail_instagram').val(instagram);
                         $('.detail_youtube').val(youtube);
                         $('.detail_telegram').val(telegram);
+                        $('.detail_tahun').val(tahun);
                         $('.detail_alamat_universitas').val(alamat_universitas);
                         location.reload(true);
                         $(".show_img").html('<img src="' + base_url + 'assets/images/logo/' + images + '" width="150" height="150" class="rounded img-thumbnail">');
                         $(".show_img_favicon").html('<img src="' + base_url + 'assets/images/logo/' + site_favicon + '" width="50" height="50">');
-
-
-
-
 
                     }
                 });

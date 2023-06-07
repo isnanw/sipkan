@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body p-4">
-                    <?php echo form_open('backend/pembenihan/add'); ?>
+                    <?php echo form_open('backend/pembesaran/add'); ?>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-data" role="tabpanel" aria-labelledby="pills-data" tabindex="0">
                             <div class="row">
@@ -80,8 +80,8 @@
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
-                                            <label class="control-label">Jumlah (UPR) Pembudidaya</label>
-                                            <input type="number" id="upr" name="upr" class="form-control" required />
+                                            <label class="control-label">Jumlah (RTP) Pembudidaya</label>
+                                            <input type="number" id="rtp" name="rtp" class="form-control" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -96,7 +96,7 @@
                                                 </div>
                                             </button>
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <a href="<?= base_url('backend/pembenihan') ?>" class="btn btn-danger font-medium rounded-pill px-4">
+                                                    <a href="<?= base_url('backend/pembesaran') ?>" class="btn btn-danger font-medium rounded-pill px-4">
                                                         <div class="d-flex align-items-center">
                                                             Cancel
                                                         </div>

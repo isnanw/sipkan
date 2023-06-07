@@ -28,6 +28,7 @@ class Jeniskolam extends CI_Controller
 		$data['site_title'] = $site['site_title'];
 		$data['site_favicon'] = $site['site_favicon'];
 		$data['images'] = $site['images'];
+		$data['tahun'] = $site['tahun'];
 		$data['title'] = 'Data Jenis Kolam';
 		$data['title0'] = 'Master';
 

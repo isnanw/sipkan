@@ -28,6 +28,7 @@ class Jenisikan extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Data Jenis Ikan';
         $data['title0'] = 'Master';
 

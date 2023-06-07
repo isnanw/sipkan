@@ -1,5 +1,5 @@
 <?php
-class Pembenihan_model extends CI_Model
+class Pembesaran_model extends CI_Model
 {
     /**
      * Description of Controller
@@ -7,7 +7,7 @@ class Pembenihan_model extends CI_Model
      * @author IsnanW
      */
 
-    var $tablets = 'tb_pembenihan';
+    var $tablets = 'tb_pembesaran';
     var $tablelog = 'tbl_log';
     var $column_search_ts = array('lokasi', 'kampung', 'ketua');
     var $order = array('kk.id' => 'ASC'); // default order
@@ -27,7 +27,7 @@ class Pembenihan_model extends CI_Model
                         tji.namajenisikan as ikan,
                         tp.*
                     FROM
-                            tb_pembenihan tp
+                            tb_pembesaran tp
                     LEFT JOIN lokasi l on
                             l.kodelokasi = tp.lokasi
                     LEFT JOIN tb_periode p on
@@ -88,13 +88,13 @@ class Pembenihan_model extends CI_Model
     }
     public function tambah($data)
     {
-        $this->db->insert('tb_pembenihan', $data);
+        $this->db->insert('tb_pembesaran', $data);
         $id = $this->db->insert_id();
         return (isset($id)) ? $id : FALSE;
     }
     public function tambah_detail($data1)
     {
-        $this->db->insert('tb_rlpp', $data1);
+        $this->db->insert('tb_pembesaranpp', $data1);
     }
     function insert_log($data2)
     {
@@ -106,18 +106,18 @@ class Pembenihan_model extends CI_Model
 
     public function update($id, $data)
     {
-        return $this->db->update('tb_pembenihan', $data, array('id' => $id));
+        return $this->db->update('tb_pembesaran', $data, array('id' => $id));
     }
 
     // public function update_detail($id, $data2)
     // {
-    //     return $this->db->update('tb_rlpp', $data2, array('id_rl' => $id));
+    //     return $this->db->update('tb_pembesaranpp', $data2, array('id_rl' => $id));
     // }
 
     public function single_entry($id)
     {
         $this->db->select('*');
-        $this->db->from('tb_pembenihan');
+        $this->db->from('tb_pembesaran');
         $this->db->where('id', $id);
         $query = $this->db->get();
         if (count($query->result()) > 0) {
@@ -126,22 +126,17 @@ class Pembenihan_model extends CI_Model
     }
     public function update_lock($id, $data)
     {
-        return $this->db->update('tb_pembenihan', $data, array('id' => $id));
+        return $this->db->update('tb_pembesaran', $data, array('id' => $id));
     }
     function delete($id)
     {
-        return $this->db->delete('tb_pembenihan', array('id' => $id));
-    }
-
-    function delete_detail($id)
-    {
-        return $this->db->delete('tb_rlpp', array('id_rl' => $id));
+        return $this->db->delete('tb_pembesaran', array('id' => $id));
     }
 
 
     function import($data)
     {
-        $insert = $this->db->insert_batch('tb_pembenihan', $data);
+        $insert = $this->db->insert_batch('tb_pembesaran', $data);
         if ($insert) {
             return true;
         }
@@ -155,7 +150,7 @@ class Pembenihan_model extends CI_Model
                         tji.namajenisikan as ikan,
                         tp.*
                     FROM
-                            tb_pembenihan tp
+                            tb_pembesaran tp
                     LEFT JOIN lokasi l on
                             l.kodelokasi = tp.lokasi
                     LEFT JOIN tb_periode p on

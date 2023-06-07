@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jun 05, 2023 at 01:10 AM
--- Server version: 5.7.36
--- PHP Version: 7.4.26
+-- Host: localhost
+-- Generation Time: Jun 07, 2023 at 03:17 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,30 +28,29 @@ SET time_zone = "+00:00";
 -- Table structure for table `detail_website`
 --
 
-DROP TABLE IF EXISTS `detail_website`;
-CREATE TABLE IF NOT EXISTS `detail_website` (
-  `detail_website_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `detail_website` (
+  `tahun` varchar(4) DEFAULT NULL,
+  `detail_website_id` int(11) NOT NULL,
   `site_title` varchar(255) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `site_deskripsi` text,
+  `site_deskripsi` text DEFAULT NULL,
   `notelp` varchar(255) DEFAULT NULL,
   `nama_kontak` varchar(255) DEFAULT NULL,
   `facebook` varchar(255) DEFAULT NULL,
   `instagram` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `telegram` varchar(255) DEFAULT NULL,
-  `alamat_universitas` text,
+  `alamat_universitas` text DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
-  `site_favicon` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`detail_website_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `site_favicon` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detail_website`
 --
 
-INSERT INTO `detail_website` (`detail_website_id`, `site_title`, `email`, `site_deskripsi`, `notelp`, `nama_kontak`, `facebook`, `instagram`, `youtube`, `telegram`, `alamat_universitas`, `images`, `site_favicon`) VALUES
-(1, 'SIPkan', 'provita@gmail.com', 'Sistem Informasi Perikanan Kab Keerom', '62812345678', 'Admin SIPkan', 'https://www.facebook.com/link_anda/', 'https://www.instagram.com/link_anda/', 'https://www.youtube.com/c/link_anda', 'https://t.me/link_anda', 'Jayapura, Papua', '1ac12671226fc2218b7a75a30059ebee.jpeg', 'c8329678e30eb62c6f3760072f1eb003.png');
+INSERT INTO `detail_website` (`tahun`, `detail_website_id`, `site_title`, `email`, `site_deskripsi`, `notelp`, `nama_kontak`, `facebook`, `instagram`, `youtube`, `telegram`, `alamat_universitas`, `images`, `site_favicon`) VALUES
+('2023', 1, 'SIPkan', 'provita@gmail.com', 'Sistem Informasi Perikanan Kab Keerom', '62812345678', 'Admin SIPkan', 'https://www.facebook.com/link_anda/', 'https://www.instagram.com/link_anda/', 'https://www.youtube.com/c/link_anda', 'https://t.me/link_anda', 'Keerom, Papua', '1ac12671226fc2218b7a75a30059ebee.jpeg', 'c8329678e30eb62c6f3760072f1eb003.png');
 
 -- --------------------------------------------------------
 
@@ -58,11 +58,9 @@ INSERT INTO `detail_website` (`detail_website_id`, `site_title`, `email`, `site_
 -- Table structure for table `lokasi`
 --
 
-DROP TABLE IF EXISTS `lokasi`;
-CREATE TABLE IF NOT EXISTS `lokasi` (
+CREATE TABLE `lokasi` (
   `kodelokasi` varchar(255) NOT NULL,
-  `lokasi` varchar(255) NOT NULL,
-  PRIMARY KEY (`kodelokasi`)
+  `lokasi` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -180,17 +178,15 @@ INSERT INTO `lokasi` (`kodelokasi`, `lokasi`) VALUES
 -- Table structure for table `tbl_home`
 --
 
-DROP TABLE IF EXISTS `tbl_home`;
-CREATE TABLE IF NOT EXISTS `tbl_home` (
-  `home_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_home` (
+  `home_id` int(11) NOT NULL,
   `home_caption_1` varchar(255) DEFAULT NULL,
-  `home_caption_2` longtext,
+  `home_caption_2` longtext DEFAULT NULL,
   `home_bg_heading` varchar(50) DEFAULT NULL,
   `home_bg_heading2` varchar(50) DEFAULT NULL,
   `home_bg_heading3` varchar(50) DEFAULT NULL,
-  `home_bg_testimonial` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`home_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `home_bg_testimonial` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_home`
@@ -205,13 +201,11 @@ INSERT INTO `tbl_home` (`home_id`, `home_caption_1`, `home_caption_2`, `home_bg_
 -- Table structure for table `tbl_log`
 --
 
-DROP TABLE IF EXISTS `tbl_log`;
-CREATE TABLE IF NOT EXISTS `tbl_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_log` (
+  `id` int(11) NOT NULL,
   `ket` varchar(255) DEFAULT NULL,
-  `tgl_log` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=latin1;
+  `tgl_log` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_log`
@@ -435,7 +429,32 @@ INSERT INTO `tbl_log` (`id`, `ket`, `tgl_log`) VALUES
 (215, '<b>IsWah</b> Melakukan Tambah RL', '2023-05-17 02:34:33'),
 (216, '<b>IsWah</b> Melakukan Update RL', '2023-05-17 02:40:48'),
 (217, '<b>IsWah</b> Melakukan Tambah RL', '2023-05-18 10:03:29'),
-(218, '<b>IsWah</b> Melakukan Tambah KJAL', '2023-05-19 02:50:16');
+(218, '<b>IsWah</b> Melakukan Tambah KJAL', '2023-05-19 02:50:16'),
+(219, '<b>IsWah</b> Melakukan Edit jenisbudidaya <b>Pembenihan Air Tawar</b>', '2023-06-05 11:21:35'),
+(220, '<b>IsWah</b> Melakukan Tambah jenisbudidaya <b>Pembenihan Air Laut</b>', '2023-06-05 11:21:44'),
+(221, '<b>IsWah</b> Melakukan Edit jenisikan <b>Nila</b>', '2023-06-05 11:22:12'),
+(222, '<b>IsWah</b> Melakukan Tambah jenisikan <b>Mas</b>', '2023-06-05 11:22:21'),
+(223, '<b>IsWah</b> Melakukan Tambah jenisikan <b>Lele</b>', '2023-06-05 11:22:27'),
+(224, '<b>IsWah</b> Melakukan Tambah Pembenihan', '2023-06-05 16:40:48'),
+(225, '<b>IsWah</b> Melakukan Tambah Pembenihan', '2023-06-05 16:42:38'),
+(226, '<b>IsWah</b> Melakukan Tambah Tambak Sederhana', '2023-06-06 03:03:26'),
+(227, '<b>IsWah</b> Melakukan Update Tambak Sederhana', '2023-06-06 05:53:28'),
+(228, '<b>IsWah</b> Melakukan Update Pembenihan', '2023-06-06 09:33:12'),
+(229, '<b>IsWah</b> Melakukan Update Pembenihan', '2023-06-06 09:33:49'),
+(230, '<b>IsWah</b> Melakukan Update Pembenihan', '2023-06-06 09:34:00'),
+(231, '<b>IsWah</b> Melakukan Update Pembenihan', '2023-06-06 09:34:09'),
+(232, '<b>IsWah</b> Melakukan Tambah Pembenihan', '2023-06-06 11:54:36'),
+(233, '<b>IsWah</b> Melakukan Tambah Pembenihan', '2023-06-06 13:06:02'),
+(234, '<b>IsWah</b> Melakukan Edit jeniskolam <b>Kolam Tanah</b>', '2023-06-06 13:18:37'),
+(235, '<b>IsWah</b> Melakukan Edit jeniskolam <b>Kolam Terpal</b>', '2023-06-06 13:18:59'),
+(236, '<b>IsWah</b> Melakukan Edit jeniskolam <b>Kolam Beton</b>', '2023-06-06 13:19:15'),
+(237, '<b>IsWah</b> Melakukan Edit jeniskolam <b>Bioflok</b>', '2023-06-06 13:19:30'),
+(238, '<b>IsWah</b> Melakukan Tambah Pembenihan', '2023-06-06 14:43:32'),
+(239, '<b>IsWah</b> Melakukan Tambah pembesaran', '2023-06-06 15:10:46'),
+(240, '<b>IsWah</b> Melakukan Update pembesaran', '2023-06-06 15:10:57'),
+(241, '<b>IsWah</b> Melakukan Tambah pembesaran', '2023-06-06 15:12:29'),
+(242, '<b>IsWah</b> Melakukan Tambah pembesaran', '2023-06-06 15:57:58'),
+(243, '<b>IsWah</b> Melakukan Tambah pembesaran', '2023-06-06 16:01:15');
 
 -- --------------------------------------------------------
 
@@ -443,12 +462,11 @@ INSERT INTO `tbl_log` (`id`, `ket`, `tgl_log`) VALUES
 -- Table structure for table `tbl_site`
 --
 
-DROP TABLE IF EXISTS `tbl_site`;
-CREATE TABLE IF NOT EXISTS `tbl_site` (
-  `site_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_site` (
+  `site_id` int(11) NOT NULL,
   `site_name` varchar(100) DEFAULT NULL,
   `site_title` varchar(200) DEFAULT NULL,
-  `site_description` text,
+  `site_description` text DEFAULT NULL,
   `site_favicon` varchar(50) DEFAULT NULL,
   `site_logo_header` varchar(50) DEFAULT NULL,
   `site_logo_footer` varchar(50) DEFAULT NULL,
@@ -457,15 +475,15 @@ CREATE TABLE IF NOT EXISTS `tbl_site` (
   `site_twitter` varchar(150) DEFAULT NULL,
   `site_instagram` varchar(150) DEFAULT NULL,
   `site_youtube` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`site_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `tahun` varchar(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_site`
 --
 
-INSERT INTO `tbl_site` (`site_id`, `site_name`, `site_title`, `site_description`, `site_favicon`, `site_logo_header`, `site_logo_footer`, `site_logo_big`, `site_facebook`, `site_twitter`, `site_instagram`, `site_youtube`) VALUES
-(1, 'Admin Portal', 'Medan Test Center for Japanese Language NAT-TEST', 'Medan Test Center for Japanese Language NAT - TEST', 'nat-tes1.webp', 'Untitled-11.png', 'favicon.png', 'bg211.png', 'https://www.facebook.com/keeki/', 'https://twitter.com/keeki/', 'https://www.instagram.com/keeki/', 'https://www.youtube.com/c/keeki');
+INSERT INTO `tbl_site` (`site_id`, `site_name`, `site_title`, `site_description`, `site_favicon`, `site_logo_header`, `site_logo_footer`, `site_logo_big`, `site_facebook`, `site_twitter`, `site_instagram`, `site_youtube`, `tahun`) VALUES
+(1, 'Admin Portal', 'Medan Test Center for Japanese Language NAT-TEST', 'Medan Test Center for Japanese Language NAT - TEST', 'nat-tes1.webp', 'Untitled-11.png', 'favicon.png', 'bg211.png', 'https://www.facebook.com/keeki/', 'https://twitter.com/keeki/', 'https://www.instagram.com/keeki/', 'https://www.youtube.com/c/keeki', NULL);
 
 -- --------------------------------------------------------
 
@@ -473,18 +491,16 @@ INSERT INTO `tbl_site` (`site_id`, `site_name`, `site_title`, `site_description`
 -- Table structure for table `tbl_user`
 --
 
-DROP TABLE IF EXISTS `tbl_user`;
-CREATE TABLE IF NOT EXISTS `tbl_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_user` (
+  `user_id` int(11) NOT NULL,
   `user_name` varchar(100) DEFAULT NULL,
   `user_email` varchar(60) DEFAULT NULL,
   `user_password` varchar(40) DEFAULT NULL,
   `user_level` varchar(10) DEFAULT NULL,
   `user_atasan` varchar(10) DEFAULT NULL,
   `user_status` varchar(10) DEFAULT '1',
-  `user_photo` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  `user_photo` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user`
@@ -507,72 +523,21 @@ INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_email`, `user_password`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_bagian`
---
-
-DROP TABLE IF EXISTS `tb_bagian`;
-CREATE TABLE IF NOT EXISTS `tb_bagian` (
-  `id_bagian` int(11) NOT NULL AUTO_INCREMENT,
-  `namabagian` varchar(25) NOT NULL,
-  PRIMARY KEY (`id_bagian`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_bagian`
---
-
-INSERT INTO `tb_bagian` (`id_bagian`, `namabagian`) VALUES
-(1, 'LAB'),
-(2, 'FARMASI'),
-(3, 'RADIOLOGI'),
-(4, 'JANG UM'),
-(5, 'PANTRY');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_belanja`
---
-
-DROP TABLE IF EXISTS `tb_belanja`;
-CREATE TABLE IF NOT EXISTS `tb_belanja` (
-  `id_belanja` int(11) NOT NULL AUTO_INCREMENT,
-  `namabelanja` varchar(255) NOT NULL,
-  `biaya` int(11) NOT NULL,
-  `tgl_belanja` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `id_user` int(11) NOT NULL,
-  `id_pettycash` int(11) NOT NULL,
-  PRIMARY KEY (`id_belanja`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_belanja`
---
-
-INSERT INTO `tb_belanja` (`id_belanja`, `namabelanja`, `biaya`, `tgl_belanja`, `id_user`, `id_pettycash`) VALUES
-(5, 'Kertas HVS 1 Rim', 100000, '2023-03-03 06:31:57', 2, 10),
-(6, 'Print Laporan Bulanan', 100000, '2023-03-03 07:39:21', 2, 10),
-(7, 'Tes', 150000, '2023-03-03 08:17:34', 7, 7);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_jenisbudidaya`
 --
 
-DROP TABLE IF EXISTS `tb_jenisbudidaya`;
-CREATE TABLE IF NOT EXISTS `tb_jenisbudidaya` (
-  `id_jenisbudidaya` int(11) NOT NULL AUTO_INCREMENT,
-  `namajenisbudidaya` text NOT NULL,
-  PRIMARY KEY (`id_jenisbudidaya`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_jenisbudidaya` (
+  `id_jenisbudidaya` int(11) NOT NULL,
+  `namajenisbudidaya` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_jenisbudidaya`
 --
 
 INSERT INTO `tb_jenisbudidaya` (`id_jenisbudidaya`, `namajenisbudidaya`) VALUES
-(3, 'Ikan Lele');
+(3, 'Pembenihan Air Tawar'),
+(4, 'Pembenihan Air Laut');
 
 -- --------------------------------------------------------
 
@@ -580,19 +545,19 @@ INSERT INTO `tb_jenisbudidaya` (`id_jenisbudidaya`, `namajenisbudidaya`) VALUES
 -- Table structure for table `tb_jenisikan`
 --
 
-DROP TABLE IF EXISTS `tb_jenisikan`;
-CREATE TABLE IF NOT EXISTS `tb_jenisikan` (
-  `id_jenisikan` int(11) NOT NULL AUTO_INCREMENT,
-  `namajenisikan` text NOT NULL,
-  PRIMARY KEY (`id_jenisikan`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_jenisikan` (
+  `id_jenisikan` int(11) NOT NULL,
+  `namajenisikan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_jenisikan`
 --
 
 INSERT INTO `tb_jenisikan` (`id_jenisikan`, `namajenisikan`) VALUES
-(2, 'Hiu');
+(2, 'Nila'),
+(4, 'Mas'),
+(5, 'Lele');
 
 -- --------------------------------------------------------
 
@@ -600,24 +565,20 @@ INSERT INTO `tb_jenisikan` (`id_jenisikan`, `namajenisikan`) VALUES
 -- Table structure for table `tb_jeniskolam`
 --
 
-DROP TABLE IF EXISTS `tb_jeniskolam`;
-CREATE TABLE IF NOT EXISTS `tb_jeniskolam` (
-  `id_jeniskolam` int(11) NOT NULL AUTO_INCREMENT,
-  `namajeniskolam` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_jeniskolam`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_jeniskolam` (
+  `id_jeniskolam` int(11) NOT NULL,
+  `namajeniskolam` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_jeniskolam`
 --
 
 INSERT INTO `tb_jeniskolam` (`id_jeniskolam`, `namajeniskolam`) VALUES
-(1, 'Manajer'),
-(2, 'Manajer Marketing'),
-(3, 'Manajer Eksekutif'),
-(4, 'Manajer Jang Umum'),
-(6, 'Manajer Mutu'),
-(13, 'sss2');
+(1, 'Kolam Tanah'),
+(2, 'Kolam Terpal'),
+(3, 'Kolam Beton'),
+(4, 'Bioflok');
 
 -- --------------------------------------------------------
 
@@ -625,12 +586,10 @@ INSERT INTO `tb_jeniskolam` (`id_jeniskolam`, `namajeniskolam`) VALUES
 -- Table structure for table `tb_jeniskomoditas`
 --
 
-DROP TABLE IF EXISTS `tb_jeniskomoditas`;
-CREATE TABLE IF NOT EXISTS `tb_jeniskomoditas` (
-  `id_jeniskomoditas` int(11) NOT NULL AUTO_INCREMENT,
-  `namajeniskomoditas` text NOT NULL,
-  PRIMARY KEY (`id_jeniskomoditas`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_jeniskomoditas` (
+  `id_jeniskomoditas` int(11) NOT NULL,
+  `namajeniskomoditas` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_jeniskomoditas`
@@ -645,9 +604,9 @@ INSERT INTO `tb_jeniskomoditas` (`id_jeniskomoditas`, `namajeniskomoditas`) VALU
 -- Table structure for table `tb_kat`
 --
 
-DROP TABLE IF EXISTS `tb_kat`;
-CREATE TABLE IF NOT EXISTS `tb_kat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kat` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -658,9 +617,8 @@ CREATE TABLE IF NOT EXISTS `tb_kat` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -668,9 +626,8 @@ CREATE TABLE IF NOT EXISTS `tb_kat` (
 -- Table structure for table `tb_katpp`
 --
 
-DROP TABLE IF EXISTS `tb_katpp`;
-CREATE TABLE IF NOT EXISTS `tb_katpp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_katpp` (
+  `id` int(11) NOT NULL,
   `id_kat` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -683,9 +640,8 @@ CREATE TABLE IF NOT EXISTS `tb_katpp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -693,9 +649,9 @@ CREATE TABLE IF NOT EXISTS `tb_katpp` (
 -- Table structure for table `tb_kjal`
 --
 
-DROP TABLE IF EXISTS `tb_kjal`;
-CREATE TABLE IF NOT EXISTS `tb_kjal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjal` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -705,9 +661,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjal` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -715,9 +670,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjal` (
 -- Table structure for table `tb_kjalpp`
 --
 
-DROP TABLE IF EXISTS `tb_kjalpp`;
-CREATE TABLE IF NOT EXISTS `tb_kjalpp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjalpp` (
+  `id` int(11) NOT NULL,
   `id_kjal` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -730,9 +684,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjalpp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -740,9 +693,9 @@ CREATE TABLE IF NOT EXISTS `tb_kjalpp` (
 -- Table structure for table `tb_kjat`
 --
 
-DROP TABLE IF EXISTS `tb_kjat`;
-CREATE TABLE IF NOT EXISTS `tb_kjat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjat` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -752,9 +705,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjat` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -762,9 +714,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjat` (
 -- Table structure for table `tb_kjatpp`
 --
 
-DROP TABLE IF EXISTS `tb_kjatpp`;
-CREATE TABLE IF NOT EXISTS `tb_kjatpp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjatpp` (
+  `id` int(11) NOT NULL,
   `id_kjat` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -777,9 +728,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjatpp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -787,9 +737,9 @@ CREATE TABLE IF NOT EXISTS `tb_kjatpp` (
 -- Table structure for table `tb_kjtt`
 --
 
-DROP TABLE IF EXISTS `tb_kjtt`;
-CREATE TABLE IF NOT EXISTS `tb_kjtt` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjtt` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -799,16 +749,15 @@ CREATE TABLE IF NOT EXISTS `tb_kjtt` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_kjtt`
 --
 
-INSERT INTO `tb_kjtt` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_unit`, `jml_petak`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
-(6, '91.11', '91.11.03.2003', '2', 2, 2, 2, 2, 2, 2, 2);
+INSERT INTO `tb_kjtt` (`id`, `tahun`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_unit`, `jml_petak`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
+(6, NULL, '91.11', '91.11.03.2003', '2', 2, 2, 2, 2, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -816,9 +765,8 @@ INSERT INTO `tb_kjtt` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_u
 -- Table structure for table `tb_kjttpp`
 --
 
-DROP TABLE IF EXISTS `tb_kjttpp`;
-CREATE TABLE IF NOT EXISTS `tb_kjttpp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_kjttpp` (
+  `id` int(11) NOT NULL,
   `id_kjtt` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -831,9 +779,8 @@ CREATE TABLE IF NOT EXISTS `tb_kjttpp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_kjttpp`
@@ -848,9 +795,9 @@ INSERT INTO `tb_kjttpp` (`id`, `id_kjtt`, `jan`, `feb`, `mar`, `apr`, `mei`, `ju
 -- Table structure for table `tb_mnp`
 --
 
-DROP TABLE IF EXISTS `tb_mnp`;
-CREATE TABLE IF NOT EXISTS `tb_mnp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_mnp` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -860,18 +807,17 @@ CREATE TABLE IF NOT EXISTS `tb_mnp` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_mnp`
 --
 
-INSERT INTO `tb_mnp` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_kolam`, `uk_kolam`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
-(4, '91.11', '91.11.01.2002', '4', 4, 4, 3, 4, 4, 2, 1),
-(3, '91.11', '91.11.02.2002', '4', 4, 4, 4, 4, 4, 2, 45),
-(5, '91.11', '91.11.04.2002', '92', 9, 9, 9, 9, 9, 2, 9);
+INSERT INTO `tb_mnp` (`id`, `tahun`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_kolam`, `uk_kolam`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
+(4, NULL, '91.11', '91.11.01.2002', '4', 4, 4, 3, 4, 4, 2, 1),
+(3, NULL, '91.11', '91.11.02.2002', '4', 4, 4, 4, 4, 4, 2, 45),
+(5, NULL, '91.11', '91.11.04.2002', '92', 9, 9, 9, 9, 9, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -879,9 +825,8 @@ INSERT INTO `tb_mnp` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_ko
 -- Table structure for table `tb_mnppp`
 --
 
-DROP TABLE IF EXISTS `tb_mnppp`;
-CREATE TABLE IF NOT EXISTS `tb_mnppp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_mnppp` (
+  `id` int(11) NOT NULL,
   `id_mnp` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -894,9 +839,8 @@ CREATE TABLE IF NOT EXISTS `tb_mnppp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_mnppp`
@@ -913,20 +857,29 @@ INSERT INTO `tb_mnppp` (`id`, `id_mnp`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`
 -- Table structure for table `tb_pembenihan`
 --
 
-DROP TABLE IF EXISTS `tb_pembenihan`;
-CREATE TABLE IF NOT EXISTS `tb_pembenihan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_pembenihan` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) DEFAULT NULL,
   `lokasi` varchar(50) NOT NULL,
   `bulan` int(11) NOT NULL,
   `id_budidaya` int(11) NOT NULL,
   `id_jenisikan` int(11) NOT NULL,
   `produksi` bigint(20) NOT NULL,
   `harga` double NOT NULL,
+  `nilai_produksi` double DEFAULT NULL,
   `luas_lahan` double NOT NULL,
   `luas_wadah` double NOT NULL,
-  `jumlah_upr_pembudidayaan` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `jumlah_upr_pembudidayaan` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_pembenihan`
+--
+
+INSERT INTO `tb_pembenihan` (`id`, `tahun`, `lokasi`, `bulan`, `id_budidaya`, `id_jenisikan`, `produksi`, `harga`, `nilai_produksi`, `luas_lahan`, `luas_wadah`, `jumlah_upr_pembudidayaan`) VALUES
+(1, NULL, '91.11', 1, 3, 4, 11, 100, 50, 10, 100, 5000),
+(3, NULL, '91.11', 1, 3, 5, 123, 30000, 123, 10, 1234, 4321),
+(4, '2023', '91.11', 2, 3, 2, 100, 15000, 150000, 10, 25, 200);
 
 -- --------------------------------------------------------
 
@@ -934,87 +887,49 @@ CREATE TABLE IF NOT EXISTS `tb_pembenihan` (
 -- Table structure for table `tb_pembesaran`
 --
 
-DROP TABLE IF EXISTS `tb_pembesaran`;
-CREATE TABLE IF NOT EXISTS `tb_pembesaran` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_pembesaran` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) DEFAULT NULL,
   `lokasi` varchar(50) NOT NULL,
   `bulan` int(11) NOT NULL,
   `id_budidaya` int(11) NOT NULL,
   `id_jenisikan` int(11) NOT NULL,
   `produksi` bigint(20) NOT NULL,
   `harga` double NOT NULL,
+  `nilai_produksi` double DEFAULT NULL,
   `luas_lahan` double NOT NULL,
   `luas_wadah` double NOT NULL,
-  `jumlah_rtp_pembesaran` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `jumlah_rtp_pembesaran` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pettycash`
+-- Table structure for table `tb_periode`
 --
 
-DROP TABLE IF EXISTS `tb_pettycash`;
-CREATE TABLE IF NOT EXISTS `tb_pettycash` (
-  `id_pettycash` int(11) NOT NULL AUTO_INCREMENT,
-  `ket_pettycash` text,
-  `biaya_pettycash` double DEFAULT NULL,
-  `tgl_pettycash` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_pettycash_manajer` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_pettycash_direktur` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `catatan_manajer` text,
-  `catatan_direktur` text,
-  `id_user_pettycash` int(11) DEFAULT NULL,
-  `id_user_manager` int(11) DEFAULT NULL,
-  `id_bagian` int(11) DEFAULT NULL,
-  `status` varchar(50) NOT NULL,
-  `imgbukti` varchar(255) DEFAULT NULL,
-  `tgl_bonmerah` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_bonmerah_manajer` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_bonmerah_direktur` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `catatan_manajer_bonmerah` text NOT NULL,
-  `catatan_direktur_bonmerah` text NOT NULL,
-  `status_bonmerah` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_pettycash`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_periode` (
+  `id` int(11) NOT NULL,
+  `periode` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_pettycash`
+-- Dumping data for table `tb_periode`
 --
 
-INSERT INTO `tb_pettycash` (`id_pettycash`, `ket_pettycash`, `biaya_pettycash`, `tgl_pettycash`, `tgl_pettycash_manajer`, `tgl_pettycash_direktur`, `catatan_manajer`, `catatan_direktur`, `id_user_pettycash`, `id_user_manager`, `id_bagian`, `status`, `imgbukti`, `tgl_bonmerah`, `tgl_bonmerah_manajer`, `tgl_bonmerah_direktur`, `catatan_manajer_bonmerah`, `catatan_direktur_bonmerah`, `status_bonmerah`) VALUES
-(15, 'Beli Kertas HVS', 150000, '2023-03-11 08:27:28', '2023-03-11 08:39:40', '2023-03-11 08:42:18', 'Okk', 'Lanjutkan!!!', 7, 1, 1, 'RILIS', 'fda2ea5ded93f75d988bc1093d4d0877.png', '2023-03-11 09:33:23', '2023-03-12 04:59:42', '2023-03-12 08:44:55', 'Okk1', 'Ok Rilis', 'RILIS'),
-(16, 'Suntikan', 100000, '2023-03-11 08:27:51', '2023-03-11 08:39:33', '2023-03-11 08:42:53', 'Okk', 'Ditahan dulu', 7, 1, 1, 'NONRILIS', NULL, NULL, NULL, NULL, '', '', ''),
-(17, 'Obat', 200000, '2023-03-11 08:30:30', '2023-03-11 08:39:20', '2023-03-11 08:42:05', 'Gas', 'Lanjutkan!!!', 6, 1, 2, 'RILIS', '505df7d8cb1c88e6d9fa8facca90e197.png', '2023-03-12 05:26:35', '2023-03-12 05:29:33', NULL, 'Okk', '', 'DISETUJUI'),
-(18, 'Seragam', 150000, '2023-03-11 08:30:56', '2023-03-11 08:39:03', NULL, 'Seragam Apa ya?', NULL, 6, 1, 2, 'DITOLAK', NULL, NULL, NULL, NULL, '', '', ''),
-(19, 'Tes Apapun', 500000, '2023-03-11 08:32:12', '2023-03-11 08:35:51', NULL, 'Dana Terlalu Besar', NULL, 3, 2, 4, 'DITOLAK', NULL, NULL, NULL, NULL, '', '', ''),
-(20, 'Hem', 275000, '2023-03-11 08:35:02', '2023-03-11 08:36:24', '2023-03-11 08:41:55', 'Okk', 'Lanjutkan!!!', 3, 2, 5, 'RILIS', 'b10f237d01bc509cf5e49f98a9487468.png', '2023-03-11 14:52:34', NULL, NULL, '', '', 'PENGAJUAN'),
-(21, 'Tes', 123000, '2023-03-11 09:27:18', '2023-03-12 05:52:17', NULL, 'Lanjutkan', NULL, 7, 1, 1, 'DISETUJUI', NULL, NULL, NULL, NULL, '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_reimburse`
---
-
-DROP TABLE IF EXISTS `tb_reimburse`;
-CREATE TABLE IF NOT EXISTS `tb_reimburse` (
-  `id_reimburse` int(11) NOT NULL AUTO_INCREMENT,
-  `ket_reimburse` text,
-  `biaya_reimburse` double DEFAULT NULL,
-  `tgl_reimburse` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_reimburse_manajer` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_reimburse_direktur` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `catatan_manajer` text,
-  `catatan_direktur` text,
-  `id_user_reimburse` int(11) DEFAULT NULL,
-  `id_user_manager` int(11) DEFAULT NULL,
-  `id_bagian` int(11) DEFAULT NULL,
-  `status` varchar(50) NOT NULL,
-  `imgbukti` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_reimburse`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tb_periode` (`id`, `periode`) VALUES
+(1, 'Januari'),
+(2, 'Februari'),
+(3, 'Maret'),
+(4, 'April'),
+(5, 'Mei'),
+(6, 'Juni'),
+(7, 'Juli'),
+(8, 'Agustus'),
+(9, 'September'),
+(10, 'Oktober'),
+(11, 'November'),
+(12, 'Desember');
 
 -- --------------------------------------------------------
 
@@ -1022,9 +937,9 @@ CREATE TABLE IF NOT EXISTS `tb_reimburse` (
 -- Table structure for table `tb_rl`
 --
 
-DROP TABLE IF EXISTS `tb_rl`;
-CREATE TABLE IF NOT EXISTS `tb_rl` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_rl` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -1034,16 +949,15 @@ CREATE TABLE IF NOT EXISTS `tb_rl` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_bibit` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `jml_bibit` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_rl`
 --
 
-INSERT INTO `tb_rl` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_unit`, `jml_longline`, `potensi`, `existing`, `jenis_komoditas`, `jml_bibit`) VALUES
-(2, '91.11', '91.11.02.2002', '1', 1, 1, 1, 1, 1, 2, 1);
+INSERT INTO `tb_rl` (`id`, `tahun`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_unit`, `jml_longline`, `potensi`, `existing`, `jenis_komoditas`, `jml_bibit`) VALUES
+(2, NULL, '91.11', '91.11.02.2002', '1', 1, 1, 1, 1, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -1051,9 +965,8 @@ INSERT INTO `tb_rl` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_uni
 -- Table structure for table `tb_rlpp`
 --
 
-DROP TABLE IF EXISTS `tb_rlpp`;
-CREATE TABLE IF NOT EXISTS `tb_rlpp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_rlpp` (
+  `id` int(11) NOT NULL,
   `id_rl` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -1066,16 +979,8 @@ CREATE TABLE IF NOT EXISTS `tb_rlpp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_rlpp`
---
-
-INSERT INTO `tb_rlpp` (`id`, `id_rl`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, `jul`, `agu`, `sep`, `okt`, `nov`, `des`) VALUES
-(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1083,12 +988,10 @@ INSERT INTO `tb_rlpp` (`id`, `id_rl`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, 
 -- Table structure for table `tb_role`
 --
 
-DROP TABLE IF EXISTS `tb_role`;
-CREATE TABLE IF NOT EXISTS `tb_role` (
-  `id_role` int(11) NOT NULL AUTO_INCREMENT,
-  `namarole` varchar(25) NOT NULL,
-  PRIMARY KEY (`id_role`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+CREATE TABLE `tb_role` (
+  `id_role` int(11) NOT NULL,
+  `namarole` varchar(25) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_role`
@@ -1107,9 +1010,9 @@ INSERT INTO `tb_role` (`id_role`, `namarole`) VALUES
 -- Table structure for table `tb_ts`
 --
 
-DROP TABLE IF EXISTS `tb_ts`;
-CREATE TABLE IF NOT EXISTS `tb_ts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_ts` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(4) CHARACTER SET utf8mb4 DEFAULT NULL,
   `lokasi` varchar(255) NOT NULL,
   `kampung` varchar(255) NOT NULL,
   `ketua` text NOT NULL,
@@ -1119,19 +1022,19 @@ CREATE TABLE IF NOT EXISTS `tb_ts` (
   `potensi` double NOT NULL,
   `existing` double NOT NULL,
   `jenis_komoditas` int(11) NOT NULL,
-  `jml_ekor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `jml_ekor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_ts`
 --
 
-INSERT INTO `tb_ts` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_tambak`, `uk_tambak`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
-(7, '91.11', '91.11.03.2003', '1', 1, 1, 1, 1, 1, 2, 1),
-(4, '91.11', '91.11.01.2001', 'A', 1, 1, 1, 1, 1, 2, 1),
-(5, '91.11', '91.11.01.2001', '1', 1, 1, 1, 1, 1, 2, 1),
-(6, '91.11', '91.11.06.2005', '2', 2, 2, 2, 2, 2, 2, 2);
+INSERT INTO `tb_ts` (`id`, `tahun`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_tambak`, `uk_tambak`, `potensi`, `existing`, `jenis_komoditas`, `jml_ekor`) VALUES
+(7, NULL, '91.11', '91.11.03.2003', '1', 1, 1, 1, 1, 1, 2, 1),
+(4, NULL, '91.11', '91.11.01.2001', 'A', 1, 1, 1, 1, 1, 2, 1),
+(5, NULL, '91.11', '91.11.01.2001', '1', 1, 1, 1, 1, 1, 2, 1),
+(6, NULL, '91.11', '91.11.06.2005', '2', 2, 2, 2, 2, 2, 2, 2),
+(8, NULL, '91.11', '91.11.01.2001', 'qw', 12, 1212, 212, 123, 321, 2, 12345);
 
 -- --------------------------------------------------------
 
@@ -1139,9 +1042,8 @@ INSERT INTO `tb_ts` (`id`, `lokasi`, `kampung`, `ketua`, `jml_anggota`, `jml_tam
 -- Table structure for table `tb_tspp`
 --
 
-DROP TABLE IF EXISTS `tb_tspp`;
-CREATE TABLE IF NOT EXISTS `tb_tspp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_tspp` (
+  `id` int(11) NOT NULL,
   `id_ts` int(11) NOT NULL,
   `jan` double DEFAULT NULL,
   `feb` double DEFAULT NULL,
@@ -1154,9 +1056,8 @@ CREATE TABLE IF NOT EXISTS `tb_tspp` (
   `sep` double DEFAULT NULL,
   `okt` double DEFAULT NULL,
   `nov` double DEFAULT NULL,
-  `des` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `des` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_tspp`
@@ -1166,7 +1067,8 @@ INSERT INTO `tb_tspp` (`id`, `id_ts`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, 
 (7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2);
+(6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+(8, 8, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1174,14 +1076,12 @@ INSERT INTO `tb_tspp` (`id`, `id_ts`, `jan`, `feb`, `mar`, `apr`, `mei`, `jun`, 
 -- Table structure for table `tokens`
 --
 
-DROP TABLE IF EXISTS `tokens`;
-CREATE TABLE IF NOT EXISTS `tokens` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tokens` (
+  `id` int(11) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `created` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `created` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tokens`
@@ -1189,6 +1089,356 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 
 INSERT INTO `tokens` (`id`, `token`, `user_id`, `created`) VALUES
 (1, '2718f9264dc5ab8a9438efcbaeb69c', 13, '2023-03-05');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `detail_website`
+--
+ALTER TABLE `detail_website`
+  ADD PRIMARY KEY (`detail_website_id`);
+
+--
+-- Indexes for table `lokasi`
+--
+ALTER TABLE `lokasi`
+  ADD PRIMARY KEY (`kodelokasi`);
+
+--
+-- Indexes for table `tbl_home`
+--
+ALTER TABLE `tbl_home`
+  ADD PRIMARY KEY (`home_id`);
+
+--
+-- Indexes for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_site`
+--
+ALTER TABLE `tbl_site`
+  ADD PRIMARY KEY (`site_id`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `tb_jenisbudidaya`
+--
+ALTER TABLE `tb_jenisbudidaya`
+  ADD PRIMARY KEY (`id_jenisbudidaya`);
+
+--
+-- Indexes for table `tb_jenisikan`
+--
+ALTER TABLE `tb_jenisikan`
+  ADD PRIMARY KEY (`id_jenisikan`);
+
+--
+-- Indexes for table `tb_jeniskolam`
+--
+ALTER TABLE `tb_jeniskolam`
+  ADD PRIMARY KEY (`id_jeniskolam`);
+
+--
+-- Indexes for table `tb_jeniskomoditas`
+--
+ALTER TABLE `tb_jeniskomoditas`
+  ADD PRIMARY KEY (`id_jeniskomoditas`);
+
+--
+-- Indexes for table `tb_kat`
+--
+ALTER TABLE `tb_kat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_katpp`
+--
+ALTER TABLE `tb_katpp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjal`
+--
+ALTER TABLE `tb_kjal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjalpp`
+--
+ALTER TABLE `tb_kjalpp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjat`
+--
+ALTER TABLE `tb_kjat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjatpp`
+--
+ALTER TABLE `tb_kjatpp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjtt`
+--
+ALTER TABLE `tb_kjtt`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_kjttpp`
+--
+ALTER TABLE `tb_kjttpp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_mnp`
+--
+ALTER TABLE `tb_mnp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_mnppp`
+--
+ALTER TABLE `tb_mnppp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_pembenihan`
+--
+ALTER TABLE `tb_pembenihan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_pembesaran`
+--
+ALTER TABLE `tb_pembesaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_periode`
+--
+ALTER TABLE `tb_periode`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_rl`
+--
+ALTER TABLE `tb_rl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_rlpp`
+--
+ALTER TABLE `tb_rlpp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_role`
+--
+ALTER TABLE `tb_role`
+  ADD PRIMARY KEY (`id_role`);
+
+--
+-- Indexes for table `tb_ts`
+--
+ALTER TABLE `tb_ts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_tspp`
+--
+ALTER TABLE `tb_tspp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `detail_website`
+--
+ALTER TABLE `detail_website`
+  MODIFY `detail_website_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_home`
+--
+ALTER TABLE `tbl_home`
+  MODIFY `home_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+
+--
+-- AUTO_INCREMENT for table `tbl_site`
+--
+ALTER TABLE `tbl_site`
+  MODIFY `site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tb_jenisbudidaya`
+--
+ALTER TABLE `tb_jenisbudidaya`
+  MODIFY `id_jenisbudidaya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_jenisikan`
+--
+ALTER TABLE `tb_jenisikan`
+  MODIFY `id_jenisikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_jeniskolam`
+--
+ALTER TABLE `tb_jeniskolam`
+  MODIFY `id_jeniskolam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tb_jeniskomoditas`
+--
+ALTER TABLE `tb_jeniskomoditas`
+  MODIFY `id_jeniskomoditas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_kat`
+--
+ALTER TABLE `tb_kat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_katpp`
+--
+ALTER TABLE `tb_katpp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_kjal`
+--
+ALTER TABLE `tb_kjal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_kjalpp`
+--
+ALTER TABLE `tb_kjalpp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_kjat`
+--
+ALTER TABLE `tb_kjat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_kjatpp`
+--
+ALTER TABLE `tb_kjatpp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_kjtt`
+--
+ALTER TABLE `tb_kjtt`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tb_kjttpp`
+--
+ALTER TABLE `tb_kjttpp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_mnp`
+--
+ALTER TABLE `tb_mnp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_mnppp`
+--
+ALTER TABLE `tb_mnppp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_pembenihan`
+--
+ALTER TABLE `tb_pembenihan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_pembesaran`
+--
+ALTER TABLE `tb_pembesaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_periode`
+--
+ALTER TABLE `tb_periode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tb_rl`
+--
+ALTER TABLE `tb_rl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_rlpp`
+--
+ALTER TABLE `tb_rlpp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_role`
+--
+ALTER TABLE `tb_role`
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tb_ts`
+--
+ALTER TABLE `tb_ts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tb_tspp`
+--
+ALTER TABLE `tb_tspp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

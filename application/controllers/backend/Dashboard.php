@@ -27,6 +27,7 @@ class Dashboard extends CI_Controller{
 		$data['site_title'] = $site['site_title'];
 		$data['site_favicon'] = $site['site_favicon'];
 		$data['images'] = $site['images'];
+		$data['tahun'] = $site['tahun'];
 		$data['title'] = 'Dashboard';
 
 		if($this->session->userdata('access')=='1') {
