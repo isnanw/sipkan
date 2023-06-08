@@ -46,7 +46,7 @@
         //datatables
         table = $('#mytable').DataTable({
             "responsive": true,
-            "scrollX": true,
+            // "scrollX": true,
 
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.

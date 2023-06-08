@@ -146,28 +146,43 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Data</span>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+            <li class="sidebar-item ">
+              <a class="sidebar-link "
+                href="<?= site_url('backend/pengolahan'); ?>" aria-expanded="false">
+                <span>
+                  <i class="ti ti-brain"></i>
+                </span>
+                <span class="hide-menu">Pengolahan Hasil</span>
+              </a>
+            </li>
+            <li
+              class="sidebar-item <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran' || $this->uri->segment(2) == 'pengolahan' ? 'selected' : '' ?>">
+              <a class="sidebar-link has-arrow <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran' ? 'active' : '' ?>"
+                href="#" aria-expanded="false">
                 <span class="d-flex">
-                  <i class="ti ti-stack-pop"></i>
+                  <i class="ti ti-brand-4chan"></i>
                 </span>
                 <span class="hide-menu">Data Dasar</span>
               </a>
-              <ul aria-expanded="false" class="collapse first-level">
-                <li class="sidebar-item">
-                  <a href="<?= site_url('backend/pembenihan'); ?>" class="sidebar-link">
+              <!-- <li class="sidebar-item ">
+                              <a class="sidebar-link "> -->
+              <ul aria-expanded="false" class="collapse first-level <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran' ? 'active in' : '' ?>">
+                <li class="sidebar-item <?= $this->uri->segment(2) == 'pembenihan' ? 'active' : '' ?>">
+                  <a href="<?= site_url('backend/pembenihan'); ?>"
+                    class="sidebar-link <?= $this->uri->segment(2) == 'pembenihan' ? 'active' : '' ?>">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
                     <span class="hide-menu">Produksi Pembenihan Ikan</span>
                   </a>
                 </li>
-                <li class="sidebar-item">
-                  <a href="<?= site_url('backend/pembesaran'); ?>" class="sidebar-link">
+                <li class="sidebar-item <?= $this->uri->segment(2) == 'pembesaran' ? 'active' : '' ?>">
+                  <a href="<?= site_url('backend/pembesaran'); ?>"
+                    class="sidebar-link <?= $this->uri->segment(2) == 'pembesaran' ? 'active' : '' ?>">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
-                    <span class="hide-menu">Data Pembesaran Budidaya</span>
+                    <span class="hide-menu">Produksi Pembesaran Ikan</span>
                   </a>
                 </li>
               </ul>
@@ -175,7 +190,7 @@
             <li class="sidebar-item">
               <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                 <span class="d-flex">
-                  <i class="ti ti-stack-pop"></i>
+                  <i class="ti ti-brand-mysql"></i>
                 </span>
                 <span class="hide-menu">Produksi Budidaya Ikan</span>
               </a>

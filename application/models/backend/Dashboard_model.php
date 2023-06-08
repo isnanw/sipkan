@@ -48,33 +48,29 @@ class Dashboard_model extends CI_Model{
         return $this->db->count_all('tb_pembesaran'); // Menghitung jumlah baris di tabel "pembesaran"
     }
 
-    function count_safari_visitors(){
-        $query = $this->db->query("SELECT COUNT(*) safari_visitor FROM tbl_visitors WHERE visit_platform='Safari'");
-        return $query;
+    public function countPud()
+    {
+        return $this->db->count_all('tb_ts'); // Menghitung jumlah baris di tabel "pembesaran"
     }
-    function count_opera_visitors(){
-        $query = $this->db->query("SELECT COUNT(*) opera_visitor FROM tbl_visitors WHERE visit_platform='Opera'");
-        return $query;
+    public function countKat()
+    {
+        return $this->db->count_all('tb_kat'); // Menghitung jumlah baris di tabel "pembesaran"
     }
-    function count_karyawan2(){
-            $query = $this->db->query("SELECT COUNT(*) karyawan_count FROM tbl_user");
-            return $query;
+    public function countKjtt()
+    {
+        return $this->db->count_all('tb_kjtt'); // Menghitung jumlah baris di tabel "pembesaran"
     }
-    function count_produksihariini(){
-        $query = $this->db->query("SELECT SUM(produksi_selesai_jumlah) AS produksihariini_count FROM tbl_produksi_selesai WHERE
-            MONTH(produksi_selesai_tgl)=MONTH(NOW())");
-        return $query;
+    public function countKjat()
+    {
+        return $this->db->count_all('tb_kjat'); // Menghitung jumlah baris di tabel "pembesaran"
     }
-    function count_transaksihariini(){
-        $query = $this->db->query("SELECT SUM(jumlah_pembelian) AS transaksihariini_count FROM tbl_list_transaksi WHERE
-            MONTH(tgl_transaksi)=MONTH(NOW())");
-        return $query;
+    public function countMnp()
+    {
+        return $this->db->count_all('tb_mnp'); // Menghitung jumlah baris di tabel "pembesaran"
     }
-
-
-    function transaksi_count2() {
-            $query = $this->db->query("SELECT SUM(total_cash) AS transaksi FROM tbl_rekap_cash WHERE DAY(tgl_cash)=DAY(NOW())");
-            return $query;
+    public function countKjal()
+    {
+        return $this->db->count_all('tb_kjal'); // Menghitung jumlah baris di tabel "pembesaran"
     }
     function count_pengeluaran() {
             $query = $this->db->query("SELECT SUM(biaya_pengeluaran) AS pengeluaran_count FROM tbl_pengeluaran WHERE

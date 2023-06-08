@@ -24,10 +24,11 @@ class Dashboard extends CI_Controller{
 	function index(){
 
 		$site = $this->site_model->get_site_data()->row_array();
-		$data['site_title']      = $site['site_title'];
-		$data['site_favicon']    = $site['site_favicon'];
-		$data['images']          = $site['images'];
-		$data['tahun']           = $site['tahun'];
+		$data['site_title']     = $site['site_title'];
+		$data['site_favicon']   = $site['site_favicon'];
+		$data['images']         = $site['images'];
+		$data['tahun']          = $site['tahun'];
+		$data['site_deskripsi'] = $site['site_deskripsi'];
 
 		$data['jmlh_user']       = $this->dashboard_model->countUsers();
 		$data['jmlh_kolam']      = $this->dashboard_model->countKolam();
@@ -36,6 +37,12 @@ class Dashboard extends CI_Controller{
 		$data['jmlh_komoditas']  = $this->dashboard_model->countKomoditas();
 		$data['jmlh_pembesaran'] = $this->dashboard_model->countPembesaran();
 		$data['jmlh_pembenihan'] = $this->dashboard_model->countPembenihan();
+		$data['jmlh_pud']  = $this->dashboard_model->countPud();
+		$data['jmlh_kat']  = $this->dashboard_model->countKat();
+		$data['jmlh_kjtt'] = $this->dashboard_model->countKjtt();
+		$data['jmlh_kjat'] = $this->dashboard_model->countKjat();
+		$data['jmlh_mnp']  = $this->dashboard_model->countMnp();
+		$data['jmlh_kjal'] = $this->dashboard_model->countKjal();
 
 		$data['title'] = 'Dashboard';
 
