@@ -30,6 +30,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Perairan Umum Darat (PUD)';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Tambak Sederhana';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Tambak Sederhana';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
