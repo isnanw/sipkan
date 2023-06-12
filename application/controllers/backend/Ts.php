@@ -115,9 +115,12 @@ class Ts extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_tambak1' => $this->input->post('uk_tambak1'),
+            'uk_tambak2' => $this->input->post('uk_tambak2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -168,9 +171,12 @@ class Ts extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_tambak1' => $this->input->post('uk_tambak1'),
+            'uk_tambak2' => $this->input->post('uk_tambak2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );

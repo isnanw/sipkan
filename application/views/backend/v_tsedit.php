@@ -67,8 +67,24 @@
                                             <input type="number" id="jml_tambak" name="jml_tambak" class="form-control" required />
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="control-label">Ukuran Tambak</label>
-                                            <input type="number" id="uk_tambak" name="uk_tambak" class="form-control" required />
+                                            <label class="control-label">Ukuran Tambak (M<sup>2</sup>)</label>
+                                            <div class="row col">
+                                                <div class="col-md-3">
+                                                    <input type="number" id="uk_tambak1" name="uk_tambak1" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" id="uk_tambak2" name="uk_tambak2" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" id="uk_tambakhasil" name="uk_tambakhasil" class="form-control" readonly />
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -76,13 +92,44 @@
                                         <h5 class="mb-2">Luas Lahan(M<sup>2</sup>)</h5>
                                         <div class="col-md-6">
                                             <label class="control-label">Potensi (M<sup>2</sup>)</label>
-                                            <input type="number" id="potensi" name="potensi" class="form-control" required />
+                                            <div class="row col">
+                                                <div class="col-md-3">
+                                                    <input type="number" id="potensi1" name="potensi1" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" id="potensi2" name="potensi2" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" id="potensihasil" name="potensihasil" class="form-control" readonly />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Existing (M<sup>2</sup>)</label>
-                                            <input type="number" id="existing" name="existing" class="form-control" required />
+                                            <div class="row col">
+                                                <div class="col-md-3">
+                                                    <input type="number" id="existing1" name="existing1" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="number" id="existing2" name="existing2" class="form-control" required />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" id="existinghasil" name="existinghasil" class="form-control" readonly />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!--/span-->
                                     </div>
                                     <div class="row pt-3 mb-3">
                                         <h5 class="mb-2">Komoditas</h5>
@@ -270,9 +317,15 @@
                 $('#ketua').val(data.ketua);
                 $('#jml_anggota').val(data.jml_anggota);
                 $('#jml_tambak').val(data.jml_tambak);
-                $('#uk_tambak').val(data.uk_tambak);
-                $('#potensi').val(data.potensi);
-                $('#existing').val(data.existing);
+                $('#uk_tambak1').val(data.uk_tambak1);
+                $('#uk_tambak2').val(data.uk_tambak2);
+                $('#uk_tambakhasil').val(data.uk_tambak1*data.uk_tambak2 + " m2");
+                $('#potensi1').val(data.potensi1);
+                $('#potensi2').val(data.potensi2);
+                $('#potensihasil').val(data.potensi1*data.potensi2+ "m2");
+                $('#existing1').val(data.existing1);
+                $('#existing2').val(data.existing2);
+                $('#existinghasil').val(data.existing1*data.existing2+ "m2");
                 $('#jml_ekor').val(data.jml_ekor);
 
                 $('#jan').val(data.jan);
@@ -292,6 +345,62 @@
                 alert('Error get data from ajax');
             }
         });
+        var potensi1 = document.getElementById('potensi1');
+        var potensi2 = document.getElementById('potensi2');
+        var potensihasil = document.getElementById('potensihasil');
+
+        potensi1.addEventListener('input', hitungPerkalian);
+        potensi2.addEventListener('input', hitungPerkalian);
+
+        function hitungPerkalian() {
+
+            var angka1 = parseFloat(potensi1.value.replace(' m2', ''));
+            var angka2 = parseFloat(potensi2.value.replace(' m2', ''));
+
+            var hasilPerkalian = angka1 * angka2;
+
+            var hasilakhir = isNaN(hasilPerkalian) ? '' : hasilPerkalian;
+
+            potensihasil.value = hasilakhir + ' M\u00B2';
+        }
+
+        var uk_tambak1 = document.getElementById('uk_tambak1');
+        var uk_tambak2 = document.getElementById('uk_tambak2');
+        var uk_tambakhasil = document.getElementById('uk_tambakhasil');
+
+        uk_tambak1.addEventListener('input', hitungPerkalian_uk_tambak);
+        uk_tambak2.addEventListener('input', hitungPerkalian_uk_tambak);
+
+        function hitungPerkalian_uk_tambak() {
+
+            var angka1 = parseFloat(uk_tambak1.value.replace(' m2', ''));
+            var angka2 = parseFloat(uk_tambak2.value.replace(' m2', ''));
+
+            var hasilPerkalian = angka1 * angka2;
+
+            var hasilakhir = isNaN(hasilPerkalian) ? '' : hasilPerkalian;
+
+            uk_tambakhasil.value = hasilakhir + ' M\u00B2';
+        }
+
+        var existing1 = document.getElementById('existing1');
+        var existing2 = document.getElementById('existing2');
+        var existinghasil = document.getElementById('existinghasil');
+
+        existing1.addEventListener('input', hitungPerkalianexisting);
+        existing2.addEventListener('input', hitungPerkalianexisting);
+
+        function hitungPerkalianexisting() {
+
+            var angka1 = parseFloat(existing1.value.replace(' m2', ''));
+            var angka2 = parseFloat(existing2.value.replace(' m2', ''));
+
+            var hasilPerkalian = angka1 * angka2;
+
+            var hasilakhir = isNaN(hasilPerkalian) ? '' : hasilPerkalian;
+
+            existinghasil.value = hasilakhir + ' M\u00B2';
+        }
     });
     $("#kab").change(function() {
         $('#distrik').val('');
