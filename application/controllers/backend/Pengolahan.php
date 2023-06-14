@@ -20,7 +20,7 @@ class Pengolahan extends CI_Controller
     $this->load->model('backend/Jenisbudidaya_model', 'jenisbudidaya_model');
     $this->load->model('backend/Lokasi_model', 'lokasi_model');
     $this->load->model('backend/Rl_model', 'rl_model');
-    $this->load->model('backend/Pembenihan_model', 'pembenihan_model');
+    $this->load->model('backend/pengolahan_model', 'pengolahan_model');
     $this->load->model('Site_model', 'site_model');
     $this->load->helper('text');
     $this->load->helper('url');
@@ -34,12 +34,12 @@ class Pengolahan extends CI_Controller
     $data['site_favicon'] = $site['site_favicon'];
     $data['images'] = $site['images'];
     $data['tahun'] = $site['tahun'];
-    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
-    $data['title0'] = 'Data Dasar';
+    $data['title'] = 'Kelompok Pengolahan Hasil Perikanan';
+    $data['title0'] = 'Data';
 
     $this->load->view('backend/menu', $data);
     // $this->load->view('backend/modal/jenisikan_modal');
-    $this->load->view('backend/pembenihan/index', $data);
+    $this->load->view('backend/pengolahan/index', $data);
   }
 
   public function v_input()
@@ -50,11 +50,11 @@ class Pengolahan extends CI_Controller
     $data['images'] = $site['images'];
     $data['tahun'] = $site['tahun'];
     $data['title1'] = 'Tambah Data';
-    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
-    $data['title0'] = 'Data Dasar';
+    $data['title'] = 'Kelompok Pengolahan Hasil Perikanan';
+    $data['title0'] = 'Data';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/pembenihan/tambah', $data);
+    $this->load->view('backend/pengolahan/tambah', $data);
   }
   public function v_edit()
   {
@@ -65,41 +65,41 @@ class Pengolahan extends CI_Controller
     $data['images'] = $site['images'];
     $data['tahun'] = $site['tahun'];
     $data['title1'] = 'Edit Data';
-    $data['title'] = 'PRODUKSI PEMBENIHAN IKAN';
+    $data['title'] = 'Kelompok Pengolahan Hasil Perikanan';
     $data['title0'] = 'Produksi Budidaya Ikan';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/pembenihan/edit', $data);
+    $this->load->view('backend/pengolahan/edit', $data);
   }
   public function ajax_edit($idedit)
   {
-    $data = $this->pembenihan_model->edit($idedit);
+    $data = $this->pengolahan_model->edit($idedit);
     echo json_encode($data);
   }
 
   public function get_ajax_list()
   {
-    $list = $this->pembenihan_model->get_datatables();
+    $list = $this->pengolahan_model->get_datatables();
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $d) {
       $no++;
       $row = array();
       $row[] = $no;
+      $row[] = $d->nama_kelompok;
       $row[] = $d->kab;
-      $row[] = $d->periode;
-      $row[] = $d->budidaya;
-      $row[] = $d->ikan;
+      $row[] = $d->jenis_hasil_produksi;
+      $row[] = $d->keterangan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('backend/pembenihan/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/pengolahan/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
       $data[] = $row;
     }
 
     $output = array(
       "draw" => $_POST['draw'],
-      "recordsTotal" => $this->pembenihan_model->count_all(),
-      "recordsFiltered" => $this->pembenihan_model->count_filtered(),
+      "recordsTotal" => $this->pengolahan_model->count_all(),
+      "recordsFiltered" => $this->pengolahan_model->count_filtered(),
       "data" => $data,
     );
     //output to json format
@@ -115,23 +115,18 @@ class Pengolahan extends CI_Controller
     $nama_users = $this->session->userdata('name');
 
     $data = array(
-      'tahun' => $this->input->post('tahun'),
       'lokasi' => $this->input->post('kab'),
-      'bulan' => $this->input->post('periode'),
-      'id_budidaya' => $this->input->post('budidaya'),
-      'id_jenisikan' => $this->input->post('ikan'),
-      'produksi' => $this->input->post('produksi'),
-      'harga' => $this->input->post('harga'),
-      'nilai_produksi' => $this->input->post('nilaiproduksi'),
-      'luas_lahan' => $this->input->post('luaslahan'),
-      'luas_wadah' => $this->input->post('luaswadah'),
-      'jumlah_upr_pembudidayaan' => $this->input->post('upr')
+      'distrik' => $this->input->post('distrik'),
+      'kampung' => $this->input->post('kampung'),
+      'nama_kelompok' => $this->input->post('nama_kelompok'),
+      'jenis_hasil_produksi' => $this->input->post('jenis_hasil_produksi'),
+      'keterangan' => $this->input->post('keterangan')
     );
-    $insert = $this->pembenihan_model->tambah($data);
+    $insert = $this->pengolahan_model->tambah($data);
 
     if ($insert) {
       // INSERT LOG
-      $b = '<b>' . $nama_users . '</b> Melakukan Tambah Pembenihan';
+      $b = '<b>' . $nama_users . '</b> Melakukan Tambah Kelompok';
       $data2 = array(
         'ket' => $b,
       );
@@ -144,7 +139,7 @@ class Pengolahan extends CI_Controller
       $this->session->set_flashdata('message', 'error');
     }
 
-    redirect('backend/pembenihan');
+    redirect('backend/pengolahan');
   }
 
   function edit()
@@ -165,11 +160,11 @@ class Pengolahan extends CI_Controller
       'luas_wadah' => $this->input->post('luaswadah'),
       'jumlah_upr_pembudidayaan' => $this->input->post('upr')
     );
-    $idedit = $this->pembenihan_model->update($id, $data);
+    $idedit = $this->pengolahan_model->update($id, $data);
 
-    // $prosesdetail = $this->pembenihan_model->update_detail($id, $data1);
+    // $prosesdetail = $this->pengolahan_model->update_detail($id, $data1);
     // INSERT LOG
-    $b = '<b>' . $nama_users . '</b> Melakukan Update Pembenihan';
+    $b = '<b>' . $nama_users . '</b> Melakukan Update pengolahan';
     $data2 = array(
       'ket' => $b,
     );
@@ -177,7 +172,7 @@ class Pengolahan extends CI_Controller
     // INSERT LOG
     echo json_encode(array("status" => TRUE));
     $this->session->set_flashdata('message', 'successedit');
-    redirect('backend/pembenihan');
+    redirect('backend/pengolahan');
   }
 
   public function deletets()
@@ -185,7 +180,7 @@ class Pengolahan extends CI_Controller
     if ($this->input->is_ajax_request()) {
 
       $iddelete = $this->input->post('id');
-      if ($this->pembenihan_model->delete($iddelete)) {
+      if ($this->pengolahan_model->delete($iddelete)) {
         $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
       } else {
         $data = array('res' => "error", 'message' => "Proses gagal dilakukan");

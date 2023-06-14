@@ -146,8 +146,8 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Data</span>
             </li>
-            <li class="sidebar-item ">
-              <a class="sidebar-link "
+            <li class="sidebar-item <?= $this->uri->segment(2) == 'pengolahan' ? 'selected' : '' ?>">
+              <a class="sidebar-link <?= $this->uri->segment(2) == 'pengolahan' ? 'active' : '' ?>"
                 href="<?= site_url('backend/pengolahan'); ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-brain"></i>
@@ -156,7 +156,7 @@
               </a>
             </li>
             <li
-              class="sidebar-item <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran' || $this->uri->segment(2) == 'pengolahan' ? 'selected' : '' ?>">
+              class="sidebar-item <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran'  ? 'selected' : '' ?>">
               <a class="sidebar-link has-arrow <?= $this->uri->segment(2) == 'pembenihan' || $this->uri->segment(2) == 'pembesaran' ? 'active' : '' ?>"
                 href="#" aria-expanded="false">
                 <span class="d-flex">
