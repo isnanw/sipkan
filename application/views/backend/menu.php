@@ -106,14 +106,6 @@
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a href="<?= site_url('backend/jeniskolam'); ?>" class="sidebar-link">
-                    <div class="round-16 d-flex align-items-center justify-content-center">
-                      <i class="ti ti-circle"></i>
-                    </div>
-                    <span class="hide-menu">Jenis Kolam</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
                   <a href="<?= site_url('backend/jenisikan'); ?>" class="sidebar-link">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
@@ -121,6 +113,15 @@
                     <span class="hide-menu">Jenis Ikan</span>
                   </a>
                 </li>
+                <li class="sidebar-item">
+                  <a href="<?= site_url('backend/jeniskolam'); ?>" class="sidebar-link">
+                    <div class="round-16 d-flex align-items-center justify-content-center">
+                      <i class="ti ti-circle"></i>
+                    </div>
+                    <span class="hide-menu">Jenis Kolam</span>
+                  </a>
+                </li>
+
                 <li class="sidebar-item">
                   <a href="<?= site_url('backend/jenisbudidaya'); ?>" class="sidebar-link">
                     <div class="round-16 d-flex align-items-center justify-content-center">
@@ -135,6 +136,14 @@
                       <i class="ti ti-circle"></i>
                     </div>
                     <span class="hide-menu">Jenis Komoditas</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a href="<?= site_url('backend/jenishasilproduksi'); ?>" class="sidebar-link">
+                    <div class="round-16 d-flex align-items-center justify-content-center">
+                      <i class="ti ti-circle"></i>
+                    </div>
+                    <span class="hide-menu">Jenis Hasil Produksi</span>
                   </a>
                 </li>
               </ul>
