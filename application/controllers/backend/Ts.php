@@ -30,6 +30,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Perairan Umum Darat (PUD)';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Tambak Sederhana';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Ts extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Tambak Sederhana';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -112,9 +115,12 @@ class Ts extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_tambak1' => $this->input->post('uk_tambak1'),
+            'uk_tambak2' => $this->input->post('uk_tambak2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -165,9 +171,12 @@ class Ts extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_tambak' => $this->input->post('jml_tambak'),
-            'uk_tambak' => $this->input->post('uk_tambak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_tambak1' => $this->input->post('uk_tambak1'),
+            'uk_tambak2' => $this->input->post('uk_tambak2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );

@@ -20,7 +20,7 @@ class Ts_model extends CI_Model
 
     private function _get_datatables_query()
     {
-        $query = "(SELECT ts.id,l.lokasi,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak,ts.potensi,ts.existing,j.namajeniskomoditas,ts.jml_ekor
+        $query = "(SELECT ts.id,l.lokasi,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,(ts.uk_tambak1*ts.uk_tambak2) as uk_tambak,(ts.potensi1*ts.potensi2) as potensi,(ts.existing1*ts.existing2) as existing,j.namajeniskomoditas,ts.jml_ekor
                     FROM tb_ts ts
                     LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
                     LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
@@ -78,12 +78,11 @@ class Ts_model extends CI_Model
 
     public function get_by_id($id)
     {
-        $query = "(SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak,ts.potensi,ts.existing,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_ekor,l3.kodelokasi as kodedistrik,l3.lokasi as distrik
+        $query = "(SELECT ts.id,l.lokasi,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak1,ts.uk_tambak2,(ts.uk_tambak1*ts.uk_tambak2) as hasiluk_tambak,ts.potensi1,ts.potensi2,(ts.potensi1*ts.potensi2) as hasilpotensi,ts.existing1,ts.existing2,(ts.existing1*ts.existing2) as hasilexisting,j.namajeniskomoditas,ts.jml_ekor
                     FROM tb_ts ts
                     LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
                     LEFT JOIN lokasi l2 on l2.kodelokasi = ts.kampung
-                    LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas 
-                    LEFT JOIN lokasi l3 on l3.kodelokasi = LEFT(l2.kodelokasi,8)
+                    LEFT JOIN tb_jeniskomoditas j on j.id_jeniskomoditas = ts.jenis_komoditas
                 ) kk";
         $this->db->from($query);
         $this->db->where('kk.id', $id);
@@ -152,7 +151,7 @@ class Ts_model extends CI_Model
     }
     public function edit($id)
     {
-        $query = "SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak,ts.potensi,ts.existing,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_ekor,l3.kodelokasi as kodedistrik,l3.lokasi as distrik,
+        $query = "SELECT ts.id,ts.lokasi as kodelokasi,l.lokasi,ts.kampung as kodekampung,l2.lokasi as kampung,ts.ketua,ts.jml_anggota,ts.jml_tambak,ts.uk_tambak1,ts.uk_tambak2,(ts.uk_tambak1*ts.uk_tambak2) as hasiluk_tambak,ts.potensi1,ts.potensi2,(ts.potensi1*ts.potensi2) as hasilpotensi,ts.existing1,ts.existing2,(ts.existing1*ts.existing2) as hasilexisting,ts.jenis_komoditas,j.namajeniskomoditas,ts.jml_ekor,l3.kodelokasi as kodedistrik,l3.lokasi as distrik,
                     ts2.jan,ts2.feb,ts2.mar,ts2.apr,ts2.mei,ts2.jun,ts2.jul,ts2.agu,ts2.sep,ts2.okt,ts2.nov,ts2.des
                                         FROM tb_ts ts
                                         LEFT JOIN lokasi l on l.kodelokasi = ts.lokasi
