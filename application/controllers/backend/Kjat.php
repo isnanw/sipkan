@@ -17,7 +17,7 @@ class Kjat extends CI_Controller
         };
         $this->load->model('backend/Jenisikan_model', 'jenisikan_model');
         $this->load->model('backend/Lokasi_model', 'lokasi_model');
-        $this->load->model('backend/Kjat_model', 'kjat_model');
+        $this->load->model('backend/kjat_model', 'kjat_model');
         $this->load->model('Site_model', 'site_model');
         $this->load->helper('text');
         $this->load->helper('url');
@@ -83,7 +83,7 @@ class Kjat extends CI_Controller
             $row[] = $d->ketua;
             $row[] = $d->jml_anggota;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('backend/Kjat/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/kjat/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
             $data[] = $row;
         }
@@ -113,8 +113,10 @@ class Kjat extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_unit' => $this->input->post('jml_unit'),
             'jml_petak' => $this->input->post('jml_petak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -150,7 +152,7 @@ class Kjat extends CI_Controller
             $this->session->set_flashdata('message', 'error');
         }
 
-        redirect('backend/Kjat');
+        redirect('backend/kjat');
     }
 
     function edit()
@@ -166,8 +168,10 @@ class Kjat extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_unit' => $this->input->post('jml_unit'),
             'jml_petak' => $this->input->post('jml_petak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -196,7 +200,7 @@ class Kjat extends CI_Controller
         // INSERT LOG
         echo json_encode(array("status" => TRUE));
         $this->session->set_flashdata('message', 'successedit');
-        redirect('backend/Kjat');
+        redirect('backend/kjat');
     }
 
     public function deletets()

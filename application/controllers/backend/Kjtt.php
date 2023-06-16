@@ -30,6 +30,7 @@ class Kjtt extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Data Produksi Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Kjtt extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Kjtt extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Budidaya Ikan Jaring Tancap Tawar ( KJT T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -113,8 +116,10 @@ class Kjtt extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_unit' => $this->input->post('jml_unit'),
             'jml_petak' => $this->input->post('jml_petak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -166,8 +171,10 @@ class Kjtt extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_unit' => $this->input->post('jml_unit'),
             'jml_petak' => $this->input->post('jml_petak'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );

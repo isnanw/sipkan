@@ -30,6 +30,7 @@ class Kat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Data Produksi Budidaya Ikan Kolam Air Tenang ( KAT )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Kat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Budidaya Ikan Kolam Air Tenang ( KAT )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Kat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Budidaya Ikan Kolam Air Tenang ( KAT )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -83,7 +86,7 @@ class Kat extends CI_Controller
             $row[] = $d->ketua;
             $row[] = $d->jml_anggota;
             $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-      <a class="dropdown-item" href="' . base_url('backend/Kat/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
+      <a class="dropdown-item" href="' . base_url('backend/kat/v_edit/') . $d->id . '" title="Edit" ><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deletets" value="' . $d->id . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
             $data[] = $row;
         }
@@ -113,9 +116,12 @@ class Kat extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jenis_kolam' => $this->input->post('kolam'),
             'jml_kolam' => $this->input->post('jml_kolam'),
-            'uk_kolam' => $this->input->post('uk_kolam'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_kolam1' => $this->input->post('uk_kolam1'),
+            'uk_kolam2' => $this->input->post('uk_kolam2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -167,9 +173,12 @@ class Kat extends CI_Controller
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jenis_kolam' => $this->input->post('kolam'),
             'jml_kolam' => $this->input->post('jml_kolam'),
-            'uk_kolam' => $this->input->post('uk_kolam'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_kolam1' => $this->input->post('uk_kolam1'),
+            'uk_kolam2' => $this->input->post('uk_kolam2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
