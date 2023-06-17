@@ -30,6 +30,7 @@ class Kjat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Data Produksi Budidaya Ikan Jaring Apung Tawar ( KJA T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Kjat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Budidaya Ikan Jaring Apung Tawar ( KJA T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Kjat extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Budidaya Ikan Jaring Apung Tawar ( KJA T )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 

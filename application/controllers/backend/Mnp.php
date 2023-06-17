@@ -30,6 +30,7 @@ class Mnp extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Data Produksi Budidaya Ikan Mina Padi ( MNP )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -44,6 +45,7 @@ class Mnp extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Input Budidaya Ikan Mina Padi ( MNP )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -57,6 +59,7 @@ class Mnp extends CI_Controller
         $data['site_title'] = $site['site_title'];
         $data['site_favicon'] = $site['site_favicon'];
         $data['images'] = $site['images'];
+        $data['tahun'] = $site['tahun'];
         $data['title'] = 'Edit Budidaya Ikan Mina Padi ( MNP )';
         $data['title0'] = 'Produksi Budidaya Ikan';
 
@@ -112,9 +115,12 @@ class Mnp extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_kolam' => $this->input->post('jml_kolam'),
-            'uk_kolam' => $this->input->post('uk_kolam'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_kolam1' => $this->input->post('uk_kolam1'),
+            'uk_kolam2' => $this->input->post('uk_kolam2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
@@ -165,9 +171,12 @@ class Mnp extends CI_Controller
             'ketua' => $this->input->post('ketua'),
             'jml_anggota' => $this->input->post('jml_anggota'),
             'jml_kolam' => $this->input->post('jml_kolam'),
-            'uk_kolam' => $this->input->post('uk_kolam'),
-            'potensi' => $this->input->post('potensi'),
-            'existing' => $this->input->post('existing'),
+            'uk_kolam1' => $this->input->post('uk_kolam1'),
+            'uk_kolam2' => $this->input->post('uk_kolam2'),
+            'potensi1' => $this->input->post('potensi1'),
+            'potensi2' => $this->input->post('potensi2'),
+            'existing1' => $this->input->post('existing1'),
+            'existing2' => $this->input->post('existing2'),
             'jenis_komoditas' => $this->input->post('komoditas'),
             'jml_ekor' => $this->input->post('jml_ekor')
         );
