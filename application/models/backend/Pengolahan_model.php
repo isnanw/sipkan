@@ -21,12 +21,21 @@ class Pengolahan_model extends CI_Model
     private function _get_datatables_query()
     {
         $query = "(SELECT
-                        l.lokasi as kab,
-                        tp.*
-                    FROM
-                            tb_kelompok tp
-                    LEFT JOIN lokasi l on
-                            l.kodelokasi = tp.lokasi
+                    l.lokasi as urai_kota,
+                    l2.lokasi as urai_distrik,
+                    l3.lokasi as urai_kampung,
+                    tj.namajenishasilproduksi as jenishasil_p,
+                    tk.*
+                FROM
+                    tb_kelompok tk
+                JOIN tb_jenishasilproduksi tj on
+                    tj.id_jenishasilproduksi = tk.jenis_hasil_produksi
+                JOIN lokasi l on
+                    l.kodelokasi = tk.lokasi
+                JOIN lokasi l2 on
+                    l2.kodelokasi = tk.distrik
+                JOIN lokasi l3 on
+                    l3.kodelokasi = tk.kampung
                 ) kk";
         $this->db->from($query);
         $i = 0;
