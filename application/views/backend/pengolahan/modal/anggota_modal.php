@@ -32,8 +32,9 @@
                         <div class="col-12 col-md-12">
                             <div class="form-group">
                                 <label for="valid-state">Jabatan</label>
-                                <input type="text" name="jabatan_anggota" class="form-control jabatan_anggota"
-                                    id="jabatan_anggota" placeholder="jabatan anggota">
+                                <!-- <input type="text" name="jabatan_anggota" class="form-control jabatan_anggota"
+                                    id="jabatan_anggota" placeholder="jabatan anggota"> -->
+                                <select class="form-control" id="jabatan_anggota" name="jabatan_anggota" required></select>
                                 <span class="help-block text-danger"></span>
                             </div>
                         </div>

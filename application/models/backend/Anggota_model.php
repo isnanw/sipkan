@@ -26,6 +26,7 @@ class anggota_model extends CI_Model
         }
 
         $this->db->from($this->tableanggota);
+        $this->db->join('tb_jabatan', 'tb_jabatan.id_jabatan = tb_anggota.jabatan_anggota');
         $i = 0;
         foreach ($this->column_search_anggota as $item) {
             if ($_POST['search']['value']) {
@@ -54,6 +55,7 @@ class anggota_model extends CI_Model
 
     function get_datatables()
     {
+        // $this->db->join()
         $this->db->order_by('id_anggota', 'ASC');
         $this->_get_datatables_query();
         if ($_POST['length'] != -1)
@@ -78,6 +80,7 @@ class anggota_model extends CI_Model
     public function get_by_id($id_anggota)
     {
         $this->db->from($this->tableanggota);
+        $this->db->join('tb_jabatan', 'tb_jabatan.id_jabatan = tb_anggota.jabatan_anggota');
         $this->db->where('id_anggota', $id_anggota);
         $query = $this->db->get();
         return $query->row();
@@ -131,14 +134,14 @@ class anggota_model extends CI_Model
         }
     }
 
-    function getikan($searchTerm = "")
+    function getanggota($searchTerm = "")
     {
-        $query = "SELECT * FROM tb_anggota WHERE nama_anggota like '%$searchTerm%' ORDER BY id_anggota ASC ";
+        $query = "SELECT * FROM tb_jabatan WHERE namajabatan like '%$searchTerm%' ORDER BY id_jabatan ASC ";
         $dataprov = $this->db->query($query)->result_array();
 
         $data = array();
         foreach ($dataprov as $prov) {
-            $data[] = array("id" => $prov['id_anggota'], "text" => $prov['nama_anggota']);
+            $data[] = array("id" => $prov['id_jabatan'], "text" => $prov['namajabatan']);
         }
         return $data;
     }

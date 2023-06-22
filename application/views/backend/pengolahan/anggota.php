@@ -1,5 +1,10 @@
 <?php $this->load->view("backend/_partials/breadcrumb.php") ?>
 <!-- Post Datatables -->
+<style>
+  .select2-container {
+  z-index: 100000000;
+}
+</style>
 
 <div class="card">
   <div class="card-body">
@@ -53,6 +58,25 @@
   });
 
   $(document).ready(function () {
+    $("#jabatan_anggota").select2({
+            ajax: {
+                url: '<?= site_url() ?>backend/Pengolahan/getdataanggota',
+        type: "post",
+        dataType: 'json',
+        delay: 200,
+        data: function (params) {
+          return {
+            searchTerm: params.term
+          };
+        },
+        processResults: function (response) {
+          return {
+            results: response
+          };
+        },
+        cache: true
+      }
+    });
     //datatables
     table = $('#mytable').DataTable({
       "responsive": true,
@@ -104,13 +128,14 @@
     $('.modal-title').text('Edit anggota');
 
     $.ajax({
-      url: "<?php echo site_url('backend/pengolahan/ajax_edit_anggota/') ?>/" + id_anggota,
+      url: "<?php echo site_url('backend/pengolahan/ajax_edit_anggota') ?>/" + id_anggota,
       type: "GET",
       dataType: "JSON",
       success: function (data) {
         $('[name="id"]').val(data.id_anggota);
-        $('[name="namaanggota"]').val(data.namaanggota);
-        $('[name="harga"]').val(data.harga);
+        $('[name="nama_anggota"]').val(data.nama_anggota);
+        var $jabatan_anggota = $("<option selected='selected'></option>").val(data.jabatan_anggota).text(data.namajabatan)
+                $("#jabatan_anggota").append($jabatan_anggota).trigger('change');
 
         $('#modal_form_anggota').modal('hide');
       },
@@ -172,7 +197,7 @@
   $(document).on("click", "#deleteanggota", function (e) {
     e.preventDefault();
 
-    var idkon = $(this).attr("value");
+    var id_anggota = $(this).attr("value");
 
     Swal.fire({
       title: "Apakah kamu yakin ingin menghapus Data ini?",
@@ -188,7 +213,7 @@
           type: "post",
           url: "<?php echo site_url('backend/pengolahan/deleteanggota') ?>",
           data: {
-            idkon: idkon,
+            id: id_anggota,
           },
           dataType: "json",
           success: function (response) {
@@ -207,43 +232,7 @@
     });
   });
 
-  $(document).on("click", "#lock", function (e) {
-    e.preventDefault();
 
-    var id_anggota = $(this).attr("value");
-
-    Swal.fire({
-      title: "Aktif/ Nonaktif Konsumen ini ?",
-      text: "Konsumen yang di Nonaktifkan menandakan sudah tidak melakukan Transaksi selama 1 bulan!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Proses!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          type: "post",
-          url: "<?php echo site_url('backend/konsumen/lock') ?>",
-          data: {
-            id_anggota: id_anggota,
-          },
-          dataType: "json",
-          success: function (response) {
-            if (response.res == "success") {
-              Swal.fire(
-                "Success!",
-                "Proses berhasil dilakukan.",
-                "success"
-              );
-
-              reload_table();
-            }
-          },
-        });
-      }
-    });
-  });
 </script>
 
 </body>

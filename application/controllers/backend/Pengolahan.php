@@ -77,6 +77,12 @@ class Pengolahan extends CI_Controller
     echo json_encode($data);
   }
 
+  public function ajax_edit_anggota($id_anggota)
+  {
+    $data = $this->anggota_model->get_by_id($id_anggota);
+    echo json_encode($data);
+  }
+
   public function get_ajax_list()
   {
     $list = $this->pengolahan_model->get_datatables();
@@ -273,6 +279,13 @@ class Pengolahan extends CI_Controller
     $this->load->view('backend/pengolahan/anggota', $data);
   }
 
+  public function getdataanggota()
+  {
+    $searchTerm = $this->input->post('searchTerm');
+    $response = $this->anggota_model->getanggota($searchTerm);
+    echo json_encode($response);
+  }
+
   public function get_ajax_list_anggota()
   {
     $list = $this->anggota_model->get_datatables();
@@ -283,7 +296,7 @@ class Pengolahan extends CI_Controller
       $row = array();
       $row[] = $no;
       $row[] = $d->nama_anggota;
-      $row[] = $d->jabatan_anggota;
+      $row[] = $d->namajabatan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
       <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_anggota(' . "'" . $d->id_anggota . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
       <a class="dropdown-item" href="javascript:void()" title="Hapus" id="deleteanggota" value="' . $d->id_anggota . '"><i class="bi bi-trash"></i> Hapus</a></div></div></div>';
@@ -334,7 +347,7 @@ class Pengolahan extends CI_Controller
 
   function edit_anggota()
   {
-    $id = $this->input->post('id_anggota', TRUE);
+    $id = $this->input->post('id', TRUE);
     $this->_validate_edit_anggota();
 
 
@@ -343,7 +356,7 @@ class Pengolahan extends CI_Controller
     $ajax_data['jabatan_anggota'] = $this->input->post('jabatan_anggota');
 
 
-    if ($this->jenisikan_model->update_entry($id, $ajax_data)) {
+    if ($this->anggota_model->update_entry($id, $ajax_data)) {
       // INSERT LOG
       $nama_users = $this->session->userdata('name');
 
@@ -365,8 +378,8 @@ class Pengolahan extends CI_Controller
   {
     if ($this->input->is_ajax_request()) {
 
-      $id_jenisikan = $this->input->post('id_anggota');
-      if ($this->jenisikan_model->delete_entry($id_jenisikan)) {
+      $id_anggota = $this->input->post('id');
+      if ($this->anggota_model->delete_entry($id_anggota)) {
 
         $data = array('res' => "success", 'message' => "Proses berhasil dilakukan");
       } else {

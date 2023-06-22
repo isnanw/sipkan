@@ -130,7 +130,7 @@ class Pengolahan_model extends CI_Model
     }
     function delete($id)
     {
-        return $this->db->delete('tb_pembenihan', array('id' => $id));
+        return $this->db->delete('tb_kelompok', array('id' => $id));
     }
 
     function delete_detail($id)
