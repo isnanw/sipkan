@@ -53,10 +53,12 @@ class anggota_model extends CI_Model
         }
     }
 
-    function get_datatables()
+    function get_datatables($id)
     {
-        // $this->db->join()
-        $this->db->order_by('id_anggota', 'ASC');
+        $this->db->where('id_kelompok', $id);
+        $this->db->order_by('id_kelompok', 'ASC');
+
+        // die($this->db->last_query());
         $this->_get_datatables_query();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);

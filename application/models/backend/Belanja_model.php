@@ -61,7 +61,7 @@ class Belanja_model extends CI_Model{
 	}
 
 	function get_datatables($bon){
-		// $this->db->where('id_pettycash', $bon);	
+		// $this->db->where('id_pettycash', $bon);
 		$this->db->order_by('id_belanja', 'ASC');
 		$this->_get_datatables_query();
 		if($_POST['length'] != -1)

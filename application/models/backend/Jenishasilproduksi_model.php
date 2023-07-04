@@ -130,7 +130,7 @@ class jenishasilproduksi_model extends CI_Model
             return true;
         }
     }
-    function getkomoditas($searchTerm = "")
+    function getproduksi($searchTerm = "")
     {
         $query = "SELECT * FROM tb_jenishasilproduksi WHERE namajenishasilproduksi like '%$searchTerm%' ORDER BY id_jenishasilproduksi ASC ";
         $dataprov = $this->db->query($query)->result_array();
@@ -138,18 +138,6 @@ class jenishasilproduksi_model extends CI_Model
         $data = array();
         foreach ($dataprov as $prov) {
             $data[] = array("id" => $prov['id_jenishasilproduksi'], "text" => $prov['namajenishasilproduksi']);
-        }
-        return $data;
-    }
-
-    function getperiode($searchTerm = "")
-    {
-        $query = "SELECT * FROM tb_periode WHERE periode like '%$searchTerm%' ORDER BY id ASC ";
-        $dataprov = $this->db->query($query)->result_array();
-
-        $data = array();
-        foreach ($dataprov as $prov) {
-            $data[] = array("id" => $prov['id'], "text" => $prov['periode']);
         }
         return $data;
     }

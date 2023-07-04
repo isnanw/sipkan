@@ -106,7 +106,7 @@ class Pengolahan_model extends CI_Model
 
     public function update($id, $data)
     {
-        return $this->db->update('tb_pembenihan', $data, array('id' => $id));
+        return $this->db->update('tb_kelompok', $data, array('id' => $id));
     }
 
     // public function update_detail($id, $data2)
@@ -148,23 +148,33 @@ class Pengolahan_model extends CI_Model
     }
     public function edit($id)
     {
-        $query = "SELECT l.kodelokasi,
-                        l.lokasi as kab,
-                        p.periode as periode,
-                        tj.namajenisbudidaya as budidaya,
-                        tji.namajenisikan as ikan,
-                        tp.*
-                    FROM
-                            tb_pembenihan tp
-                    LEFT JOIN lokasi l on
-                            l.kodelokasi = tp.lokasi
-                    LEFT JOIN tb_periode p on
-                            p.id = tp.bulan
-                    LEFT JOIN tb_jenisbudidaya tj on
-                            tj.id_jenisbudidaya = tp.id_budidaya
-                    LEFT JOIN tb_jenisikan tji on
-                            tji.id_jenisikan = tp.id_jenisikan
-                    WHERE tp.id = $id";
+        $query = "SELECT
+                    tk.id,
+                    tk.lokasi as kodekabupaten,
+                    l.lokasi as kabupaten,
+                    l3.kodelokasi as kodedistrik,
+                    l3.lokasi as distrik,
+                    tk.kampung as kodekampung,
+                    l2.lokasi as kampung,
+                    tk.nama_kelompok,
+                    tk.jenis_hasil_produksi,
+                    j.namajenishasilproduksi,
+                    tk.keterangan
+                FROM
+                    tb_kelompok tk
+                LEFT JOIN lokasi l on
+                    l.kodelokasi = tk.lokasi
+                LEFT JOIN lokasi l2 on
+                    l2.kodelokasi = tk.kampung
+                LEFT JOIN tb_jenishasilproduksi j on
+                    j.id_jenishasilproduksi = tk.jenis_hasil_produksi
+                LEFT JOIN lokasi l3 on
+                    l3.kodelokasi = LEFT(l2.kodelokasi,
+                    8)
+                -- LEFT JOIN tb_rlpp tk2 ON
+                --     tk2.id_rl = tk.id
+                WHERE
+                    tk.id = $id";
         return $this->db->query($query)->row_array();
         echo json_encode($query);
     }

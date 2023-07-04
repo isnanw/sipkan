@@ -143,28 +143,10 @@
                 cache: true
             }
         });
-        $("#komoditas").select2({
-            ajax: {
-                url: '<?= site_url() ?>backend/Jeniskomoditas/getdatakomoditas',
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function (params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function (response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
+
         $("#jenis_hasil_produksi").select2({
             ajax: {
-                url: '<?= site_url() ?>backend/Jeniskomoditas/getdataperiode',
+                url: '<?= site_url() ?>backend/Jenishasilproduksi/getproduksi',
                 type: "post",
                 dataType: 'json',
                 delay: 200,

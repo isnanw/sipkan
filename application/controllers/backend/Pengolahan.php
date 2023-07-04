@@ -156,15 +156,11 @@ class Pengolahan extends CI_Controller
 
     $data = array(
       'lokasi' => $this->input->post('kab'),
-      'bulan' => $this->input->post('periode'),
-      'id_budidaya' => $this->input->post('budidaya'),
-      'id_jenisikan' => $this->input->post('ikan'),
-      'produksi' => $this->input->post('produksi'),
-      'jabatan_anggota' => $this->input->post('jabatan_anggota'),
-      'nilai_produksi' => $this->input->post('nilaiproduksi'),
-      'luas_lahan' => $this->input->post('luaslahan'),
-      'luas_wadah' => $this->input->post('luaswadah'),
-      'jumlah_upr_pembudidayaan' => $this->input->post('upr')
+      'distrik' => $this->input->post('distrik'),
+      'kampung' => $this->input->post('kampung'),
+      'nama_kelompok' => $this->input->post('nama_kelompok'),
+      'jenis_hasil_produksi' => $this->input->post('jenis_hasil_produksi'),
+      'keterangan' => $this->input->post('keterangan')
     );
     $idedit = $this->pengolahan_model->update($id, $data);
 
@@ -288,14 +284,15 @@ class Pengolahan extends CI_Controller
 
   public function get_ajax_list_anggota()
   {
-    $list = $this->anggota_model->get_datatables();
+    $id = $this->uri->segment(4);
+    $list = $this->anggota_model->get_datatables($id);
     $data = array();
     $no = $_POST['start'];
     foreach ($list as $d) {
       $no++;
       $row = array();
       $row[] = $no;
-      $row[] = $d->nama_anggota;
+      $row[] = '<a href="#">'.$d->nama_anggota.'</a>';
       $row[] = $d->namajabatan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
       <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_anggota(' . "'" . $d->id_anggota . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
@@ -307,7 +304,7 @@ class Pengolahan extends CI_Controller
     $output = array(
       "draw" => $_POST['draw'],
       "recordsTotal" => $this->anggota_model->count_all(),
-      "recordsFiltered" => $this->anggota_model->count_filtered(),
+      "recordsFiltered" => $this->anggota_model->count_filtered($id),
       "data" => $data,
     );
     //output to json format

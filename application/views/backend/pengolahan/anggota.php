@@ -87,7 +87,7 @@
       "order": [], //Initial no order.
       // Load data for the table's content from an Ajax source
       "ajax": {
-        "url": "<?php echo site_url('backend/pengolahan/get_ajax_list_anggota') ?>",
+        "url": "<?php echo site_url('backend/pengolahan/get_ajax_list_anggota/').$this->uri->segment(4); ?>",
         "type": "POST",
         "data": function (data) { },
       },

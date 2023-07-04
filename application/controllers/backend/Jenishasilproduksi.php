@@ -209,16 +209,11 @@ class Jenishasilproduksi extends CI_Controller
             exit();
         }
     }
-    public function getdatakomoditas()
+
+    public function getproduksi()
     {
         $searchTerm = $this->input->post('searchTerm');
-        $response   = $this->jenishasilproduksi_model->getkomoditas($searchTerm);
-        echo json_encode($response);
-    }
-    public function getdataperiode()
-    {
-        $searchTerm = $this->input->post('searchTerm');
-        $response   = $this->jenishasilproduksi_model->getperiode($searchTerm);
+        $response   = $this->jenishasilproduksi_model->getproduksi($searchTerm);
         echo json_encode($response);
     }
 }
