@@ -54,12 +54,12 @@
                     <?= $this->session->flashdata('msg');?>
                       <div class="mb-3">
                         <label for="username_cgtv_122021" class="form-label">Username</label>
-                        <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
+                        <!-- <input type="email" class="form-control border border-info" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
                         <?= $form_username; ?>
                       </div>
                       <div class="mb-4">
                         <label for="password_cgtv_122021" class="form-label">Password</label>
-                        <!-- <input type="password" class="form-control" id="exampleInputPassword1"> -->
+                        <!-- <input type="password" class="form-control border border-info" id="exampleInputPassword1"> -->
                         <?= $form_password; ?>
                       </div>
                       <div class="form-check form-check-lg d-flex align-items-end">

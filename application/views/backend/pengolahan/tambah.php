@@ -20,18 +20,18 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                         <div class="col-md-4">
                                             <label class="control-label">Kab/Kota</label>
-                                            <select class="form-control" id="kab" name="kab" required>
+                                            <select class="form-control border border-info" id="kab" name="kab" required>
                                             </select>
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-4">
                                             <label class="control-label">Distrik</label>
-                                            <select class="form-control" id="distrik" name="distrik" required>
+                                            <select class="form-control border border-info" id="distrik" name="distrik" required>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label class="control-label">Kampung</label>
-                                            <select class="form-control" id="kampung" name="kampung" required>
+                                            <select class="form-control border border-info" id="kampung" name="kampung" required>
                                             </select>
                                         </div>
                                         <!--/span-->
@@ -41,17 +41,17 @@
                                         <div class="col-md-6">
                                             <label class="control-label">Nama Kelompok</label>
                                             <input type="text" id="nama_kelompok" name="nama_kelompok"
-                                                class="form-control" required />
+                                                class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                         <!-- <div class="col-md-4">
                                             <label class="control-label">Jabatan Dalam Kelompok</label>
-                                            <select class="form-control" id="jabatan" name="jabatan" required>
+                                            <select class="form-control border border-info" id="jabatan" name="jabatan" required>
                                             </select>
                                         </div> -->
                                         <div class="col-md-6">
                                             <label class="control-label">Jenis Hasil Produksi</label>
-                                            <select class="form-control" id="jenis_hasil_produksi" name="jenis_hasil_produksi" required>
+                                            <select class="form-control border border-info" id="jenis_hasil_produksi" name="jenis_hasil_produksi" required>
                                             </select>
                                         </div>
                                         <!--/span-->
@@ -61,7 +61,7 @@
                                         <div class="col-md-12">
                                             <label class="control-label">Keterangan</label>
                                             <textarea style="height: 100px;" id="keterangan" name="keterangan"
-                                                class="form-control" required></textarea>
+                                                class="form-control border border-info" required></textarea>
                                         </div>
 
                                     </div>

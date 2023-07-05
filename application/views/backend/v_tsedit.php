@@ -26,14 +26,14 @@
                                         <h5 class="mb-2">Data</h5>
                                         <div class="col-md-6">
                                             <label class="control-label">Kab/Kota</label>
-                                            <select class="form-control" id="kab" name="kab" required>
+                                            <select class="form-control border border-info" id="kab" name="kab" required>
                                             </select>
-                                            <input type="hidden" id="id_ts" name="id_ts" class="form-control" value="<?= $id_ts; ?>" required />
+                                            <input type="hidden" id="id_ts" name="id_ts" class="form-control border border-info" value="<?= $id_ts; ?>" required />
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
                                             <label class="control-label">Distrik</label>
-                                            <select class="form-control" id="distrik" name="distrik" required>
+                                            <select class="form-control border border-info" id="distrik" name="distrik" required>
                                             </select>
                                         </div>
                                         <!--/span-->
@@ -43,7 +43,7 @@
                                         <h5 class="mb-2">RTP</h5>
                                         <div class="col-md-12">
                                             <label class="control-label">Kampung</label>
-                                            <select class="form-control" id="kampung" name="kampung" required>
+                                            <select class="form-control border border-info" id="kampung" name="kampung" required>
                                             </select>
                                         </div>
                                         <!--/span-->
@@ -52,11 +52,11 @@
                                     <div class="row pt-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="control-label">Ketua</label>
-                                            <input type="text" id="ketua" name="ketua" class="form-control" required />
+                                            <input type="text" id="ketua" name="ketua" class="form-control border border-info" required />
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Jumlah Anggota</label>
-                                            <input type="number" id="jml_anggota" name="jml_anggota" class="form-control" required />
+                                            <input type="number" id="jml_anggota" name="jml_anggota" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -64,25 +64,25 @@
                                         <h5 class="mb-2">Tambak Sederhana</h5>
                                         <div class="col-md-6">
                                             <label class="control-label">Jumlah Tambak</label>
-                                            <input type="number" id="jml_tambak" name="jml_tambak" class="form-control" required />
+                                            <input type="number" id="jml_tambak" name="jml_tambak" class="form-control border border-info" required />
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Ukuran Tambak (M<sup>2</sup>)</label>
                                             <div class="row col">
                                                 <div class="col-md-3">
-                                                    <input type="number" id="uk_tambak1" name="uk_tambak1" class="form-control" required />
+                                                    <input type="number" id="uk_tambak1" name="uk_tambak1" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">X</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="number" id="uk_tambak2" name="uk_tambak2" class="form-control" required />
+                                                    <input type="number" id="uk_tambak2" name="uk_tambak2" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" id="uk_tambakhasil" name="uk_tambakhasil" class="form-control" readonly />
+                                                    <input type="text" id="uk_tambakhasil" name="uk_tambakhasil" class="form-control border border-info" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -94,19 +94,19 @@
                                             <label class="control-label">Potensi (M<sup>2</sup>)</label>
                                             <div class="row col">
                                                 <div class="col-md-3">
-                                                    <input type="number" id="potensi1" name="potensi1" class="form-control" required />
+                                                    <input type="number" id="potensi1" name="potensi1" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">X</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="number" id="potensi2" name="potensi2" class="form-control" required />
+                                                    <input type="number" id="potensi2" name="potensi2" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" id="potensihasil" name="potensihasil" class="form-control" readonly />
+                                                    <input type="text" id="potensihasil" name="potensihasil" class="form-control border border-info" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -114,19 +114,19 @@
                                             <label class="control-label">Existing (M<sup>2</sup>)</label>
                                             <div class="row col">
                                                 <div class="col-md-3">
-                                                    <input type="number" id="existing1" name="existing1" class="form-control" required />
+                                                    <input type="number" id="existing1" name="existing1" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">X</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">X</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="number" id="existing2" name="existing2" class="form-control" required />
+                                                    <input type="number" id="existing2" name="existing2" class="form-control border border-info" required />
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="form-control" style="border:none; padding-top: 8px;">=</label>
+                                                    <label class="form-control border border-info" style="border:none; padding-top: 8px;">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" id="existinghasil" name="existinghasil" class="form-control" readonly />
+                                                    <input type="text" id="existinghasil" name="existinghasil" class="form-control border border-info" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -135,12 +135,12 @@
                                         <h5 class="mb-2">Komoditas</h5>
                                         <div class="col-md-6">
                                             <label class="control-label">Jenis</label>
-                                            <select class="form-control" id="komoditas" name="komoditas" required>
+                                            <select class="form-control border border-info" id="komoditas" name="komoditas" required>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Jumlah (Ekor)</label>
-                                            <input type="number" id="jml_ekor" name="jml_ekor" class="form-control" required />
+                                            <input type="number" id="jml_ekor" name="jml_ekor" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -176,62 +176,62 @@
                                                 <tr>
                                                     <th class="col-1">1</th>
                                                     <th class="col-9">Januari</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="jan" name="jan" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="jan" name="jan" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">2</th>
                                                     <th class="col-9">Februari</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="feb" name="feb" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="feb" name="feb" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">3</th>
                                                     <th class="col-9">Maret</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="mar" name="mar" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="mar" name="mar" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">4</th>
                                                     <th class="col-9">April</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="apr" name="apr" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="apr" name="apr" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">5</th>
                                                     <th class="col-9">Mei</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="mei" name="mei" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="mei" name="mei" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">6</th>
                                                     <th class="col-9">Juni</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="jun" name="jun" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="jun" name="jun" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">7</th>
                                                     <th class="col-9">Juli</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="jul" name="jul" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="jul" name="jul" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">8</th>
                                                     <th class="col-9">Agustus</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="agu" name="agu" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="agu" name="agu" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">9</th>
                                                     <th class="col-9">September</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="sep" name="sep" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="sep" name="sep" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">10</th>
                                                     <th class="col-9">Oktober</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="okt" name="okt" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="okt" name="okt" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">11</th>
                                                     <th class="col-9">November</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="nov" name="nov" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="nov" name="nov" /> </th>
                                                 </tr>
                                                 <tr>
                                                     <th class="col-1">12</th>
                                                     <th class="col-9">Desember</th>
-                                                    <th class="col-2"> <input type="number" class="form-control" id="des" name="des" /> </th>
+                                                    <th class="col-2"> <input type="number" class="form-control border border-info" id="des" name="des" /> </th>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -9,12 +9,15 @@
                             <li class="breadcrumb-item"><a class="text-muted"><?= $title0; ?></a></li>
                             <li class="breadcrumb-item" aria-current="page"><?= $title; ?></li>
                             <li class="breadcrumb-item" aria-current="page"><?= $title1; ?></li>
+                            <li class="breadcrumb-item" aria-current="page"><?= $title2; ?>
+                            </li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="<?= base_url('assets/keren/'); ?>dist/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
+                    <div class="text-center mb-n4">
+                        <img style="transform: rotateY(180deg)" src="<?= base_url('assets/keren/'); ?>dist/images/breadcrumb/ikan2.webp"
+                            alt="" class="img-fluid mb-n4">
                     </div>
                 </div>
             </div>

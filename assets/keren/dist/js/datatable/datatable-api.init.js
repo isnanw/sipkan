@@ -66,10 +66,10 @@ $(".datatable-select-inputs").DataTable({
 $(".text-inputs-searching tfoot th").each(function () {
   var title = $(this).text();
   $(this).html(
-    '<input type="text" class="form-control" placeholder="Search ' +
-      title +
-      '" />'
-  );
+		'<input type="text" class="form-control border border-info" placeholder="Search ' +
+			title +
+			'" />'
+	);
 });
 
 // DataTable

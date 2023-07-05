@@ -19,15 +19,15 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                         <div class="col-md-6">
                                             <label class="control-label">Kab/Kota</label>
-                                            <select class="form-control" id="kab" name="kab" required>
+                                            <select class="form-control border border-info" id="kab" name="kab" required>
                                             </select>
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
                                             <label class="control-label">Periode (Bulan)</label>
-                                            <select class="form-control" id="periode" name="periode" required>
+                                            <select class="form-control border border-info" id="periode" name="periode" required>
                                             </select>
-                                            <input type="number" id="tahun" name="tahun" class="form-control" hidden required value="<?= $tahun; ?>"/>
+                                            <input type="number" id="tahun" name="tahun" class="form-control border border-info" hidden required value="<?= $tahun; ?>" />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -35,13 +35,13 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                         <div class="col-md-6">
                                             <label class="control-label">Jenis Budidaya</label>
-                                            <select class="form-control" id="budidaya" name="budidaya" required>
+                                            <select class="form-control border border-info" id="budidaya" name="budidaya" required>
                                             </select>
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
                                             <label class="control-label">Jenis Ikan</label>
-                                            <select class="form-control" id="ikan" name="ikan" required>
+                                            <select class="form-control border border-info" id="ikan" name="ikan" required>
                                             </select>
                                         </div>
                                         <!--/span-->
@@ -50,12 +50,12 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                        <div class="col-md-6">
                                             <label class="control-label">Produksi (Ekor)</label>
-                                            <input type="number" id="produksi" name="produksi" class="form-control" required />
+                                            <input type="number" id="produksi" name="produksi" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                        <div class="col-md-6">
                                             <label class="control-label">Harga/Ekor</label>
-                                            <input type="number" id="harga" name="harga" class="form-control" required />
+                                            <input type="number" id="harga" name="harga" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -63,12 +63,12 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                        <div class="col-md-6">
                                             <label class="control-label">Nilai Produksi (Pro*Hrg)</label>
-                                            <input type="number" id="nilaiproduksi" name="nilaiproduksi" class="form-control" required />
+                                            <input type="number" id="nilaiproduksi" name="nilaiproduksi" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                        <div class="col-md-6">
                                             <label class="control-label">Luas Lahan (Ha) Produksi</label>
-                                            <input type="number" id="luaslahan" name="luaslahan" class="form-control" required />
+                                            <input type="number" id="luaslahan" name="luaslahan" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                     </div>
@@ -76,12 +76,12 @@
                                         <!-- <h5 class="mb-2">Data</h5> -->
                                         <div class="col-md-6">
                                             <label class="control-label">Luas Wadah Pemeliharaan (M²) yang aktif Produksi</label>
-                                            <input type="number" id="luaswadah" name="luaswadah" class="form-control" required />
+                                            <input type="number" id="luaswadah" name="luaswadah" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                         <div class="col-md-6">
                                             <label class="control-label">Jumlah (UPR) Pembudidaya</label>
-                                            <input type="number" id="upr" name="upr" class="form-control" required />
+                                            <input type="number" id="upr" name="upr" class="form-control border border-info" required />
                                         </div>
                                         <!--/span-->
                                     </div>

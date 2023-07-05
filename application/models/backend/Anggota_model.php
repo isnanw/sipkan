@@ -66,8 +66,9 @@ class anggota_model extends CI_Model
         return $query->result();
     }
 
-    public function count_filtered()
+    public function count_filtered($id)
     {
+        $this->db->where('id_kelompok', $id);
         $this->_get_datatables_query();
         $query = $this->db->get();
         return $query->num_rows();

@@ -266,7 +266,7 @@ class Pengolahan extends CI_Controller
     $data['site_favicon'] = $site['site_favicon'];
     $data['images'] = $site['images'];
     $data['tahun'] = $site['tahun'];
-    $data['title'] = 'Anggota Kelompok Pengolahan Hasil Perikanan';
+    $data['title'] = 'Kelompok Pengolahan Hasil Perikanan';
     $data['title0'] = 'Data';
     $data['title1'] = 'Data Anggota';
 
@@ -292,7 +292,7 @@ class Pengolahan extends CI_Controller
       $no++;
       $row = array();
       $row[] = $no;
-      $row[] = '<a href="#">'.$d->nama_anggota.'</a>';
+      $row[] = '<a href="' . base_url('backend/pengolahan/unit/') . $d->id_anggota . '?idkelompok=' . $id . '">' . $d->nama_anggota . '</a>';
       $row[] = $d->namajabatan;
       $row[] = '<div class="btn-group mb-1"><div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
       <a class="dropdown-item" href="javascript:void()" title="Edit" onclick="edit_anggota(' . "'" . $d->id_anggota . "'" . ')"><i class="bi bi-pen-fill"></i> Edit</a>
@@ -459,6 +459,23 @@ class Pengolahan extends CI_Controller
       echo json_encode($data);
       exit();
     }
+  }
+
+  public function unit()
+  {
+    $site = $this->site_model->get_site_data()->row_array();
+    $data['site_title'] = $site['site_title'];
+    $data['site_favicon'] = $site['site_favicon'];
+    $data['images'] = $site['images'];
+    $data['tahun'] = $site['tahun'];
+    $data['title'] = 'Data Dasar Unit Pengolahan Ikan (UPI)';
+    $data['title0'] = 'Data';
+    $data['title1'] = 'Data Anggota';
+    $data['title2'] = 'Data Unit Anggota';
+
+    $this->load->view('backend/menu', $data);
+    $this->load->view('backend/pengolahan/modal/anggota_modal');
+    $this->load->view('backend/pengolahan/unit', $data);
   }
 
 }
