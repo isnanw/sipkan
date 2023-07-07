@@ -463,6 +463,28 @@ class Pengolahan extends CI_Controller
 
   public function unit()
   {
+    $id = $this->uri->segment(4);
+    $id_kelompok = $_GET['idkelompok'];
+
+    $site = $this->site_model->get_site_data()->row_array();
+    $data['site_title'] = $site['site_title'];
+    $data['site_favicon'] = $site['site_favicon'];
+    $data['kelompok'] = $this->db->query('SELECT * FROM tb_kelompok WHERE id = ' . $id_kelompok . '')->row();
+    $data['anggota'] = $this->db->query('SELECT * FROM tb_anggota WHERE id_anggota = ' . $id . ' AND id_kelompok = ' . $id_kelompok . '')->row();
+    // print($this->db->last_query());
+    $data['images'] = $site['images'];
+    $data['tahun'] = $site['tahun'];
+    $data['title'] = 'Data Dasar Unit Pengolahan Ikan (UPI)';
+    $data['title0'] = 'Data';
+    $data['title1'] = 'Data Anggota';
+    $data['title2'] = 'Data Unit Anggota';
+
+    $this->load->view('backend/menu', $data);
+    $this->load->view('backend/pengolahan/unit', $data);
+  }
+
+  public function unit_edit()
+  {
     $site = $this->site_model->get_site_data()->row_array();
     $data['site_title'] = $site['site_title'];
     $data['site_favicon'] = $site['site_favicon'];
@@ -474,8 +496,101 @@ class Pengolahan extends CI_Controller
     $data['title2'] = 'Data Unit Anggota';
 
     $this->load->view('backend/menu', $data);
-    $this->load->view('backend/pengolahan/modal/anggota_modal');
-    $this->load->view('backend/pengolahan/unit', $data);
+    $this->load->view('backend/pengolahan/unit_edit', $data);
+  }
+
+  function unit_add()
+  {
+    // $this->_validate();
+
+    $users = $this->session->userdata('id');
+    $nama_users = $this->session->userdata('name');
+
+    $data = array(
+      'id' => $this->input->post('id'),
+      'id_kelompok' => $this->input->post('id_kelompok'),
+      'nama_unit' => $this->input->post('namaunit'),
+      'entitas' => $this->input->post('entitas'),
+      'nama_pemilik' => $this->input->post('namapemilik'),
+      'penanggungjawab' => $this->input->post('penanggungajwab'),
+      'modalusaha' => $this->input->post('modalusaha'),
+      'omzettahunanupi' => $this->input->post('omzet'),
+      'tahun_berdiri' => $this->input->post('tahunberdiri'),
+      'kontakperson' => $this->input->post('kontakperson'),
+      'provinsi' => $this->input->post('provinsi'),
+      'kabupaten' => $this->input->post('kabupaten'),
+      'kecamatan' => $this->input->post('Kecamatan'),
+      'kelurahan' => $this->input->post('kelurahan'),
+      'alamat' => $this->input->post('alamat'),
+      'kodepost' => $this->input->post('kodepos'),
+      'nib' => $this->input->post('nib'),
+      'kbli' => $this->input->post('kbli'),
+      'npwp' => $this->input->post('npwp'),
+      'no_iup' => $this->input->post('no_iup'),
+      'no_skp' => $this->input->post('skp'),
+      'no_haccp' => $this->input->post('hscpp'),
+      'no_siup' => $this->input->post('siup'),
+      'no_akte' => $this->input->post('akte'),
+      'email' => $this->input->post('email'),
+
+      'nama_produk' => $this->input->post('namaproduk'),
+      'teknologi_produksi' => $this->input->post('teknologi'),
+      'tujuan_pemasaran_domestik' => $this->input->post('domestik'),
+      'tujuan_pemasaran_mancanegara' => $this->input->post('mancanegara'),
+      'realisasi_pertahun' => $this->input->post('realisasi'),
+
+      'asal_wilayah' => $this->input->post('asalwilayah'),
+      'jenis_ikan' => $this->input->post('jenisikan'),
+      'bentuk_ikan' => $this->input->post('bentukikan'),
+      'kebutuhan_perhari' => $this->input->post('kebutuhan'),
+      'sni' => $this->input->post('sni'),
+
+      'jumlah_unit' => $this->input->post('jenisunit'),
+      'jumlah_kapasitas' => $this->input->post('jumlahkapasitas'),
+
+      'tenagakerjaasing_laki' => $this->input->post('tenagakerjaasing_laki'),
+      'tenagakerjaasing_perempuan' => $this->input->post('tenagakerjaasing_perempuan'),
+      'tenagakerjatetap_laki' => $this->input->post('tenagakerjatetap_laki'),
+      'tenagakerjatetap_perempuan' => $this->input->post('tenagakerjatetap_perempuan'),
+      'tenagakerjaharian_laki' => $this->input->post('tenagakerjaharian_laki'),
+      'tenagakerjaharian_perempuan' => $this->input->post('tenagakerjaharian_perempuan'),
+      'jumlahharikerja_perbulan' => $this->input->post('jmlhharikerja'),
+      'jumlahshift_perhari' => $this->input->post('jmlhshift'),
+      'upi' => $this->input->post('upi'),
+      'produksi' => $this->input->post('produksi'),
+      'mutu' => $this->input->post('mutu'),
+      'sumber' => $this->input->post('sumber'),
+      'pengolahan' => $this->input->post('pengolahan'),
+      'volume' => $this->input->post('volume'),
+      'produksi_sendiri' => $this->input->post('produksisendiri'),
+      'pembelian_dari' => $this->input->post('pembeliandari'),
+      'bentuk_es' => $this->input->post('bentukes'),
+      'penggunaan_es' => $this->input->post('penggunaanes'),
+      'bahan_tambahan_pangan' => $this->input->post('bahantambahanpangan'),
+      'bahan_kimia_yangdigunakan' => $this->input->post('bahankimia'),
+      'bahan_lainnya' => $this->input->post('bahanlainnya'),
+      'jenis_bahan_kemasan' => $this->input->post('jenisbahankemasan'),
+      'informasi_lainnya' => $this->input->post('informasilainnya'),
+      'catatan' => $this->input->post('kab'),
+    );
+    $insert = $this->pengolahan_model->tambah($data);
+
+    if ($insert) {
+      // INSERT LOG
+      $b = '<b>' . $nama_users . '</b> Melakukan Tambah Kelompok';
+      $data2 = array(
+        'ket' => $b,
+      );
+      $this->jenisikan_model->insert_log_jenisikan($data2);
+      // INSERT LOG
+      echo json_encode(array("status" => TRUE));
+      $this->session->set_flashdata('message', 'success');
+    } else {
+      echo json_encode(array("status" => FALSE));
+      $this->session->set_flashdata('message', 'error');
+    }
+
+    redirect('backend/pengolahan');
   }
 
 }
